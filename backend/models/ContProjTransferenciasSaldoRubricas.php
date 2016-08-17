@@ -17,6 +17,10 @@ use Yii;
  */
 class ContProjTransferenciasSaldoRubricas extends \yii\db\ActiveRecord
 {
+
+    public $nomeprojeto;
+    public $nomeRubricaOrigem;
+    public $nomeRubricaDestino;
     /**
      * @inheritdoc
      */
@@ -37,6 +41,12 @@ class ContProjTransferenciasSaldoRubricas extends \yii\db\ActiveRecord
             [['data'], 'safe'],
             [['autorizacao'], 'string', 'max' => 100],
         ];
+    }
+
+
+    function trunc()
+    {
+        return substr($this->nomeRubricaDestino, 0, 14) . '...';
     }
 
     /**

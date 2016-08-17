@@ -2,9 +2,12 @@
 
 namespace backend\controllers;
 
+use backend\models\ContProjProjetos;
+use backend\models\ContProjRubricasdeProjetos;
 use Yii;
 use backend\models\ContProjReceitas;
 use backend\models\ContProjReceitasSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,13 +40,20 @@ class ContProjReceitasController extends Controller
     {
         $searchModel = new ContProjReceitasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $receita= $this->calcularRreceita();
         return $this->render('index', [
+            'receita' => $receita,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
+
+    public function calcularRreceita(){
+        $receita = 0;
+
+        return $receita;
+    }
     /**
      * Displays a single ContProjReceitas model.
      * @param integer $id
@@ -51,8 +61,13 @@ class ContProjReceitasController extends Controller
      */
     public function actionView($id)
     {
+        $nomeProjeto = Yii::$app->request->get('nomeProjeto');
+        $idProjeto = Yii::$app->request->get('idProjeto');
+        $data = Yii::$app->request->get('data');
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'idProjeto'=> $idProjeto,
+            'nomeProjeto' => $nomeProjeto,
         ]);
     }
 
@@ -61,15 +76,41 @@ class ContProjReceitasController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+
+    public function titulo()
+    {
+        return $this->descricao;
+    }
+
     public function actionCreate()
     {
         $model = new ContProjReceitas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $nomeProjeto= Yii::$app->request->get('nomeProjeto');
+        $idProjeto= Yii::$app->request->get('idProjeto');
+
+        if ($model->load(Yii::$app->request->post()) &&  $model->save() ) {
+            $model->data = date('Y-m-d', strtotime($model->data));
+            $model->save();
+            $rubricaProjeto = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
+            $rubricaProjeto->valor_disponivel =  $rubricaProjeto->valor_disponivel + $model->valor_receita;
+            $rubricaProjeto->save(false);
+            $projeto = ContProjProjetos::find()->select("*")->where("id=$rubricaProjeto->projeto_id")->one();
+            $projeto->saldo = $projeto->saldo + $model->valor_receita;
+            $projeto->save(false);
+            return $this->redirect(['view', 'id' => $model->id,'idProjeto' => $idProjeto, 'nomeProjeto' => $nomeProjeto]);
         } else {
+            $rubricasdeProj = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.id",
+                "CONCAT_WS(':',j17_contproj_rubricas.tipo,j17_contproj_rubricas.nome, j17_contproj_rubricasdeprojetos.valor_total) 
+                AS descricao"])
+                ->leftJoin("j17_contproj_rubricas","j17_contproj_rubricasdeprojetos.rubrica_id = j17_contproj_rubricas.id")
+                ->where("j17_contproj_rubricasdeprojetos.projeto_id = $idProjeto")->all();
+            $rubricasdeProjeto = ArrayHelper::map($rubricasdeProj, 'id', 'descricao');
             return $this->render('create', [
+                'rubricasdeProjeto' => $rubricasdeProjeto,
                 'model' => $model,
+                'idProjeto' => $idProjeto,
+                'nomeProjeto' => $nomeProjeto
             ]);
         }
     }
@@ -101,9 +142,19 @@ class ContProjReceitasController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
-        return $this->redirect(['index']);
+        $idProjeto = Yii::$app->request->get("idProjeto");
+        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
+        $rubricaProjeto = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
+        $rubricaProjeto->valor_disponivel =  $rubricaProjeto->valor_disponivel - $model->valor_receita;
+        $rubricaProjeto->save(false);
+        $projeto = ContProjProjetos::find()->select("*")->where("id=$rubricaProjeto->projeto_id")->one();
+        $projeto->saldo = $projeto->saldo - $model->valor_receita;
+        $projeto->save(false);
+
+        $this->findModel($id)->delete();
+        return $this->redirect(['index','idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto]);
     }
 
     /**

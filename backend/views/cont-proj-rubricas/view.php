@@ -9,6 +9,10 @@ use yii\widgets\DetailView;
 $this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Rubricas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$nomeProjeto = Yii::$app->request->get('nomeProjeto');
+$idProjeto = Yii::$app->request->get('idProjeto');
+
 ?>
 <div class="cont-proj-rubricas-view">
 

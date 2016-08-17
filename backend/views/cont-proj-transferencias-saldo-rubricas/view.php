@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'projeto_id',
             'rubrica_origem',
             'rubrica_destino',
-            'valor',
+            'valor:currency',
             'data',
             'autorizacao',
         ],

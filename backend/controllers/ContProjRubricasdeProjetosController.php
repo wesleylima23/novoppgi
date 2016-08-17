@@ -2,9 +2,13 @@
 
 namespace backend\controllers;
 
+use backend\models\ContProjProjetos;
+use backend\models\ContProjReceitas;
+use backend\models\ContProjRubricas;
 use Yii;
 use backend\models\ContProjRubricasdeProjetos;
 use backend\models\ContProjRubricasdeProjetosSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,12 +39,17 @@ class ContProjRubricasdeProjetosController extends Controller
      */
     public function actionIndex()
     {
+        $idProjeto = Yii::$app->request->get("idProjeto");
+        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
+        $id = Yii::$app->request->get('id');
         $searchModel = new ContProjRubricasdeProjetosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'idProjeto' => $idProjeto,
+            'nomeProjeto' => $nomeProjeto,
         ]);
     }
 
@@ -51,9 +60,35 @@ class ContProjRubricasdeProjetosController extends Controller
      */
     public function actionView($id)
     {
+        $idProjeto = Yii::$app->request->get("idProjeto");
+        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'idProjeto' => $idProjeto,
+            'nomeProjeto' => $nomeProjeto,
         ]);
+    }
+
+    public function cadastrarReceita($model){
+        $receita = new ContProjReceitas();
+        $receita->rubricasdeprojetos_id = $model->id;
+        $receita->descricao = $model->descricao;
+        $receita->valor_receita = $model->valor_disponivel;
+        $receita->data = date("Y:m:d");
+        $projeto = ContProjProjetos::find()->select("*")->where("id=$model->projeto_id")->one();
+        $projeto->saldo = $model->valor_disponivel;
+        $projeto->save();
+        return $receita->save(false);
+
+    }
+
+    public function atualizarReceita($model){
+        $receita = ContProjReceitas::find()->where("rubricasdeprojetos_id=$model->id")->one();
+        //$receita->rubricasdeprojetos_id = $model->id;
+        $receita->descricao = $model->descricao;
+        $receita->valor_receita = $model->valor_disponivel;
+        //$receita->data = date("Y:m:d");
+        return $receita->save(false);
     }
 
     /**
@@ -64,12 +99,27 @@ class ContProjRubricasdeProjetosController extends Controller
     public function actionCreate()
     {
         $model = new ContProjRubricasdeProjetos();
+        $nomeProjeto= Yii::$app->request->get('nomeProjeto');
+        $idProjeto= Yii::$app->request->get('idProjeto');
+        $rubricas = ArrayHelper::map(ContProjRubricas::find()->all(), 'id', 'nome');
+        $model->valor_gasto = 0.00;
+        $model->valor_disponivel = 0.00;
+        if ($model->load(Yii::$app->request->post()) && $model->save() ) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->valor_disponivel > 0) {
+                if ($this->cadastrarReceita($model)) {
+
+                    return $this->redirect(['view', 'id' => $model->id, 'nomeProjeto' => $nomeProjeto,
+                        'idProjeto' => $idProjeto,]);
+                }
+            }
+            return $this->redirect(['view', 'id' => $model->id, 'idProjeto' => $idProjeto, 'nomeProjeto' => $nomeProjeto]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'rubricas'=>$rubricas,
+                'nomeProjeto'=>$nomeProjeto,
+                'idProjeto'=>$idProjeto,
             ]);
         }
     }
@@ -83,15 +133,28 @@ class ContProjRubricasdeProjetosController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $idProjeto = Yii::$app->request->get("idProjeto");
+        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
+        $rubricas = ArrayHelper::map(ContProjRubricas::find()->orderBy('')->all(), 'id', 'nome');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->valor_disponivel > 0) {
+                if ($this->atualizarReceita($model)) {
+
+                    return $this->redirect(['view', 'id' => $model->id, 'nomeProjeto' => $nomeProjeto,
+                        'idProjeto' => $idProjeto,]);
+                }
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'rubricas'=>$rubricas,
+                'nomeProjeto'=>$nomeProjeto,
+                'idProjeto'=>$idProjeto,
             ]);
         }
     }
+
+
 
     /**
      * Deletes an existing ContProjRubricasdeProjetos model.
@@ -101,10 +164,24 @@ class ContProjRubricasdeProjetosController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
+        $model = $this->findModel($id);
+        $idProjeto = Yii::$app->request->get("idProjeto");
+        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
+        $projeto = ContProjProjetos::find()->select("*")->where("id=$model->projeto_id")->one();
+        $projeto->saldo = $projeto->saldo - $model->valor_disponivel;
+        $projeto->save();
+        $receitas = ContProjReceitas::find()->where("rubricasdeprojetos_id=$model->id")->all();
+        if($receitas) {
+            return $this->redirect(['view',
+                                    'id' => $model->id,
+                                    'idProjeto' => $idProjeto,
+                                    'nomeProjeto' => $nomeProjeto,
+                                    'mensagem'=>true]);
+        }else{
+            $this->findModel($id)->delete();
+            return $this->redirect(['index', 'idProjeto' => $idProjeto, 'nomeProjeto' => $nomeProjeto]);
+            }
+        }
 
     /**
      * Finds the ContProjRubricasdeProjetos model based on its primary key value.
@@ -115,6 +192,7 @@ class ContProjRubricasdeProjetosController extends Controller
      */
     protected function findModel($id)
     {
+
         if (($model = ContProjRubricasdeProjetos::findOne($id)) !== null) {
             return $model;
         } else {

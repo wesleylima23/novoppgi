@@ -2,9 +2,13 @@
 
 namespace backend\controllers;
 
+use backend\models\ContProjBancos;
+use backend\models\ContProjRubricas;
+use backend\models\ContProjRubricasdeProjetos;
 use Yii;
 use backend\models\ContProjDespesas;
 use backend\models\ContProjDespesasSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -63,13 +67,16 @@ class ContProjDespesasController extends Controller
      */
     public function actionCreate()
     {
+        $projeto_id = Yii::$app->request->get('idProjeto');
         $model = new ContProjDespesas();
-
+        $rubricasDeProjeto  = ArrayHelper::map(ContProjRubricasdeProjetos::find()
+            ->where("projeto_id=".$projeto_id)->all(), 'id', 'descricao');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'rubricasDeProjeto'=>$rubricasDeProjeto ,
             ]);
         }
     }
@@ -83,12 +90,13 @@ class ContProjDespesasController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $rubricasDeProjeto = ArrayHelper::map(ContProjRubricasdeProjetos::find()->orderBy('nome'), 'id', 'descricao');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'rubricasDeProjeto'=>$rubricasDeProjeto,
             ]);
         }
     }

@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ContProjDespesas */
 
-$this->title = 'Create Cont Proj Despesas';
-$this->params['breadcrumbs'][] = ['label' => 'Cont Proj Despesas', 'url' => ['index']];
+$this->title = 'Cadastrar nova despesa';
+$this->params['breadcrumbs'][] = ['label' => 'Despesas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cont-proj-despesas-create">
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'rubricasDeProjeto'=>$rubricasDeProjeto,
     ]) ?>
 
 </div>
