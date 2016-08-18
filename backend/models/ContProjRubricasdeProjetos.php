@@ -68,13 +68,13 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
         }
     }
 
-    public function checarOrcamento($attribute,$params){
+    /*public function checarOrcamento($attribute,$params){
         $orcamento = \backend\models\ContProjProjetos::find()->where("id=$this->projeto_id")->one();
         //echo $orcamento->orcamento;
         if($this->$attribute > $orcamento->orcamento ){
             $this->addError($attribute, 'O Valor disponivel não pode ser maior que o orçamento do projeto');
         }
-    }
+    }*/
 
     public function checarOrcamentoTotal($attribute,$params){
         $projeto = \backend\models\ContProjProjetos::find()->where("id=$this->projeto_id")->one();
@@ -83,16 +83,16 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
         $permitido = $projeto->orcamento - $valorRubricas;
         if( $permitido >0){
             $permitido = number_format ( $permitido , 2 );
-            $messagem = "O Valor disponivel não pode ser maior que o orçamento do projeto o valor ainda disponivél para cadastro é R$ $permitido";
+            $messagem = "O Valor ainda disponivél para cadastro é de R$ $permitido!";
         }else{
-            $messagem = "limite atingido";
+            $messagem = "O orçamento do projeto foi atingido, não é possível cadastrar novas rubricas!";
         }
 
         $total = $this->$attribute + $valorRubricas;
 
-        echo '<script language="javascript">';
-        echo 'alert("'.$projeto->orcamento." ".$total.'")';
-        echo '</script>';
+        //echo '<script language="javascript">';
+        //echo 'alert("'.$projeto->orcamento." ".$total.'")';
+        //echo '</script>';
 
 
         if ($total > $projeto->orcamento) {

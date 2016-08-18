@@ -7,20 +7,18 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ContProjProjetos */
 
+$coordenador = \app\models\User::find()->select("*")->where("id=$model->coordenador_id")->one();
+$agencia = \backend\models\ContProjAgencias::find()->select("*")->where("id=$model->agencia_id")->one();
+$banco =\backend\models\ContProjBancos::find()->select("*")->where("id=$model->banco_id")->one();
+
 $this->title = $model->nomeprojeto;
 $this->params['breadcrumbs'][] = ['label' => 'Projetos de Pesquisa e desenvolvimento', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$coordenadores = ArrayHelper::map(\app\models\User::find()->orderBy('nome')->all(), 'id', 'nome');
-$agencias = ArrayHelper::map(\backend\models\ContProjAgencias::find()->orderBy('nome')->all(), 'id', 'nome');
-$bancos = ArrayHelper::map(\backend\models\ContProjBancos::find()->orderBy('nome')->all(), 'id', 'nome');
+//$coordenadores = ArrayHelper::map(\app\models\User::find()->orderBy('nome')->all(), 'id', 'nome');
+//$agencias = ArrayHelper::map(\backend\models\ContProjAgencias::find()->orderBy('nome')->all(), 'id', 'nome');
+//$bancos = ArrayHelper::map(\backend\models\ContProjBancos::find()->orderBy('nome')->all(), 'id', 'nome');
 
-echo $model->coordenador." cordenador";
-if(isset($mensagem)){
-    echo '<script language="javascript">';
-    echo 'alert(Não foi possivel excluir os itens)';
-    echo '</script>';
-}
 
 ?>
 <div class="cont-proj-projetos-view">
@@ -28,10 +26,12 @@ if(isset($mensagem)){
     <!--<h1><?= Html::encode($this->title) ?></h1>-->
 
     <p>
-        <?= Html::a('Rubricas do projeto', ['cont-proj-rubricasde-projetos/index', 'idProjeto' => $model->id, 'nomeProjeto'=>$model->nomeprojeto], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Receitas', ['cont-proj-receitas/index', 'idProjeto' => $model->id, 'nomeProjeto'=>$model->nomeprojeto], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Despesas', ['cont-proj-despesas/index', 'idProjeto' => $model->id, 'nomeProjeto'=>$model->nomeprojeto], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Transferencia de saldo de rubricas', ['cont-proj-transferencias-saldo-rubricas/index', 'idProjeto' => $model->id, 'nomeProjeto'=>$model->nomeprojeto], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+        ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Rubricas do projeto', ['cont-proj-rubricasde-projetos/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Receitas', ['cont-proj-receitas/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Despesas', ['cont-proj-despesas/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Transferencia de saldo de rubricas', ['cont-proj-transferencias-saldo-rubricas/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
     <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
@@ -53,9 +53,8 @@ if(isset($mensagem)){
             //'coordenador',
             'nomeprojeto',
             [
-                'attribute' => 'agencias_id',
-                'label' => 'Agencia de Fomento',
-                'value' => $coordenadores[$model->coordenador_id],
+                'attribute' => 'coordenador_id',
+                'value' => $coordenador->nome,
             ],
             'orcamento:currency',
             'saldo:currency',
@@ -73,17 +72,27 @@ if(isset($mensagem)){
             [
                 'attribute' => 'agencias_id',
                 'label' => 'Agencia de Fomento',
-                'value' => $agencias[$model->agencia_id],
+                'value' => $agencia->nome,
             ],
             [
                 'attribute' => 'bancos_id',
                 'label' => 'Banco',
-                'value' => $bancos[$model->banco_id],
+                'value' => $banco->nome,
             ],
             'agencia',
             'conta',
-            'edital',
-            'proposta',
+            [
+                'attribute' => 'edital',
+                //'value' => "<a href=localhost/novoppgi/backend/web/".$model->edital."' target = '_blank'> Baixar </a>",
+                'format'=>'raw',
+                'value' => "<a href='".$model->edital."' target = '_blank'> Baixar </a>"
+            ],
+            [
+                'attribute' => 'proposta',
+                //'value' => "<a href=localhost/novoppgi/backend/web/".$model->edital."' target = '_blank'> Baixar </a>",
+                'format'=>'raw',
+                'value' => "<a href='".$model->edital."' target = '_blank'> Baixar </a>"
+            ],
 
             'status',
         ],

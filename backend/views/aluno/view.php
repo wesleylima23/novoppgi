@@ -56,6 +56,7 @@ $exameProficienciaAluno = array(null => "Não Avaliado", 0 => 'Reprovado',1 => '
         ]) ?>           
         </div>
     </div>
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title"><b>Dados do Aluno</b></h3>
@@ -94,6 +95,7 @@ $exameProficienciaAluno = array(null => "Não Avaliado", 0 => 'Reprovado',1 => '
         ]) ?>           
         </div>
     </div>
+
         <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title"><b>Exame de Proficiência</b></h3>

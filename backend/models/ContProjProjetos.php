@@ -87,7 +87,7 @@ class ContProjProjetos extends \yii\db\ActiveRecord
 
     public function valid_number($attribute,$params){
         if($this->data_fim < $this->data_inicio){
-            $this->addError($attribute, 'Data final precisa ser maior que data inicial');
+            $this->addError($attribute, 'Data final do projeto precisa ser maior que data inicial!');
         }
     }
 }

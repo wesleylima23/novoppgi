@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //      'filter' => \yii\jui\DatePicker::widget(['language' => 'pt', 'dateFormat' => 'dd-MM-yyyy']),
                 'attribute' => 'dataenvio',
                 'value' => function ($model) {
-                     return date("d-m-Y", strtotime($model->data_incio));
+                     return date("d-m-Y", strtotime($model->dataenvio));
                 },
             ],
         'nomeusuario',

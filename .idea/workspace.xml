@@ -2,56 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7e406d7-97f4-4eb6-9ebb-fcc547372791" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/web/uploads/17082016010833_333 Wittiest Quotable Quotes.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/web/uploads/17082016120803_333 Wittiest Quotable Quotes.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/web/uploads/17082016120807_333 Wittiest Quotable Quotes.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/web/uploads/17082016120841_333 Wittiest Quotable Quotes.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.htaccess" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/novoppgi.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php" afterPath="$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php" afterPath="$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/controllers/ContProjReceitasController.php" afterPath="$PROJECT_DIR$/backend/controllers/ContProjReceitasController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/controllers/ContProjRubricasdeProjetosController.php" afterPath="$PROJECT_DIR$/backend/controllers/ContProjRubricasdeProjetosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/AlunoSearch.php" afterPath="$PROJECT_DIR$/backend/models/AlunoSearch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjDespesas.php" afterPath="$PROJECT_DIR$/backend/models/ContProjDespesas.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjProjetos.php" afterPath="$PROJECT_DIR$/backend/models/ContProjProjetos.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjProjetosSearch.php" afterPath="$PROJECT_DIR$/backend/models/ContProjProjetosSearch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjReceitas.php" afterPath="$PROJECT_DIR$/backend/models/ContProjReceitas.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjReceitasSearch.php" afterPath="$PROJECT_DIR$/backend/models/ContProjReceitasSearch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjRubricasSearch.php" afterPath="$PROJECT_DIR$/backend/models/ContProjRubricasSearch.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" afterPath="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetosSearch.php" afterPath="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetosSearch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjTransferenciasSaldoRubricas.php" afterPath="$PROJECT_DIR$/backend/models/ContProjTransferenciasSaldoRubricas.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjTransferenciasSaldoRubricasSearch.php" afterPath="$PROJECT_DIR$/backend/models/ContProjTransferenciasSaldoRubricasSearch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/left.php" afterPath="$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/left.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/afastamentos/index.php" afterPath="$PROJECT_DIR$/backend/views/afastamentos/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-despesas/_form.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-despesas/_form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-despesas/create.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-despesas/create.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-despesas/index.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-despesas/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-despesas/update.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-despesas/update.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-despesas/view.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-despesas/view.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/aluno/view.php" afterPath="$PROJECT_DIR$/backend/views/aluno/view.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-projetos/_form.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-projetos/_form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-projetos/index.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-projetos/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-projetos/create.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-projetos/create.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-receitas/_form.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-receitas/_form.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-receitas/create.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-receitas/create.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-receitas/index.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-receitas/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-receitas/view.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-receitas/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-rubricas/index.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-rubricas/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-rubricas/view.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-rubricas/view.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/create.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/create.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/index.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/update.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/update.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/view.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/index.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/view.php" afterPath="$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
     </list>
     <ignored path="novoppgi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,25 +42,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ContProjRubricasdeProjetosController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjRubricasdeProjetosController.php">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="166" column="39" selection-start-line="166" selection-start-column="6" selection-end-line="166" selection-end-column="39" />
+            <state relative-caret-position="-267">
+              <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="65" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/update.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="103" selection-start-line="8" selection-start-column="103" selection-end-line="8" selection-end-column="103" />
               <folding>
-                <element signature="e#39#75#0#PHP" expanded="true" />
+                <marker date="1471513097380" expanded="true" signature="814:893" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContProjReceitasController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjReceitasController.php">
+      <file leaf-file-name="create.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/create.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="93" column="25" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
+            <state relative-caret-position="289">
+              <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
               <folding>
-                <element signature="e#39#75#0#PHP" expanded="true" />
+                <marker date="1471513610463" expanded="true" signature="631:712" ph="..." />
               </folding>
             </state>
           </provider>
@@ -99,50 +79,8 @@
       <file leaf-file-name="create.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/create.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/create.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="130" selection-start-line="10" selection-start-column="78" selection-end-line="10" selection-end-column="130" />
-              <folding>
-                <marker date="1471280228885" expanded="true" signature="489:568" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContProjTransferenciasSaldoRubricasController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjTransferenciasSaldoRubricasController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1530">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContProjRubricasdeProjetos.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="84" column="57" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContProjReceitas.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/models/ContProjReceitas.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="66" column="47" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="47" />
+            <state relative-caret-position="478">
+              <caret line="56" column="10" selection-start-line="27" selection-start-column="4" selection-end-line="56" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -151,19 +89,65 @@
       <file leaf-file-name="view.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+            <state relative-caret-position="546">
+              <caret line="83" column="10" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1394">
+              <caret line="83" column="10" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_form.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="935">
+              <caret line="55" column="65" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="65" />
+              <folding>
+                <element signature="e#7#28#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_form.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="884">
+              <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
+              <folding>
+                <marker date="1471512461712" expanded="true" signature="1520:1574" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="view.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/view.php">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-134">
-              <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="1241">
+              <caret line="75" column="14" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+              <folding>
+                <marker date="1471512734143" expanded="true" signature="1808:1829" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -173,14 +157,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/backend/models/ContProjBancos.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-agencias/index.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-agencias/create.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-agencias/update.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-agencias/view.php" />
         <option value="$PROJECT_DIR$/backend/views/user/_formLattes.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-registra-datas/update.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-registra-datas/create.php" />
@@ -190,7 +172,6 @@
         <option value="$PROJECT_DIR$/backend/views/cont-proj-registra-datas/index.php" />
         <option value="$PROJECT_DIR$/backend/models/ReservaSala.php" />
         <option value="$PROJECT_DIR$/backend/models/AlunoSearch.php" />
-        <option value="$PROJECT_DIR$/backend/views/afastamentos/index.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/view.php" />
         <option value="$PROJECT_DIR$/backend/models/ContProjDespesas.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-despesas/view.php" />
@@ -206,27 +187,33 @@
         <option value="$PROJECT_DIR$/backend/models/ContProjProjetosSearch.php" />
         <option value="$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/left.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricas/index.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/create.php" />
-        <option value="$PROJECT_DIR$/backend/models/ContProjProjetos.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/index.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/update.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php" />
         <option value="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetosSearch.php" />
         <option value="$PROJECT_DIR$/backend/models/ContProjRubricasSearch.php" />
         <option value="$PROJECT_DIR$/backend/models/ContProjReceitasSearch.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricas/view.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-receitas/_form.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-receitas/index.php" />
-        <option value="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/_form.php" />
-        <option value="$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/view.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-receitas/view.php" />
-        <option value="$PROJECT_DIR$/backend/controllers/ContProjRubricasdeProjetosController.php" />
         <option value="$PROJECT_DIR$/backend/models/ContProjReceitas.php" />
         <option value="$PROJECT_DIR$/backend/controllers/ContProjReceitasController.php" />
+        <option value="$PROJECT_DIR$/backend/controllers/ContProjRubricasdeProjetosController.php" />
+        <option value="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/create.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/_form.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/create.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/_form.php" />
+        <option value="$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php" />
+        <option value="$PROJECT_DIR$/backend/views/aluno/view.php" />
+        <option value="$PROJECT_DIR$/backend/models/Afastamentos.php" />
+        <option value="$PROJECT_DIR$/backend/views/afastamentos/index.php" />
+        <option value="$PROJECT_DIR$/backend/models/ContProjProjetos.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/index.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/update.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-receitas/index.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-receitas/create.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-receitas/_form.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/create.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-receitas/view.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/view.php" />
       </list>
     </option>
   </component>
@@ -362,7 +349,29 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cont-proj-transferencias-saldo-rubricas" />
+              <option name="myItemId" value="edital" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="defesa" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -407,6 +416,72 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="cont-proj-receitas" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cont-proj-projetos" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aluno" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="afastamentos" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -492,24 +567,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -584,21 +641,23 @@
       <workItem from="1470079856286" duration="1622000" />
       <workItem from="1470154695010" duration="38159000" />
       <workItem from="1470761202341" duration="63494000" />
-      <workItem from="1471451953893" duration="6937000" />
+      <workItem from="1471451953893" duration="20688000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150865000" />
+    <option name="totallyTimeSpent" value="164616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22181553" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20717423" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32492113" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -609,7 +668,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -632,100 +690,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-despesas/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/ContProjTransferenciasSaldoRubricas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="48" column="47" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-despesas/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" column="49" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/left.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="136" column="215" selection-start-line="136" selection-start-column="215" selection-end-line="136" selection-end-column="215" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/AlunoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="64" column="41" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/ContProjProjetosSearch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="44" column="12" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/AlunoSearch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="210" column="34" selection-start-line="210" selection-start-column="29" selection-end-line="210" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/aluno/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricas/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/date.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -754,16 +718,6 @@
         <state relative-caret-position="202">
           <caret line="818" column="20" selection-start-line="818" selection-start-column="20" selection-end-line="818" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
-          <folding>
-            <marker date="1471307335506" expanded="true" signature="705:784" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -823,7 +777,7 @@
         <state relative-caret-position="28">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="e#7#28#0#PHP" expanded="true" />
+            <element signature="e#7#28#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -835,59 +789,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="10" column="79" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-165">
-          <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetosSearch.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-661">
           <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/ContProjProjetos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-646">
-          <caret line="25" column="6" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="719">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <marker date="1471308728231" expanded="true" signature="1490:1544" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="66" column="14" selection-start-line="66" selection-start-column="14" selection-end-line="66" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -916,78 +821,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/controllers/FeriasController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="224" column="80" selection-start-line="224" selection-start-column="16" selection-end-line="224" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="89" column="80" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-134">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjTransferenciasSaldoRubricasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1530">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjRubricasdeProjetosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="166" column="39" selection-start-line="166" selection-start-column="6" selection-end-line="166" selection-end-column="39" />
-          <folding>
-            <element signature="e#39#75#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="84" column="57" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="57" />
           <folding />
         </state>
       </provider>
@@ -1000,39 +837,278 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjTransferenciasSaldoRubricasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1530">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/afastamentos/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="8" selection-start-line="13" selection-start-column="4" selection-end-line="15" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjRubricasdeProjetosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="149" column="53" selection-start-line="149" selection-start-column="53" selection-end-line="149" selection-end-column="53" />
+          <folding>
+            <element signature="e#39#75#0#PHP" expanded="false" />
+            <element signature="e#2943#3330#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjReceitasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="125" column="42" selection-start-line="125" selection-start-column="42" selection-end-line="125" selection-end-column="42" />
+          <folding>
+            <element signature="e#39#75#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/models/ContProjReceitas.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="66" column="47" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="47" />
+        <state relative-caret-position="362">
+          <caret line="71" column="9" selection-start-line="71" selection-start-column="9" selection-end-line="71" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="85" column="82" selection-start-line="85" selection-start-column="82" selection-end-line="85" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="95" column="8" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-transferencias-saldo-rubricas/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="141" column="11" selection-start-line="141" selection-start-column="11" selection-end-line="141" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/aluno/view_orientado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/aluno/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/controllers/AlunoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2520">
+          <caret line="38" column="60" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/aluno/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="e#7#28#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/defesa/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="100" column="34" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/afastamentos/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-335">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1462527020000" expanded="true" signature="380:407" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/Afastamentos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="44" column="22" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/edital/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="99" column="96" selection-start-line="98" selection-start-column="21" selection-end-line="99" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/afastamentos/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-425">
+          <caret line="33" column="69" selection-start-line="33" selection-start-column="69" selection-end-line="33" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/ContProjProjetos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="74" column="27" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
+          <folding>
+            <marker date="1471512461712" expanded="true" signature="1520:1574" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="55" column="65" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="65" />
+          <folding>
+            <element signature="e#7#28#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="75" column="14" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+          <folding>
+            <marker date="1471512734143" expanded="true" signature="1808:1829" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-267">
+          <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="65" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="103" selection-start-line="8" selection-start-column="103" selection-end-line="8" selection-end-column="103" />
+          <folding>
+            <marker date="1471513097380" expanded="true" signature="814:893" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="130" selection-start-line="10" selection-start-column="78" selection-end-line="10" selection-end-column="130" />
+        <state relative-caret-position="289">
+          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
           <folding>
-            <marker date="1471280228885" expanded="true" signature="489:568" ph="..." />
+            <marker date="1471513610463" expanded="true" signature="631:712" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+        <state relative-caret-position="478">
+          <caret line="56" column="10" selection-start-line="27" selection-start-column="4" selection-end-line="56" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjReceitasController.php">
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-receitas/view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="93" column="25" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="25" />
-          <folding>
-            <element signature="e#39#75#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="546">
+          <caret line="83" column="10" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="83" column="10" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

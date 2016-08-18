@@ -7,10 +7,11 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\ContProjReceitasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$nomeProjeto = Yii::$app->request->get('nomeProjeto');
 $idProjeto = Yii::$app->request->get('idProjeto');
+$modelProjeto = \backend\models\ContProjProjetos::find()->where("id=$idProjeto")->one();
+$coordenador = \app\models\User::find()->select("*")->where("id=$modelProjeto->coordenador_id")->one();
 
-$this->title = mb_strimwidth("Receitas do projeto: ".$nomeProjeto,0,60,"...");
+$this->title = mb_strimwidth("Receitas do projeto: ".$modelProjeto->nomeprojeto,0,60,"...");
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -20,7 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Cadastrar nova receita', ['create','idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+            ['cont-proj-projetos/view', 'id' => $idProjeto], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Cadastrar nova receita', ['create','idProjeto'=>$idProjeto], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -54,20 +57,59 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
-                    'view' => function ($url, $model) use ($idProjeto,$nomeProjeto) {
-                        $url .= '&idProjeto=' . $idProjeto.'&nomeProjeto='.$nomeProjeto; //This is where I want to append the $lastAddress variable.
+                    'view' => function ($url, $model) use ($idProjeto) {
+                        $url .= '&idProjeto=' . $idProjeto; //This is where I want to append the $lastAddress variable.
                         return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
                         //Html::a('Atualizar', ['update', 'id' => $model->id,'idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto ]);
                     },
-                    'update' => function ($url, $model) use ($idProjeto,$nomeProjeto) {
+                    'update' => function ($url, $model) {
                         return false;
                     },
-                    'delete' => function ($url, $model) use ($idProjeto,$nomeProjeto) {
-
-                    },
+                    'delete' => function ($url, $model) use ($idProjeto) {
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id,'idProjeto'=>$idProjeto], [
+                            'data' => [
+                                'confirm' => 'Deseja realmente remover esta rubrica?',
+                                'method' => 'post',
+                            ],
+                            'title' => Yii::t('yii', 'Remover Aluno'),
+                        ]);
+                    }
                 ],
                 //['class' => 'yii\grid\ActionColumn'],
             ],
         ],
     ]); ?>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><b>Dados do Projeto</b></h3>
+        </div>
+        <div class="panel-body">
+            <?= \yii\widgets\DetailView::widget([
+                'model' => $modelProjeto,
+                'attributes' => [
+                    //'coordenador',
+                    'nomeprojeto',
+                    [
+                        'attribute' => 'coordenador_id',
+                        'value' => $coordenador->nome,
+                    ],
+                    'orcamento:currency',
+                    'saldo:currency',
+                    [
+                        'attribute' => 'data_inicio',
+                        'value' => date("d/m/Y", strtotime($modelProjeto->data_inicio)),
+
+                    ],
+                    [
+                        'attribute' => 'data_fim',
+                        'value' => date("d/m/Y", strtotime($modelProjeto->data_fim)),
+
+                    ],
+                ],
+            ]) ?>
+        </div>
+    </div>
+
+
 </div>

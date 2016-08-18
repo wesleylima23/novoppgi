@@ -17,8 +17,9 @@ $idProjeto = Yii::$app->request->get('idProjeto');
 
     <!--<?= $form->field($model, 'rubrica_id')->textInput() ?>-->
 
-    <?= $form->field($model, 'rubrica_id')->dropDownList($rubricas, ['prompt' => 'Selecione uma rubrica']) ?>
-
+    <?php if(!isset($update)){
+         echo $form->field($model, 'rubrica_id')->dropDownList($rubricas, ['prompt' => 'Selecione uma rubrica']);
+    }?>
     <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
     <!--<?= $form->field($model, 'valor_total')->textInput() ?>-->
@@ -33,10 +34,7 @@ $idProjeto = Yii::$app->request->get('idProjeto');
     ]);?>
     <!--<?= $form->field($model, 'valor_gasto')->textInput(['value'=>"0"]) ?>-->
 
-    <?php if(isset($update)){
-
-
-    }else{
+    <?php if(!isset($update)){
         echo $form->field($model, 'valor_disponivel')->widget(\kartik\money\MaskMoney::classname(), [
             'pluginOptions' => [
                 'value' => 0.00,
@@ -50,6 +48,7 @@ $idProjeto = Yii::$app->request->get('idProjeto');
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Cancelar',['index', 'idProjeto'=>$idProjeto], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

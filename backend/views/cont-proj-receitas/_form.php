@@ -53,6 +53,7 @@ use kartik\widgets\DatePicker;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Cadastar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Cancelar',['index', 'idProjeto'=>$idProjeto,], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

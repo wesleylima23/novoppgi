@@ -136,6 +136,13 @@ class ContProjProjetosController extends Controller
         }
     }
 
+    public static function view($id){
+        $model = ContProjProjetosController::findModel($id);
+        return ContProjProjetosController::render('cont-proj-projetos/view', [
+            'model' => $model,
+        ]);
+
+    }
     /**
      * Deletes an existing ContProjProjetos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

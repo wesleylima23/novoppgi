@@ -82,6 +82,27 @@ class ContProjReceitasController extends Controller
         return $this->descricao;
     }
 
+    public function cadastrarReceita($model){
+
+        $model->data = date('Y-m-d', strtotime($model->data));
+        $rubrica = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
+        $projeto = ContProjProjetos::find()->select("*")->where("id=$rubrica->projeto_id")->one();
+        $projeto->saldo += $model->valor_receita;
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if ($projeto->save() && $model->save()) {
+                $transaction->commit();
+                return true;
+            }
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
+        }
+        $transaction->rollBack();
+        return false;
+    }
+
+
+
     public function actionCreate()
     {
         $model = new ContProjReceitas();
@@ -89,16 +110,9 @@ class ContProjReceitasController extends Controller
         $nomeProjeto= Yii::$app->request->get('nomeProjeto');
         $idProjeto= Yii::$app->request->get('idProjeto');
 
-        if ($model->load(Yii::$app->request->post()) &&  $model->save() ) {
-            $model->data = date('Y-m-d', strtotime($model->data));
-            $model->save();
-            $rubricaProjeto = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
-            $rubricaProjeto->valor_disponivel =  $rubricaProjeto->valor_disponivel + $model->valor_receita;
-            $rubricaProjeto->save(false);
-            $projeto = ContProjProjetos::find()->select("*")->where("id=$rubricaProjeto->projeto_id")->one();
-            $projeto->saldo = $projeto->saldo + $model->valor_receita;
-            $projeto->save(false);
-            return $this->redirect(['view', 'id' => $model->id,'idProjeto' => $idProjeto, 'nomeProjeto' => $nomeProjeto]);
+        if ($model->load(Yii::$app->request->post()) && $this->cadastrarReceita($model) ) {
+
+            return $this->redirect(['index', 'id' => $model->id,'idProjeto' => $idProjeto, 'nomeProjeto' => $nomeProjeto]);
         } else {
             $rubricasdeProj = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.id",
                 "CONCAT_WS(':',j17_contproj_rubricas.tipo,j17_contproj_rubricas.nome, j17_contproj_rubricasdeprojetos.valor_total) 
