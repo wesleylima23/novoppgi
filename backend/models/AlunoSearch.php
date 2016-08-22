@@ -44,7 +44,8 @@ class AlunoSearch extends Aluno
     {
         $idUsuario = Yii::$app->user->identity->id;
        
-        $query = Aluno::find()->select("j17_linhaspesquisa.sigla as siglaLinhaPesquisa, j17_linhaspesquisa.icone as icone, j17_linhaspesquisa.cor as corLinhaPesquisa, j17_user.nome as nomeOrientador, j17_aluno.*")
+        $query = Aluno::find()->select("j17_linhaspesquisa.sigla as siglaLinhaPesquisa, 
+        j17_linhaspesquisa.icone as icone, j17_linhaspesquisa.cor as corLinhaPesquisa, j17_user.nome as nomeOrientador, j17_aluno.*")
         ->leftJoin("j17_linhaspesquisa","j17_aluno.area = j17_linhaspesquisa.id")->leftJoin("j17_user","j17_aluno.orientador = j17_user.id");
 
 		if(!isset ($params['sort'])){

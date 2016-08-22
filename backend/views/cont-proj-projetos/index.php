@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = 'Projetos de Pesquisa e desenvolvimento';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="cont-proj-projetos-index">
 
@@ -22,13 +23,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            'coordenador',
             'nomeprojeto',
             'orcamento:currency',
             'saldo:currency',
-            'data_inicio:date',
-            // 'data_fim',
+            [
+                'attribute'=>'data_inicio',
+                'format' => ['date', 'php:d/m/Y'],
+            ],
+            [
+                'attribute'=>'data_fim',
+                'format' => ['date', 'php:d/m/Y'],
+            ],
             // 'data_fim_alterada',
-            // 'coordenador_id',
             // 'agencia_id',
             // 'banco_id',
             // 'agencia',

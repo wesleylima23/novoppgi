@@ -25,7 +25,7 @@ use Yii;
  */
 class ContProjProjetos extends \yii\db\ActiveRecord
 {
-
+    public $coordenador;
     public $editalArquivo;
     public $propostaArquivo;
     /**
@@ -45,6 +45,7 @@ class ContProjProjetos extends \yii\db\ActiveRecord
             [['nomeprojeto', 'orcamento', 'saldo' ,'coordenador_id', 'agencia_id', 'banco_id'], 'required'],
             [['orcamento', 'saldo'], 'number'],
             [['data_inicio', 'data_fim', 'data_fim_alterada'], 'safe'],
+            ['data_fim','valid_number'],
             [['coordenador_id', 'agencia_id', 'banco_id'], 'integer'],
             [['nomeprojeto', 'proposta'], 'string', 'max' => 200],
             [['agencia', 'conta', 'status'], 'string', 'max' => 11],
@@ -82,5 +83,11 @@ class ContProjProjetos extends \yii\db\ActiveRecord
             'proposta' => 'Proposta',
             'status' => 'Status',
         ];
+    }
+
+    public function valid_number($attribute,$params){
+        if($this->data_fim < $this->data_inicio){
+            $this->addError($attribute, 'Data final do projeto precisa ser maior que data inicial!');
+        }
     }
 }

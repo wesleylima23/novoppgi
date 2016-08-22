@@ -128,16 +128,16 @@
 				['label' => 'Upload CSV Disciplinas', 'icon' => 'fa fa-upload', 'url' => ['user/disciplinas'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
 				['label' => 'Upload CSV Alunos', 'icon' => 'fa fa-upload', 'url' => ['user/cvsalunos'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
 
-                ['label' => 'Controle de Projetos', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('professor')],
+                ['label' => 'Controle de Projetos', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('professor') or Yii::$app->user->identity->checarAcesso('secretaria'),],
 
-                ['label' => 'Bancos', 'icon' => '', 'url' => ['cont-proj-bancos/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
-				['label' => 'Agência', 'icon' => '', 'url' => ['cont-proj-agencias/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
+                ['label' => 'Bancos', 'icon' => '', 'url' => ['cont-proj-bancos/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor') or Yii::$app->user->identity->checarAcesso('secretaria'),],
+				['label' => 'Agência', 'icon' => '', 'url' => ['cont-proj-agencias/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor') or Yii::$app->user->identity->checarAcesso('secretaria'),],
 				//['label' => 'despesas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-despesas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
-				['label' => 'Projetos', 'icon' => '', 'url' => ['cont-proj-projetos/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
+				['label' => 'Projetos', 'icon' => '', 'url' => ['cont-proj-projetos/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor') or Yii::$app->user->identity->checarAcesso('secretaria'),],
 				//['label' => 'receitas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-receitas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
-				['label' => 'Registrar Datas', 'icon' => '', 'url' => ['cont-proj-registra-datas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
-				['label' => 'Rubricas', 'icon' => '', 'url' => ['cont-proj-rubricas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
-				//['label' => 'rubricas de projeto', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-rubricasde-projetos/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
+				//['label' => 'Registrar Datas', 'icon' => 'fa fa-cog fa-spin', 'url' => ['cont-proj-registra-datas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
+				['label' => 'Rubricas', 'icon' => '', 'url' => ['cont-proj-rubricas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor') or Yii::$app->user->identity->checarAcesso('secretaria'),],
+				//['label' => 'rubricas de projeto', 'icon' => '', 'url' => ['cont-proj-rubricasde-projetos/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 				//['label' => 'transferencia de rubricas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-rubricasde-projetos/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 				//['label' => 'transferencia de saldo de rubricas', 'icon' => 'fa fa-calendar', 'url' => ['cont-proj-transferencias-saldo-rubricas/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 				

@@ -19,7 +19,7 @@ class ContProjProjetosSearch extends ContProjProjetos
     {
         return [
             [['id', 'coordenador_id', 'agencia_id', 'banco_id'], 'integer'],
-            [['nomeprojeto', 'data_inicio', 'data_fim', 'data_fim_alterada', 'agencia', 'conta', 'edital', 'proposta', 'status'], 'safe'],
+            [['nomeprojeto', 'coordenador','data_inicio', 'data_fim', 'data_fim_alterada', 'agencia', 'conta', 'edital', 'proposta', 'status'], 'safe'],
             [['orcamento', 'saldo'], 'number'],
         ];
     }
@@ -42,8 +42,15 @@ class ContProjProjetosSearch extends ContProjProjetos
      */
     public function search($params)
     {
-        $query = ContProjProjetos::find();
-
+        if(!Yii::$app->user->identity->checarAcesso('secretaria')) {
+            $coordenador_id = Yii::$app->user->getId();
+            $query = ContProjProjetos::find()->select("j17_user.nome as coordenador,j17_contproj_projetos.*")
+                ->leftJoin("j17_user", "j17_contproj_projetos.coordenador_id = j17_user.id")
+                ->where("j17_contproj_projetos.coordenador_id=$coordenador_id");
+        }else{
+            $query = ContProjProjetos::find()->select("j17_user.nome as coordenador,j17_contproj_projetos.*")
+                ->leftJoin("j17_user", "j17_contproj_projetos.coordenador_id = j17_user.id");
+        }
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -58,9 +65,15 @@ class ContProjProjetosSearch extends ContProjProjetos
             return $dataProvider;
         }
 
+        $dataProvider->sort->attributes['coordenador'] = [
+            'asc' => ['coordenador' => SORT_ASC],
+            'desc' => ['coordenador' => SORT_DESC],
+        ];
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            //'coordenador' => $this->coordenador,
             'orcamento' => $this->orcamento,
             'saldo' => $this->saldo,
             'data_inicio' => $this->data_inicio,
@@ -72,12 +85,12 @@ class ContProjProjetosSearch extends ContProjProjetos
         ]);
 
         $query->andFilterWhere(['like', 'nomeprojeto', $this->nomeprojeto])
+            ->andFilterWhere(['like', 'j17_user.nome', $this->coordenador])
             ->andFilterWhere(['like', 'agencia', $this->agencia])
             ->andFilterWhere(['like', 'conta', $this->conta])
             ->andFilterWhere(['like', 'edital', $this->edital])
             ->andFilterWhere(['like', 'proposta', $this->proposta])
             ->andFilterWhere(['like', 'status', $this->status]);
-
         return $dataProvider;
     }
 }

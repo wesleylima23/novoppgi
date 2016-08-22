@@ -71,7 +71,7 @@ class ContProjProjetosController extends Controller
     public function actionCreate()
     {
         $model = new ContProjProjetos();
-        $coordenadores = ArrayHelper::map(User::find()->orderBy('nome')->all(), 'id', 'nome');
+        $coordenadores = ArrayHelper::map(User::find()->orderBy('nome')->where('professor=1')->all(), 'id', 'nome');
         $agencias = ArrayHelper::map(ContProjAgencias::find()->orderBy('nome')->all(), 'id', 'nome');
         $bancos = ArrayHelper::map(ContProjBancos::find()->orderBy('nome')->all(), 'id', 'nome');
         $model->editalArquivo = UploadedFile::getInstance($model, 'editalArquivo');
@@ -84,7 +84,12 @@ class ContProjProjetosController extends Controller
             $model->proposta = "uploads/".date('dmYhms')."_".$model->propostaArquivo->name;
             $model->propostaArquivo->saveAs($model->proposta);
         }
+        $model->saldo = 0;
+        $model->status = "Cadastrado";
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->data_inicio = date('Y-m-d', strtotime($model->data_inicio));
+            $model->data_fim = date('Y-m-d', strtotime($model->data_fim));
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -106,9 +111,19 @@ class ContProjProjetosController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $coordenadores = ArrayHelper::map(User::find()->orderBy('nome')->all(), 'id', 'nome');
+        $coordenadores = ArrayHelper::map(User::find()->orderBy('nome')->where('professor=1')->all(), 'id', 'nome');
         $agencias = ArrayHelper::map(ContProjAgencias::find()->orderBy('nome')->all(), 'id', 'nome');
         $bancos = ArrayHelper::map(ContProjBancos::find()->orderBy('nome')->all(), 'id', 'nome');
+        $model->editalArquivo = UploadedFile::getInstance($model, 'editalArquivo');
+        if($model->editalArquivo){
+            $model->edital = "uploads/".date('dmYhms')."_".$model->editalArquivo->name;
+            $model->editalArquivo->saveAs($model->edital);
+        }
+        $model->propostaArquivo = UploadedFile::getInstance($model, 'propostaArquivo');
+        if($model->propostaArquivo) {
+            $model->proposta = "uploads/".date('dmYhms')."_".$model->propostaArquivo->name;
+            $model->propostaArquivo->saveAs($model->proposta);
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -121,6 +136,13 @@ class ContProjProjetosController extends Controller
         }
     }
 
+    public static function view($id){
+        $model = ContProjProjetosController::findModel($id);
+        return ContProjProjetosController::render('cont-proj-projetos/view', [
+            'model' => $model,
+        ]);
+
+    }
     /**
      * Deletes an existing ContProjProjetos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

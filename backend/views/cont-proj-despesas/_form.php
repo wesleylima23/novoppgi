@@ -12,7 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'rubricasdeprojetos_id')->textInput() ?>
+    <!--<?= $form->field($model, 'rubricasdeprojetos_id')->textInput()->label("Item de despendio ") ?>-->
+
+    <?= $form->field($model, 'rubricasdeprojetos_id')->dropDownList($rubricasDeProjeto, ['prompt' => ' ']) ?>
 
     <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 

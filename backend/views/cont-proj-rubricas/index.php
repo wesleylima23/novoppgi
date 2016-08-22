@@ -25,8 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'codigo',
             'nome',
-            'tipo',
+            //'tipo',
+            [
+                'attribute' => 'tipo',
+                'filter' => Html::activeDropDownList($searchModel, 'tipo', \yii\helpers\ArrayHelper::map(\backend\models\ContProjRubricas::find()->distinct()->all(), 'tipo', 'tipo'),[  'class'=>'form-control','prompt' => 'Todos os tipos ']),
 
+                'format' => 'html',
+                'value' => function ($model){
+                    return $model->tipo;
+                    //return "<span class='fa ". $model->tipo ." fa-lg'/> ". $model->siglaLinhaPesquisa;
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

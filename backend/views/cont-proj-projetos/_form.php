@@ -1,9 +1,8 @@
 <?php
-//$items = ['Aula' => 'Aula', 'Defesa' => 'Defesa', 'Exame' => 'Exame', 'Reunião' => 'Reunião'];
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\widgets\DatePicker;
-use kartik\datecontrol\DateControl;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ContProjProjetos */
 /* @var $form yii\widgets\ActiveForm */
@@ -18,15 +17,21 @@ use kartik\datecontrol\DateControl;
 
     <?= $form->field($model, 'nomeprojeto')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'orcamento')->textInput() ?>
+    <?= $form->field($model, 'orcamento')->widget(\kartik\money\MaskMoney::classname(), [
+        'pluginOptions' => [
+            'prefix' => 'R$ ',
+            'suffix' => '',
+            'allowNegative' => false
+        ]
+    ]);?>
 
-    <?= $form->field($model, 'saldo')->textInput() ?>
+    <!--<?= $form->field($model, 'saldo')->textInput() ?>-->
 
     <!--<?= $form->field($model, 'data_inicio')->textInput() ?>-->
 
     <div class="row">
         <?= $form->field($model, 'data_inicio', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
-            'language' => Yii::$app->language,
+            'language' => 'pt-BR',
             'options' => ['placeholder' => 'Selecione a Data Inicial ...',],
             'pluginOptions' => [
                 'format' => 'dd-mm-yyyy',
@@ -40,9 +45,11 @@ use kartik\datecontrol\DateControl;
 
     <div class="row">
         <?= $form->field($model, 'data_fim', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
-            'language' => Yii::$app->language,
+            'attribute' => 'date_fim',
+            'language' => 'pt-BR',
             'options' => ['placeholder' => 'Selecione a Data Final ...',],
             'pluginOptions' => [
+                'autoclose'=>true,
                 'format' => 'dd-mm-yyyy',
                 'todayHighlight' => true
             ]
@@ -52,9 +59,9 @@ use kartik\datecontrol\DateControl;
 
     <!--<?= $form->field($model, 'data_fim_alterada')->textInput() ?>-->
 
-    <div class="row">
+    <!--<div class="row">
         <?= $form->field($model, 'data_fim_alterada', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
-            'language' => Yii::$app->language,
+            'language' => 'pt-BR',
             'options' => ['placeholder' => 'Selecione a Data Final Alterada ...',],
             'pluginOptions' => [
                 'format' => 'dd-mm-yyyy',
@@ -62,7 +69,7 @@ use kartik\datecontrol\DateControl;
             ]
         ])->label("<font color='#FF0000'>*</font> <b>Data Final Alterada:</b>")
         ?>
-    </div>
+    </div>-->
 
     <?= $form->field($model, 'coordenador_id')->dropDownList($coordenadores, ['prompt' => 'Selecione um Coordenador']) ?>
 
@@ -82,10 +89,11 @@ use kartik\datecontrol\DateControl;
 
     <?= $form->field($model, 'propostaArquivo', ['options' => ['class' => 'col-md-6']])->fileInput(['accept' => '.pdf'])->label("Proposta do Projeto: ")?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+    <!--<?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>-->
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Cancelar',['index'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
