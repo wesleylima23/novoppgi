@@ -79,6 +79,8 @@
 				['label' => 'Reserva de Sala', 'icon' => 'fa fa-calendar', 'url' => ['reserva-sala/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
                 ['label' => 'Acompanhar Orientandos', 'icon' => 'fa fa-eye', 'url' => ['aluno/orientandos'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
                 ['label' => 'Upload Lattes', 'icon' => 'fa fa-upload', 'url' => ['user/lattes'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
+				['label' => 'Gerar PIT', 'icon' => 'fa fa-refresh', 'url' => ['user/pit'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
+				['label' => 'Gerar RIT', 'icon' => 'fa fa-refresh', 'url' => ['user/rit'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],
 
                 ['label' => 'Secretaria', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria')],
                 ['label' => 'Alunos', 'icon' => 'fa fa-users', 'url' => ['aluno/index'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
@@ -124,7 +126,7 @@
                     ],
                 ],
 				['label' => 'Upload CSV Disciplinas', 'icon' => 'fa fa-upload', 'url' => ['user/disciplinas'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
-				['label' => 'Upload CSV Alunos', 'icon' => 'fa fa-upload', 'url' => ['user/uploadAlunos'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
+				['label' => 'Upload CSV Alunos', 'icon' => 'fa fa-upload', 'url' => ['user/cvsalunos'], 'visible' => Yii::$app->user->identity->checarAcesso('secretaria'),],
 
                 ['label' => 'Controle de Projetos', 'options' => ['class' => 'header'], 'visible' => Yii::$app->user->identity->checarAcesso('professor')],
 

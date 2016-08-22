@@ -2,6 +2,7 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use app\models\Periodo;
 
 $this->title = 'Upload Currículo Lattes';
 $this->params['breadcrumbs'][] = $this->title;
@@ -14,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<h3 class="panel-title"><b>Selecione o ano/semestre do PIT a ser baixado:</b></h3>
 		</div>
 		<div class="panel-body">
-			<?= $form->field($model, 'lattesFile', ['options' => ['class' => 'col-md-6']])->fileInput(['accept' => '.xml'])->label("<div><b>Curriculum Lattes em XML:</b></div>") ?>
+			<?= Html::activeDropDownList($model, 's_id', Periodo::map(Standard::find()->all(), 's_id', 'name')) ?>
 			<?= Html::submitButton('Enviar', ['class' => 'btn btn-primary']) ?>
 		</div>
 	</div>

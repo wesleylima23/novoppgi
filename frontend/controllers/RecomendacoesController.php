@@ -214,6 +214,7 @@ class RecomendacoesController extends Controller
 
 
             $pontos = array (1 => "Fraco",2 => "Regular",3 => "Bom",4 => "Muito bom",5 => "Excelente",6 => "Sem condições para afirmar");
+			$titulacao = ['1' => 'Mestrado', '2' => 'Doutorado', '3' => 'Epecialização', '4' => 'Graduação', '5' => 'Ensino Médio'];
 
             $classificacao = array (1 => "entre os 50% mais aptos",2 => "entre os 30% mais aptos",3 => "entre os 10% mais aptos",4 => "entre os 5% mais aptos");
 
@@ -253,7 +254,7 @@ class RecomendacoesController extends Controller
                 <div style ="text-align:center;"> <b>AVALIADOR DO CANDIDATO</b> </div>
 
                 <div style ="text-align:left"> <b>Nome: </b>'.$recomendacao[$i]->nome.' </div>
-                <div style ="text-align:left"> <b>Titulação: </b>'.$recomendacao[$i]->titulacao.' </div>
+                <div style ="text-align:left"> <b>Titulação: </b>'.$titulacao[$recomendacao[$i]->titulacao].' </div>
                 <div style ="text-align:left"> <b>Instituição: </b>'.$recomendacao[$i]->instituicaoTitulacao.' </div>
                 <div style ="text-align:left"> <b>Ano da Titulação: </b>'.$recomendacao[$i]->anoTitulacao.' </div>
                 <div style ="text-align:left"> <b>Instituição/Empresa onde atua: </b>'.$recomendacao[$i]->instituicaoAtual.' </div>

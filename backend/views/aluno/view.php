@@ -20,15 +20,17 @@ $exameProficienciaAluno = array(null => "Não Avaliado", 0 => 'Reprovado',1 => '
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
 		<?= Html::a('<span class="glyphicon glyphicon-edit"></span> Editar  ', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-remove-sign"></span> Excluir', ['delete', 'id' => $model->id], [
+        <?= Html::a('<span class="fa fa-trash-o"></span> Excluir', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Você tem certeza que deseja excluir este item?',
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Pedir Banca', ['defesa/create', 'aluno_id' => $model->id], ['class' => 'btn btn-info']) ?>
-        <?= Html::a('<span class="fa fa-file"></span> Exame de Proeficiência', ['aluno/exame', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<span class="fa fa-graduation-cap"></span> Pedir Banca', ['defesa/create', 'aluno_id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="fa fa-comments"></span> Exame de Proeficiência', ['aluno/exame', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+		<?= Html::a('<span class="fa fa-lock"></span> Registrar Trancamento', ['aluno/trancamento', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+		<?= Html::a('<span class="glyphicon glyphicon-time"></span> Registrar Prorrogação', ['aluno/prorrogacao', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <div class="panel panel-default">

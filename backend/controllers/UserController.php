@@ -14,6 +14,7 @@ use yii\db\IntegrityException;
 use yii\base\Exception;
 use app\models\UploadLattesForm;
 use app\models\UploadDisciplinasForm;
+use app\models\UploadCvsalunosForm;
 use yii\web\UploadedFile;
 
 /**
@@ -187,9 +188,18 @@ class UserController extends Controller
 				//return $this->redirect(['lattes');
   //          }
         }
+	}
 
+    public function actionCvsalunos()
+    {
+        $model = new UploadCvsalunosForm();
 
-		return $this->render('disciplinas', ['model' => $model]);
+        if (Yii::$app->request->isPost) {
+            $model->csvAlunosFile = UploadedFile::getInstance($model, 'csvAlunosFile');
+				$this->mensagens('success', 'Sucesso', 'Upload realizado com sucesso.');
+        }
+
+		return $this->render('cvsalunos', ['model' => $model]);
     }
 
     /**

@@ -157,6 +157,8 @@ if(!isset($model->cartaNome[2]) || $model->cartaNome[2] == ""){
                     ]])->label("<font color='#FF0000'>*</font> Deseja mudar o arquivo?");
             }else{
                 echo $form->field($model, 'propostaFile')->FileInput(['accept' => '.pdf'])->label("<font color='#FF0000'>*</font> Proposta de Trabalho:");
+				echo "Download do modelo de proposta de projeto: <a target='_blank' href='documentos/ppgi_form_proposta.docx'><img src='img/doc-icon.gif' border='0' height='16' width='16'></a>";
+
             }
         ?>
     </div>

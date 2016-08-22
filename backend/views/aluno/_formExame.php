@@ -30,7 +30,7 @@ $divFechar = "</div>";
             ?>
         </div>
         <div class="row">
-            <?= $form->field($model, 'conceitoExameProf', ['options' => ['class' => 'col-md-3']])->dropDownlist(['Aprovado' => 'Aprovado', 'Reprovado' => 'Reprovado'], ['prompt' => 'Selecione um Conceito...'])->label("<font color='#FF0000'>*</font> <b>Conceito Obtido:</b>");
+            <?= $form->field($model, 'conceitoExameProf', ['options' => ['class' => 'col-md-3']])->dropDownlist(['Aprovado' => 'Aprovado', 'Reprovado' => 'Reprovado'], ['prompt' => 'Selecione um Conceito...'])->label("<font color='#FF0000'>*</font> <b>Conceito Obtido:</b>"); ?>
         </div>
 
     <div class="form-group">
