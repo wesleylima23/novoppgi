@@ -41,7 +41,7 @@ class ContProjAgenciasSearch extends ContProjAgencias
      */
     public function search($params)
     {
-        $query = ContProjAgencias::find();
+        $query = ContProjAgencias::find()->orderBy("sigla");
 
         // add conditions that should always apply here
 

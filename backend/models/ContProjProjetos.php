@@ -66,7 +66,7 @@ class ContProjProjetos extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nomeprojeto' => 'Nome do projeto',
+            'nomeprojeto' => 'Título do projeto',
             'orcamento' => 'Orçamento',
             'saldo' => 'Saldo',
             'data_inicio' => 'Data de Inicio',

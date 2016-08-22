@@ -16,16 +16,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Cadastrar Novos Bancos', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cadastrar Novo Banco', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-
-            'nome',
             'codigo',
-
+			'nome',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

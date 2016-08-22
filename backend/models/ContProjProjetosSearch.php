@@ -46,10 +46,10 @@ class ContProjProjetosSearch extends ContProjProjetos
             $coordenador_id = Yii::$app->user->getId();
             $query = ContProjProjetos::find()->select("j17_user.nome as coordenador,j17_contproj_projetos.*")
                 ->leftJoin("j17_user", "j17_contproj_projetos.coordenador_id = j17_user.id")
-                ->where("j17_contproj_projetos.coordenador_id=$coordenador_id");
+                ->where("j17_contproj_projetos.coordenador_id=$coordenador_id")->orderBy("coordenador, nomeprojeto");
         }else{
             $query = ContProjProjetos::find()->select("j17_user.nome as coordenador,j17_contproj_projetos.*")
-                ->leftJoin("j17_user", "j17_contproj_projetos.coordenador_id = j17_user.id");
+                ->leftJoin("j17_user", "j17_contproj_projetos.coordenador_id = j17_user.id")->orderBy("coordenador, nomeprojeto");
         }
         // add conditions that should always apply here
 

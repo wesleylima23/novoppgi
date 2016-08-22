@@ -41,7 +41,7 @@ class ContProjBancosSearch extends ContProjBancos
      */
     public function search($params)
     {
-        $query = ContProjBancos::find();
+        $query = ContProjBancos::find()->orderBy("nome");
 
         // add conditions that should always apply here
 

@@ -17,14 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Cadastrar Novos Projetos', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cadastrar Novo Projeto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             'coordenador',
-            'nomeprojeto',
+			'nomeprojeto',
             'orcamento:currency',
             'saldo:currency',
             [

@@ -41,7 +41,7 @@ class ContProjRubricasSearch extends ContProjRubricas
      */
     public function search($params)
     {
-        $query = ContProjRubricas::find()->orderBy("tipo");
+        $query = ContProjRubricas::find()->orderBy("nome");
 
         // add conditions that should always apply here
 

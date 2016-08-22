@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\ContProjRubricasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Gerenciar Rubricas';
+$this->title = 'Gerenciar Tipos de Rubrica';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cont-proj-rubricas-index">
@@ -16,15 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Cadastrar Novas Rubricas', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cadastrar Novo Tipo de Rubrica', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-
-            'codigo',
+           
             'nome',
+			'codigo',
             //'tipo',
             [
                 'attribute' => 'tipo',

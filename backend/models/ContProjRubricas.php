@@ -44,7 +44,7 @@ class ContProjRubricas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'codigo' => 'Codigo',
+            'codigo' => 'Código da Rubrica',
             'nome' => 'Nome',
             'tipo' => 'Tipo',
         ];

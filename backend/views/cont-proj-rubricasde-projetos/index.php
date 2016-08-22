@@ -11,7 +11,7 @@ $modelProjeto = \backend\models\ContProjProjetos::find()->where("id=$idProjeto")
 $coordenador = \app\models\User::find()->select("*")->where("id=$modelProjeto->coordenador_id")->one();
 
 
-$this->title = mb_strimwidth("Rubricas do projeto - ".$modelProjeto->nomeprojeto,0,60,"...");
+$this->title = "Rubricas do projeto";
 //'Cont Proj Rubricasde Projetos';
 $this->params['breadcrumbs'][] = $this->title;
 //$this->params['breadcrumbs'][] = ['label' => "$nomeProjeto", 'url' => ['index','idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto]];
@@ -25,9 +25,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
             ['cont-proj-projetos/view', 'id' => $idProjeto], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('Cadastrar novo rubrica para o projeto', ['create','idProjeto'=>$idProjeto], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cadastrar nova rubrica para o projeto', ['create','idProjeto'=>$idProjeto], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><b>Dados do Projeto</b></h3>
+        </div>
+        <div class="panel-body">
+            <?= \yii\widgets\DetailView::widget([
+                'model' => $modelProjeto,
+                'attributes' => [
+                    'nomeprojeto',
+                    [
+                        'attribute' => 'coordenador_id',
+                        'value' => $coordenador->nome,
+                    ],
+                    'orcamento:currency',
+                    'saldo:currency',
+                    [
+                        'attribute' => 'data_inicio',
+                        'value' => date("d/m/Y", strtotime($modelProjeto->data_inicio)),
 
+                    ],
+                    [
+                        'attribute' => 'data_fim',
+                        'value' => date("d/m/Y", strtotime($modelProjeto->data_fim)),
+
+                    ],
+                ],
+            ]) ?>
+        </div>
+    </div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -70,37 +98,5 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><b>Dados do Projeto</b></h3>
-        </div>
-        <div class="panel-body">
-            <?= \yii\widgets\DetailView::widget([
-                'model' => $modelProjeto,
-                'attributes' => [
-                    //'coordenador',
-                    'nomeprojeto',
-                    [
-                        'attribute' => 'coordenador_id',
-                        'value' => $coordenador->nome,
-                    ],
-                    'orcamento:currency',
-                    'saldo:currency',
-                    [
-                        'attribute' => 'data_inicio',
-                        'value' => date("d/m/Y", strtotime($modelProjeto->data_inicio)),
-
-                    ],
-                    [
-                        'attribute' => 'data_fim',
-                        'value' => date("d/m/Y", strtotime($modelProjeto->data_fim)),
-
-                    ],
-                ],
-            ]) ?>
-        </div>
-    </div>
-
 
 </div>
