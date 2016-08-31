@@ -1,4 +1,17 @@
-2015-11-26 - 2.14.0
+2016-08-19 - 2.15.2
+-------------------
+* Update icon name constants to version 4.6.3.
+
+2016-05-29 - 2.15.1
+-------------------
+* Added option to skip the icon.
+* Added option to change the order of icons in the stack.
+
+2016-05-22 - 2.15.0
+-------------------
+* Remove bower package.
+
+2016-04-16 - 2.14.0
 -------------------
 * `Font Awesome` updated to version `4.6`.
 

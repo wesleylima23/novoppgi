@@ -2,14 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use \kartik\money\MaskMoney;
+use \kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ContProjReceitasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $idProjeto = Yii::$app->request->get('idProjeto');
-$modelProjeto = \backend\models\ContProjProjetos::find()->where("id=$idProjeto")->one();
-$coordenador = \app\models\User::find()->select("*")->where("id=$modelProjeto->coordenador_id")->one();
 
 $this->title = "Receitas do projeto";
 $this->params['breadcrumbs'][] = $this->title;
@@ -25,36 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['cont-proj-projetos/view', 'id' => $idProjeto], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Cadastrar nova receita', ['create','idProjeto'=>$idProjeto], ['class' => 'btn btn-success']) ?>
     </p>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><b>Dados do Projeto</b></h3>
-        </div>
-        <div class="panel-body">
-            <?= \yii\widgets\DetailView::widget([
-                'model' => $modelProjeto,
-                'attributes' => [
-                    //'coordenador',
-                    'nomeprojeto',
-                    [
-                        'attribute' => 'coordenador_id',
-                        'value' => $coordenador->nome,
-                    ],
-                    'orcamento:currency',
-                    'saldo:currency',
-                    [
-                        'attribute' => 'data_inicio',
-                        'value' => date("d/m/Y", strtotime($modelProjeto->data_inicio)),
 
-                    ],
-                    [
-                        'attribute' => 'data_fim',
-                        'value' => date("d/m/Y", strtotime($modelProjeto->data_fim)),
-
-                    ],
-                ],
-            ]) ?>
-        </div>
-    </div>
+    <?= $this->render('..\cont-proj-projetos\dados', [
+        'idProjeto' => $idProjeto,
+    ]) ?>
 	
 	<?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -68,10 +41,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'text',
                 'contentOptions'=>['style'=>'max-width: 40%;'],
             ],
-            'valor_receita:currency',
+            //'valor_receita:currency',
+            [
+                'attribute'=>'valor_receita',
+                'format'=>'currency',
+                /*'filter'=> MaskMoney::widget([
+                    'model' => $searchModel,
+                    'name' => 'valor_receita',
+                    //'value' => 0.00,
+                    'pluginOptions' => [
+                        'prefix' => 'R$ ',
+                    ],
+                    ]),*/
+            ],
             [
                 'attribute'=>'data',
                 'format' => ['date', 'php:d/m/Y'],
+                /*'filter' => DatePicker::widget([
+                    'model' => $searchModel,
+                    'name' => 'data',
+                    'options' => ['placeholder' => 'Data ...'],
+                    'pluginOptions' => [
+                        'format' => 'dd-M-yyyy',
+                        'todayHighlight' => true
+                    ]
+                ]),*/
             ],
 
             //'tipo',
@@ -99,10 +93,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'delete' => function ($url, $model) use ($idProjeto) {
                         return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id,'idProjeto'=>$idProjeto], [
                             'data' => [
-                                'confirm' => 'Deseja realmente remover esta rubrica?',
+                                'confirm' => 'Deseja realmente remover esta receita?',
                                 'method' => 'post',
                             ],
-                            'title' => Yii::t('yii', 'Remover Aluno'),
+                            'title' => Yii::t('yii', 'Remover Receita'),
                         ]);
                     }
                 ],

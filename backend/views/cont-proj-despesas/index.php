@@ -6,9 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ContProjDespesasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$nomeProjeto = Yii::$app->request->get('nomeProjeto');
 $idProjeto = Yii::$app->request->get('idProjeto');
-
 $this->title = 'Despesas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -18,19 +16,30 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Cadastrar nova despesa', ['create','idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+            ['cont-proj-projetos/view', 'id' => $idProjeto], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Cadastrar despesa', ['create', 'idProjeto' => $idProjeto], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <?= $this->render('..\cont-proj-projetos\dados', [
+        'idProjeto' => $idProjeto,
+    ]) ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'rubricasdeprojetos_id',
+            'ident_nf',
+            'favorecido',
+            'nomeRubrica',
+            //'rubricasdeprojetos_id',
+            'data_emissao',
             'descricao',
             'valor_despesa:currency',
-            'tipo_pessoa',
+            //'tipo_pessoa',
+            'ident_cheque',
             // 'data_emissao',
-            // 'ident_nf',
             // 'nf',
             // 'ident_cheque',
             // 'data_emissao_cheque',
@@ -39,7 +48,29 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'cnpj_cpf',
             // 'comprovante',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function ($url, $model) use ($idProjeto) {
+                        $url .= '&idProjeto=' . $idProjeto;
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
+                    },
+                    'update' => function ($url, $model) {
+                        return false;
+                    },
+                    'delete' => function ($url, $model) use ($idProjeto) {
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id, 'idProjeto' => $idProjeto], [
+                            'data' => [
+                                'confirm' => 'Deseja realmente remover esta receita?',
+                                'method' => 'post',
+                            ],
+                            'title' => Yii::t('yii', 'Remover Receita'),
+                        ]);
+                    }
+                ],
+            ],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
 </div>

@@ -56,6 +56,13 @@ class ContProjRubricasController extends Controller
         ]);
     }
 
+
+    public function actionCancelar(){
+        $this->mensagens('error', 'Rubricas',  'Operação cancelada!');
+        return $this->redirect(['index']);
+    }
+
+
     /**
      * Creates a new ContProjRubricas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -66,7 +73,8 @@ class ContProjRubricasController extends Controller
         $model = new ContProjRubricas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $this->mensagens('success', 'Rubricas',  'Rubrica cadastrado com sucesso!');
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +93,8 @@ class ContProjRubricasController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $this->mensagens('success', 'Rubricas',  'Dados atualizados com sucesso!');
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -99,10 +108,21 @@ class ContProjRubricasController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id,$detalhe=false)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        try{
+            $model->delete();
+            $this->mensagens('success', 'Exclusão do  Banco',  'Banco excluido com sucesso!');
+        }catch (\yii\base\Exception $e){
+            $this->mensagens('error', 'Exclusão do  Banco', 'Banco não pode ser excluido pois existem projetos associadas ao mesmo!');
+            if($detalhe){
+                return $this->redirect(['view','id' => $model->id]);
+            }else{
+                return $this->redirect(['index']);
+            }
+            // $this->goBack();
+        }
         return $this->redirect(['index']);
     }
 
@@ -120,5 +140,18 @@ class ContProjRubricasController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    protected function mensagens($tipo, $titulo, $mensagem){
+        Yii::$app->session->setFlash($tipo, [
+            'type' => $tipo,
+            'icon' => 'home',
+            'duration' => 5000,
+            'message' => $mensagem,
+            'title' => $titulo,
+            'positonY' => 'top',
+            'positonX' => 'center',
+            'showProgressbar' => true,
+        ]);
     }
 }

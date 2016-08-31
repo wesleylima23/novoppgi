@@ -7,6 +7,7 @@ use backend\models\ContProjRubricasdeProjetos;
 use Yii;
 use backend\models\ContProjReceitas;
 use backend\models\ContProjReceitasSearch;
+use yii\base\Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -86,11 +87,13 @@ class ContProjReceitasController extends Controller
 
         $model->data = date('Y-m-d', strtotime($model->data));
         $rubrica = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
+        $rubrica->valor_disponivel =  $rubrica->valor_disponivel + $model->valor_receita;
+
         $projeto = ContProjProjetos::find()->select("*")->where("id=$rubrica->projeto_id")->one();
-        $projeto->saldo += $model->valor_receita;
+        $projeto->saldo =  $projeto->saldo + $model->valor_receita;
         $transaction = Yii::$app->db->beginTransaction();
         try {
-            if ($projeto->save() && $model->save()) {
+            if ($projeto->save() && $model->save() && $rubrica->save()) {
                 $transaction->commit();
                 return true;
             }
@@ -107,12 +110,11 @@ class ContProjReceitasController extends Controller
     {
         $model = new ContProjReceitas();
 
-        $nomeProjeto= Yii::$app->request->get('nomeProjeto');
         $idProjeto= Yii::$app->request->get('idProjeto');
 
         if ($model->load(Yii::$app->request->post()) && $this->cadastrarReceita($model) ) {
 
-            return $this->redirect(['index', 'id' => $model->id,'idProjeto' => $idProjeto, 'nomeProjeto' => $nomeProjeto]);
+            return $this->redirect(['index', 'id' => $model->id,'idProjeto' => $idProjeto]);
         } else {
             $rubricasdeProj = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.id",
                 "CONCAT_WS(':',j17_contproj_rubricas.tipo,j17_contproj_rubricas.nome, j17_contproj_rubricasdeprojetos.valor_total) 
@@ -124,7 +126,6 @@ class ContProjReceitasController extends Controller
                 'rubricasdeProjeto' => $rubricasdeProjeto,
                 'model' => $model,
                 'idProjeto' => $idProjeto,
-                'nomeProjeto' => $nomeProjeto
             ]);
         }
     }
@@ -148,27 +149,56 @@ class ContProjReceitasController extends Controller
         }
     }
 
+    public function deletar($model){
+
+        $rubricaProjeto = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
+        $rubricaProjeto->valor_disponivel =  $rubricaProjeto->valor_disponivel - $model->valor_receita;
+
+        $projeto = ContProjProjetos::find()->select("*")->where("id=$rubricaProjeto->projeto_id")->one();
+        $projeto->saldo = $projeto->saldo - $model->valor_receita;
+
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if ( $rubricaProjeto->save() && $projeto->save() && $model->delete()) {
+                $transaction->commit();
+                return true;
+            }
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
+            $transaction->rollBack();
+            return false;
+        }
+    }
+
+
+
     /**
      * Deletes an existing ContProjReceitas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id,$detalhe=false)
     {
+        $idProjeto = Yii::$app->request->get('idProjeto');
         $model = $this->findModel($id);
+        try {
+            if($this->deletar($model)) {
+                $this->mensagens('success', 'Exclusão da Receita', 'Receita excluída com sucesso!');
+            }else{
+                throw new Exception('error!');
+            }
+        } catch (\yii\base\Exception $e) {
+            $this->mensagens('error', 'Exclusão da Receita', 'Receita não pode ser excluida!');
+            if ($detalhe) {
+                return $this->redirect(['view', 'id' => $model->id,'idProjeto'=> $idProjeto]);
+            } else {
+                return $this->redirect(['index','idProjeto'=> $idProjeto]);
+            }
+        }
+        return $this->redirect(['index','idProjeto'=> $idProjeto]);
 
-        $idProjeto = Yii::$app->request->get("idProjeto");
-        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
-        $rubricaProjeto = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
-        $rubricaProjeto->valor_disponivel =  $rubricaProjeto->valor_disponivel - $model->valor_receita;
-        $rubricaProjeto->save(false);
-        $projeto = ContProjProjetos::find()->select("*")->where("id=$rubricaProjeto->projeto_id")->one();
-        $projeto->saldo = $projeto->saldo - $model->valor_receita;
-        $projeto->save(false);
 
-        $this->findModel($id)->delete();
-        return $this->redirect(['index','idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto]);
     }
 
     /**
@@ -186,4 +216,19 @@ class ContProjReceitasController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    protected function mensagens($tipo, $titulo, $mensagem)
+    {
+        Yii::$app->session->setFlash($tipo, [
+            'type' => $tipo,
+            'icon' => 'home',
+            'duration' => 5000,
+            'message' => $mensagem,
+            'title' => $titulo,
+            'positonY' => 'top',
+            'positonX' => 'center',
+            'showProgressbar' => true,
+        ]);
+    }
+
 }

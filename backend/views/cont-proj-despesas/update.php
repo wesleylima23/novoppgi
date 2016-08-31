@@ -4,9 +4,9 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\ContProjDespesas */
-
+$idProjeto = Yii::$app->request->get('idProjeto');
 $this->title = $model->descricao;
-$this->params['breadcrumbs'][] = ['label' => 'Cont Proj Despesas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Despesas', 'url' => ['index','idProjeto'=>$idProjeto]];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'idProjeto' => $idProjeto,
     ]) ?>
 
 </div>

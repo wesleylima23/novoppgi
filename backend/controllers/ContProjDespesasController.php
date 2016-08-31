@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\ContProjBancos;
+use backend\models\ContProjProjetos;
 use backend\models\ContProjRubricas;
 use backend\models\ContProjRubricasdeProjetos;
 use Yii;
@@ -12,6 +13,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ContProjDespesasController implements the CRUD actions for ContProjDespesas model.
@@ -60,6 +62,33 @@ class ContProjDespesasController extends Controller
         ]);
     }
 
+
+    public function cadastrarDespesa(ContProjDespesas $model){
+
+        $model->data_emissao = date('Y-m-d', strtotime($model->data_emissao));
+        $model->data_emissao_cheque = date('Y-m-d', strtotime($model->data_emissao_cheque));
+
+        $rubrica = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
+        $rubrica->valor_disponivel =  $rubrica->valor_disponivel - $model->valor_despesa;
+        $rubrica->valor_gasto =  $rubrica->valor_gasto + $model->valor_despesa;
+
+        $projeto = ContProjProjetos::find()->select("*")->where("id=$rubrica->projeto_id")->one();
+        $projeto->saldo =  $projeto->saldo - $model->valor_despesa;
+
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if ($projeto->save(false) && $model->save(false) && $rubrica->save(false)) {
+                $transaction->commit();
+                return true;
+            }
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
+        }
+        $transaction->rollBack();
+        return false;
+    }
+
+
     /**
      * Creates a new ContProjDespesas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -67,17 +96,29 @@ class ContProjDespesasController extends Controller
      */
     public function actionCreate()
     {
-        $projeto_id = Yii::$app->request->get('idProjeto');
+        $idProjeto= Yii::$app->request->get('idProjeto');
         $model = new ContProjDespesas();
-        $rubricasDeProjeto  = ArrayHelper::map(ContProjRubricasdeProjetos::find()
-            ->where("projeto_id=".$projeto_id)->all(), 'id', 'descricao');
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->comprovante = UploadedFile::getInstance($model, 'comprovante');
+        if($model->comprovante) {
+            $model->comprovante = "uploads/".date('dmYhms')."_".$model->comprovante->name;
+            $model->comprovante->saveAs($model->comprovante);
+        }
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $this->cadastrarDespesa($model);
+            return $this->redirect(['index', 'idProjeto' => $idProjeto]);
         } else {
+            $rubricasdeProj = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.id",
+                "CONCAT_WS(':',j17_contproj_rubricas.tipo,j17_contproj_rubricas.nome, j17_contproj_rubricasdeprojetos.valor_total) 
+                AS descricao"])
+                ->leftJoin("j17_contproj_rubricas","j17_contproj_rubricasdeprojetos.rubrica_id = j17_contproj_rubricas.id")
+                ->where("j17_contproj_rubricasdeprojetos.projeto_id = $idProjeto")->all();
+            $rubricasdeProjeto = ArrayHelper::map($rubricasdeProj, 'id', 'descricao');
             return $this->render('create', [
+                'rubricasdeProjeto' => $rubricasdeProjeto,
                 'model' => $model,
-                'rubricasDeProjeto'=>$rubricasDeProjeto ,
+                'idProjeto' => $idProjeto,
             ]);
+
         }
     }
 
@@ -101,17 +142,53 @@ class ContProjDespesasController extends Controller
         }
     }
 
+
+    public function deletar(ContProjDespesas $model){
+
+        $rubricaProjeto = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
+        $rubricaProjeto->valor_disponivel =  $rubricaProjeto->valor_disponivel + $model->valor_despesa;
+        $rubricaProjeto->valor_gasto =  $rubricaProjeto->valor_gasto - $model->valor_despesa;
+
+        $projeto = ContProjProjetos::find()->select("*")->where("id=$rubricaProjeto->projeto_id")->one();
+        $projeto->saldo = $projeto->saldo + $model->valor_despesa;
+
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if ( $rubricaProjeto->save(false) && $projeto->save(false) && $model->delete()) {
+                $transaction->commit();
+                return true;
+            }
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
+            $transaction->rollBack();
+            return false;
+        }
+    }
     /**
      * Deletes an existing ContProjDespesas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id,$detalhe=false)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $idProjeto = Yii::$app->request->get('idProjeto');
+        $model = $this->findModel($id);
+        try {
+            if($this->deletar($model)) {
+                $this->mensagens('success', 'Exclusão da Despesa', 'Despesa excluída com sucesso!');
+            }else{
+                throw new Exception('error!');
+            }
+        } catch (\yii\base\Exception $e) {
+            $this->mensagens('error', 'Exclusão da Despesa', 'Despesa não pode ser excluida!');
+            if ($detalhe) {
+                return $this->redirect(['view', 'id' => $model->id,'idProjeto'=> $idProjeto]);
+            } else {
+                return $this->redirect(['index','idProjeto'=> $idProjeto]);
+            }
+        }
+        return $this->redirect(['index','idProjeto'=> $idProjeto]);
     }
 
     /**
@@ -129,4 +206,19 @@ class ContProjDespesasController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    protected function mensagens($tipo, $titulo, $mensagem)
+    {
+        Yii::$app->session->setFlash($tipo, [
+            'type' => $tipo,
+            'icon' => 'home',
+            'duration' => 5000,
+            'message' => $mensagem,
+            'title' => $titulo,
+            'positonY' => 'top',
+            'positonX' => 'center',
+            'showProgressbar' => true,
+        ]);
+    }
+
 }

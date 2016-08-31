@@ -11,7 +11,7 @@ $coordenador = \app\models\User::find()->select("*")->where("id=$model->coordena
 $agencia = \backend\models\ContProjAgencias::find()->select("*")->where("id=$model->agencia_id")->one();
 $banco =\backend\models\ContProjBancos::find()->select("*")->where("id=$model->banco_id")->one();
 
-$this->title = $model->nomeprojeto;
+$this->title = mb_strimwidth($model->nomeprojeto,0,50,"...");
 $this->params['breadcrumbs'][] = ['label' => 'Projetos de Pesquisa e desenvolvimento', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -24,21 +24,29 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="cont-proj-projetos-view">
 
     <!--<h1><?= Html::encode($this->title) ?></h1>-->
-
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+    <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
         ['index'], ['class' => 'btn btn-warning']) ?>
+    </p>
+    <p>
         <?= Html::a('Rubricas do projeto', ['cont-proj-rubricasde-projetos/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Receitas', ['cont-proj-receitas/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Prorrogar Data de Conclusão', ['cont-proj-prorrogacoes/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+    </p>
+    <p>
         <?= Html::a('Despesas', ['cont-proj-despesas/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Transferencia de saldo de rubricas', ['cont-proj-transferencias-saldo-rubricas/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Transferencia de saldo de rubricas',
+            ['cont-proj-transferencias-saldo-rubricas/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Relatorio Simples',
+            ['cont-proj-projetos/relatorio', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
     <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Deletar', ['delete', 'id' => $model->id], [
+        <?= Html::a('Deletar', ['delete', 'id' => $model->id, 'detalhe'=>true], [
+
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Você tem certeza que deseja excluir este projeto?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -47,6 +55,12 @@ $this->params['breadcrumbs'][] = $this->title;
     'url' => ['cont-proj-rubricasde-projetos/index'], 'visible' => Yii::$app->user->identity->checarAcesso('professor'),],-->
     <!--['label' => 'rubricas de projeto', 'icon' => '', 'url' => ['cont-proj-rubricasde-projetos/index'],
     'visible' => Yii::$app->user->identity->checarAcesso('professor'),],-->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><b>Dados do Projeto</b></h3>
+        </div>
+        <div class="panel-body">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -59,15 +73,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'orcamento:currency',
             'saldo:currency',
             [
-                'label' => 'data_inicio',
                 'attribute' => 'data_inicio',
                 'value' => date("d/m/Y", strtotime($model->data_inicio)),
 
             ],
             [
                 'attribute' => 'data_fim',
-                'value' => date("d/m/Y", strtotime($model->data_fim)),
-
+                'value' => date("d/m/Y", strtotime($model->dataMaior())),
             ],
             [
                 'attribute' => 'agencias_id',

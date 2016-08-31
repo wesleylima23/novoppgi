@@ -42,6 +42,8 @@ class ContProjTransferenciasSaldoRubricasSearch extends ContProjTransferenciasSa
      */
     public function search($params)
     {
+
+
         /*
         SELECT j17_contproj_transferenciassaldorubricas.*, j17_contproj_rubricasdeprojetos.descricao as Destino, j17_contproj_projetos.nomeprojeto as nomeprojeto
         FROM `j17_contproj_transferenciassaldorubricas`
@@ -54,17 +56,17 @@ class ContProjTransferenciasSaldoRubricasSearch extends ContProjTransferenciasSa
          * $query = ContProjProjetos::find()->select("j17_user.nome as coordenador,j17_contproj_projetos.*")
         ->leftJoin("j17_user","j17_contproj_projetos.coordenador_id = j17_user.id");
          */
-
-
         //$query = ContProjTransferenciasSaldoRubricas::find();
+        $projeto_id = Yii::$app->request->get('idProjeto');
         $query = ContProjTransferenciasSaldoRubricas::find()->select(" j17_contproj_transferenciassaldorubricas.*,
-        j17_contproj_rubricasdeprojetos.descricao as nomeRubricaDestino")
-        ->leftJoin("j17_contproj_rubricasdeprojetos",
-            "j17_contproj_transferenciassaldorubricas.rubrica_destino =  j17_contproj_rubricasdeprojetos.id");
+        A.descricao as nomeRubricaDestino, B.descricao as nomeRubricaOrigem")
+        ->leftJoin("j17_contproj_rubricasdeprojetos as A",
+        "j17_contproj_transferenciassaldorubricas.rubrica_destino =  A.id")
+        ->leftJoin("j17_contproj_rubricasdeprojetos as B",
+        "j17_contproj_transferenciassaldorubricas.rubrica_origem =  B.id")
+        ->where("A.projeto_id=$projeto_id");
 
         // add conditions that should always apply here
-
-
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -83,6 +85,11 @@ class ContProjTransferenciasSaldoRubricasSearch extends ContProjTransferenciasSa
             'desc' => ['nomeRubricaDestino' => SORT_DESC],
         ];
 
+        $dataProvider->sort->attributes['nomeRubricaOrigem'] = [
+            'asc' => ['nomeRubricaOrigem' => SORT_ASC],
+            'desc' => ['nomeRubricaOrigem' => SORT_DESC],
+        ];
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -95,7 +102,9 @@ class ContProjTransferenciasSaldoRubricasSearch extends ContProjTransferenciasSa
         ]);
 
         $query->andFilterWhere(['like', 'autorizacao', $this->autorizacao])
-        ->andFilterWhere(['like', 'j17_contproj_rubricasdeprojetos.descricao', $this->nomeRubricaDestino]);
+        ->andFilterWhere(['like', 'A.descricao', $this->nomeRubricaDestino])
+        ->andFilterWhere(['like', 'B.descricao', $this->nomeRubricaOrigem])
+        ->andFilterWhere(['like', 'j17_contproj_transferenciassaldorubricas.autorizacao', $this->autorizacao]);
         return $dataProvider;
     }
 }

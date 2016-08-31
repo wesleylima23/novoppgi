@@ -54,33 +54,20 @@ class ContProjReceitas extends \yii\db\ActiveRecord
             'descricao' => 'Descricao',
             'valor_receita' => 'Valor Receita',
             'data' => 'Data',
+            'nomeRubrica' => 'Item de Despêndio',
         ];
     }
 
     public function validar_receita($attribute,$params){
         $saldoRubrica = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.valor_total"])
            ->where("j17_contproj_rubricasdeprojetos.id=$this->rubricasdeprojetos_id")->sum("valor_total");
-        $receitas = ContProjReceitas::find()->select(["j17_contproj_rubricasdeprojetos.valor_receita"])
+        $receitas = ContProjReceitas::find()->select(["valor_receita"])
             ->where("rubricasdeprojetos_id=$this->rubricasdeprojetos_id")->sum("valor_receita");
-        //$rubricaValorToral = 2000;
-
         $permitido = $saldoRubrica - $receitas;
-        $messagem = "limite atingido maximo ainda permitido é $permitido";
         if($this->valor_receita > $permitido ){
             $permitido = number_format ( $permitido , 2 );
+            $messagem = "limite atingido maximo ainda permitido é $permitido";
             $this->addError($attribute, $messagem);
         }
-        /*$projeto = \backend\models\ContProjProjetos::find()->where("id=$this->projeto_id")->one();
-        $valorRubricas =  \backend\models\ContProjRubricasdeProjetos::find()->where("projeto_id=58")->sum("valor_total");
-
-        $permitido = $projeto->orcamento - $valorRubricas;
-        if( $permitido >0){
-            $permitido = number_format ( $permitido , 2 );
-            $messagem = "O Valor disponivel não pode ser maior que o orçamento do projeto o valor ainda disponivél para cadastro é R$ $permitido";
-        }
-        $total = $this->$attribute + $valorRubricas;
-        if($total > $projeto->orcamento ){
-            $this->addError($attribute, $messagem);
-        }*/
     }
 }

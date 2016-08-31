@@ -7,8 +7,6 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\ContProjRubricasdeProjetosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $idProjeto = Yii::$app->request->get('idProjeto');
-$modelProjeto = \backend\models\ContProjProjetos::find()->where("id=$idProjeto")->one();
-$coordenador = \app\models\User::find()->select("*")->where("id=$modelProjeto->coordenador_id")->one();
 
 
 $this->title = "Rubricas do projeto";
@@ -27,35 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['cont-proj-projetos/view', 'id' => $idProjeto], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Cadastrar nova rubrica para o projeto', ['create','idProjeto'=>$idProjeto], ['class' => 'btn btn-success']) ?>
     </p>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><b>Dados do Projeto</b></h3>
-        </div>
-        <div class="panel-body">
-            <?= \yii\widgets\DetailView::widget([
-                'model' => $modelProjeto,
-                'attributes' => [
-                    'nomeprojeto',
-                    [
-                        'attribute' => 'coordenador_id',
-                        'value' => $coordenador->nome,
-                    ],
-                    'orcamento:currency',
-                    'saldo:currency',
-                    [
-                        'attribute' => 'data_inicio',
-                        'value' => date("d/m/Y", strtotime($modelProjeto->data_inicio)),
-
-                    ],
-                    [
-                        'attribute' => 'data_fim',
-                        'value' => date("d/m/Y", strtotime($modelProjeto->data_fim)),
-
-                    ],
-                ],
-            ]) ?>
-        </div>
-    </div>
+    <?= $this->render('..\cont-proj-projetos\dados', [
+        'idProjeto' => $idProjeto,
+    ]) ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -73,13 +45,13 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
-                    'view' => function ($url, $model) use ($idProjeto,$nomeProjeto) {
-                        $url .= '&idProjeto=' . $idProjeto.'&nomeProjeto='.$nomeProjeto; //This is where I want to append the $lastAddress variable.
+                    'view' => function ($url, $model) use ($idProjeto) {
+                        $url .= '&idProjeto=' . $idProjeto; //This is where I want to append the $lastAddress variable.
                         return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
                         //Html::a('Atualizar', ['update', 'id' => $model->id,'idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto ]);
                     },
-                    'update' => function ($url, $model) use ($idProjeto,$nomeProjeto) {
-                        $url .= '&idProjeto=' . $idProjeto.'&nomeProjeto='.$nomeProjeto; //This is where I want to append the $lastAddress variable.
+                    'update' => function ($url, $model) use ($idProjeto) {
+                        $url .= '&idProjeto=' . $idProjeto; //This is where I want to append the $lastAddress variable.
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url);
                         //Html::a('Atualizar', ['update', 'id' => $model->id,'idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto ]);
                     },

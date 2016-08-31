@@ -13,6 +13,8 @@ $this->params['breadcrumbs'][] = 'Atualizar Informações';
 <div class="cont-proj-agencias-update">
 
     <!--<h1><?= Html::encode($model->nome) ?></h1>-->
+    <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+        ['index'], ['class' => 'btn btn-warning']) ?>
 
     <?= $this->render('_form', [
         'model' => $model,

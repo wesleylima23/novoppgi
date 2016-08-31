@@ -138,6 +138,8 @@
 						['label' => 'Agências de Fomento', 'icon' => 'fa fa-gift', 'url' => ['cont-proj-agencias/index'],],
 						['label' => 'Tipos de Rubricas', 'icon' => 'fa fa-gears', 'url' => ['cont-proj-rubricas/index'],],
 						['label' => 'Projetos', 'icon' => 'fa fa-signal', 'url' => ['cont-proj-projetos/index'],],
+                        ['label' => 'Saldo Rubricas', 'icon' => 'fa fa-clone', 'url' => ['cont-proj-rubricasde-projetos/consultar'],],
+
                     ],
                 ],
                 

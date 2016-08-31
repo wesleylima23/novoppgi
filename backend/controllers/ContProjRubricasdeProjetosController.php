@@ -40,8 +40,6 @@ class ContProjRubricasdeProjetosController extends Controller
     public function actionIndex()
     {
         $idProjeto = Yii::$app->request->get("idProjeto");
-        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
-        $id = Yii::$app->request->get('id');
         $searchModel = new ContProjRubricasdeProjetosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -49,8 +47,23 @@ class ContProjRubricasdeProjetosController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'idProjeto' => $idProjeto,
-            'nomeProjeto' => $nomeProjeto,
         ]);
+    }
+
+
+    public function actionConsultar(){
+        $searchModel = new ContProjRubricasdeProjetosSearch();
+        $dataProvider = $searchModel->searchByRubrica(Yii::$app->request->queryParams);
+        return $this->render('consultarSaldo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            ]);
+    }
+
+    public function actionCancelar($idProjeto)
+    {
+        $this->mensagens('error', 'Cadastro da Rubrica', 'O cadastro da Rubrica foi cancelado!');
+        return $this->redirect(['index', 'idProjeto' => $idProjeto]);
     }
 
     /**
@@ -69,35 +82,38 @@ class ContProjRubricasdeProjetosController extends Controller
         ]);
     }
 
-    public function cadastrarReceita($model){
+    public function cadastrarReceita($model)
+    {
 
-        if($model->valor_disponivel > 0) {
-
-            $receita = new ContProjReceitas();
-            $receita->rubricasdeprojetos_id = $model->id;
-            $receita->descricao = $model->descricao;
-            $receita->valor_receita = $model->valor_disponivel;
-            $receita->data = date("Y:m:d");
-            $projeto = ContProjProjetos::find()->select("*")->where("id=$model->projeto_id")->one();
-            $projeto->saldo += $receita->valor_receita;
-
+        if ($model->valor_disponivel > 0) {
 
             $transaction = Yii::$app->db->beginTransaction();
             try {
-                if ($projeto->save() && $receita->save()) {
-                    $transaction->commit();
-                    return true;
-                }
+                $model->save(false);
+                $projeto = ContProjProjetos::find()->select("*")->where("id=$model->projeto_id")->one();
+                $projeto->saldo = $projeto->saldo + $model->valor_disponivel;
+                $projeto->save(false);
+                $receita = new ContProjReceitas();
+                $receita->rubricasdeprojetos_id = $model->id;
+                $receita->descricao = $model->descricao;
+                $receita->valor_receita = $model->valor_disponivel;
+                $receita->data = date("Y:m:d");
+                $receita->save(false);
+                $transaction->commit();
+                return true;
+
             } catch (Exception $e) {
                 Yii::error($e->getMessage());
+                $transaction->rollBack();
+                return false;
             }
-            $transaction->rollBack();
-        }else{
-            return $model->save();
+
         }
+        return $model->save();
     }
 
-    public function atualizarReceita($model){
+    public function atualizarReceita($model)
+    {
         $receita = ContProjReceitas::find()->where("rubricasdeprojetos_id=$model->id")->one();
         //$receita->rubricasdeprojetos_id = $model->id;
         $receita->descricao = $model->descricao;
@@ -114,20 +130,27 @@ class ContProjRubricasdeProjetosController extends Controller
     public function actionCreate()
     {
         $model = new ContProjRubricasdeProjetos();
-        $nomeProjeto= Yii::$app->request->get('nomeProjeto');
-        $idProjeto= Yii::$app->request->get('idProjeto');
+        $idProjeto = Yii::$app->request->get('idProjeto');
         $rubricas = ArrayHelper::map(ContProjRubricas::find()->all(), 'id', 'nome');
         $model->valor_gasto = 0.00;
         $model->valor_disponivel = 0.00;
-        if ($model->load(Yii::$app->request->post()) && $this->cadastrarReceita($model) ) {
-
-            return $this->redirect(['index', 'id' => $model->id, 'nomeProjeto' => $nomeProjeto, 'idProjeto' => $idProjeto,]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($this->cadastrarReceita($model)) {
+                $this->mensagens('success', 'Cadastrar Rubrica', 'Rubrica cadastrada com sucesso!');
+                return $this->redirect(['index', 'id' => $model->id, 'idProjeto' => $idProjeto,]);
+            } else {
+                $this->mensagens('error', 'Cadastrar Rubrica', 'Problemas ocorreram na hora do cadastro da Rubrica!');
+                return $this->render('create', [
+                    'model' => $model,
+                    'rubricas' => $rubricas,
+                    'idProjeto' => $idProjeto,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'rubricas'=>$rubricas,
-                'nomeProjeto'=>$nomeProjeto,
-                'idProjeto'=>$idProjeto,
+                'rubricas' => $rubricas,
+                'idProjeto' => $idProjeto,
             ]);
         }
     }
@@ -142,22 +165,18 @@ class ContProjRubricasdeProjetosController extends Controller
     {
         $model = $this->findModel($id);
         $idProjeto = Yii::$app->request->get("idProjeto");
-        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
         $rubricas = ArrayHelper::map(ContProjRubricas::find()->orderBy('')->all(), 'id', 'nome');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            return $this->redirect(['index', 'id' => $model->id, 'nomeProjeto' => $nomeProjeto,
-                        'idProjeto' => $idProjeto,]);
+            $this->mensagens('success', 'Atualizar Informações da Rubrica', 'Dados da Rubrica atualizados com sucesso!');
+            return $this->redirect(['index', 'id' => $model->id, 'idProjeto' => $idProjeto,]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'rubricas'=>$rubricas,
-                'nomeProjeto'=>$nomeProjeto,
-                'idProjeto'=>$idProjeto,
+                'rubricas' => $rubricas,
+                'idProjeto' => $idProjeto,
             ]);
         }
     }
-
 
 
     /**
@@ -166,26 +185,23 @@ class ContProjRubricasdeProjetosController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $detalhe = false)
     {
         $model = $this->findModel($id);
-        $idProjeto = Yii::$app->request->get("idProjeto");
-        $nomeProjeto = Yii::$app->request->get("nomeProjeto");
-        $projeto = ContProjProjetos::find()->select("*")->where("id=$model->projeto_id")->one();
-        $projeto->saldo = $projeto->saldo - $model->valor_disponivel;
-        $projeto->save();
-        $receitas = ContProjReceitas::find()->where("rubricasdeprojetos_id=$model->id")->all();
-        if($receitas) {
-            return $this->redirect(['view',
-                                    'id' => $model->id,
-                                    'idProjeto' => $idProjeto,
-                                    'nomeProjeto' => $nomeProjeto,
-                                    'mensagem'=>true]);
-        }else{
-            $this->findModel($id)->delete();
-            return $this->redirect(['index', 'idProjeto' => $idProjeto, 'nomeProjeto' => $nomeProjeto]);
+        try {
+            $model->delete();
+            $this->mensagens('success', 'Excluir Rubrica', 'Rubrica excluido com sucesso!');
+        } catch (\yii\base\Exception $e) {
+            $this->mensagens('error', 'Excluir Rubrica', 'Projeto não pode ser excluido pois existem rubricas associadas ao projeto!');
+            if ($detalhe) {
+                return $this->redirect(['view', 'id' => $model->id, 'idProjeto' => $model->projeto_id]);
+            } else {
+                return $this->redirect(['index', 'idProjeto' => $model->projeto_id]);
             }
         }
+        return $this->redirect(['index', 'idProjeto' => $model->projeto_id]);
+
+    }
 
     /**
      * Finds the ContProjRubricasdeProjetos model based on its primary key value.
@@ -203,4 +219,19 @@ class ContProjRubricasdeProjetosController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    protected function mensagens($tipo, $titulo, $mensagem)
+    {
+        Yii::$app->session->setFlash($tipo, [
+            'type' => $tipo,
+            'icon' => 'home',
+            'duration' => 5000,
+            'message' => $mensagem,
+            'title' => $titulo,
+            'positonY' => 'top',
+            'positonX' => 'center',
+            'showProgressbar' => true,
+        ]);
+    }
+
 }

@@ -16,8 +16,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => true]) ?>
 
+
     <div class="form-group">
+        </br>
         <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Cancelar',['cont-proj-agencias/cancelar'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

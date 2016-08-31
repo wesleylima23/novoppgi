@@ -156,9 +156,17 @@ If you need to separate sections of the menu then just add the `li.header` item 
         // ... a group items
 ```
 
+To add a label for a item:
 
-
-
+```php
+'items' => [
+        [
+            'label' => '<span>Mailbox</span><span class="pull-right-container"><small class="label pull-right bg-yellow">' . $mailCount . '</small></span>',
+            'icon' => 'fa fa fa-envelope-o',
+            'url' => ['/mailbox'],
+            'encode' => false,
+        ],
+```
 
 Further Information
 -------------------

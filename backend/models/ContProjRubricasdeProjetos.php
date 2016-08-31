@@ -20,6 +20,7 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
 
     public $nomeprojeto;
     public $nomerubrica;
+    public $coordenador;
     /**
      * @inheritdoc
      */
@@ -40,7 +41,8 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
             [['descricao'], 'string', 'max' => 200],
             ['valor_disponivel','validar_valor'],
             //['valor_total','checarOrcamento'],
-            ['valor_total','checarOrcamentoTotal'],
+            ['valor_total','checarOrcamento'],
+           // ['valor_total','checarOrcamentoUpdate','on'=>'update'],
         ];
     }
 
@@ -58,7 +60,7 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
             'descricao' => 'Descrição',
             'valor_total' => 'Valor Previsto',
             'valor_gasto' => 'Valor Gasto',
-            'valor_disponivel' => 'Saldo Inicial',
+            'valor_disponivel' => 'Saldo',
         ];
     }
 
@@ -68,35 +70,29 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
         }
     }
 
-    /*public function checarOrcamento($attribute,$params){
-        $orcamento = \backend\models\ContProjProjetos::find()->where("id=$this->projeto_id")->one();
-        //echo $orcamento->orcamento;
-        if($this->$attribute > $orcamento->orcamento ){
-            $this->addError($attribute, 'O Valor disponivel não pode ser maior que o orçamento do projeto');
+
+
+
+    public function checarOrcamento($attribute,$params){
+        $soma = 0.00;
+        $projeto = \backend\models\ContProjProjetos::find()->where("id=$this->projeto_id")->sum("orcamento");
+        $valorRubricas =  \backend\models\ContProjRubricasdeProjetos::find()->where("projeto_id=$this->projeto_id")->all();
+        foreach($valorRubricas as $valor){
+            if($valor->id != $this->id){
+                $soma = $soma + $valor->valor_total;
+            }
         }
-    }*/
-
-    public function checarOrcamentoTotal($attribute,$params){
-        $projeto = \backend\models\ContProjProjetos::find()->where("id=$this->projeto_id")->one();
-        $valorRubricas =  \backend\models\ContProjRubricasdeProjetos::find()->where("projeto_id=$this->projeto_id")->sum("valor_total");
-
-        $permitido = $projeto->orcamento - $valorRubricas;
+        $permitido = $projeto - $soma;
         if( $permitido >0){
             $permitido = number_format ( $permitido , 2 );
             $messagem = "O Valor ainda disponivél para cadastro é de R$ $permitido!";
         }else{
             $messagem = "O orçamento do projeto foi atingido, não é possível cadastrar novas rubricas!";
         }
-
-        $total = $this->$attribute + $valorRubricas;
-
-        //echo '<script language="javascript">';
-        //echo 'alert("'.$projeto->orcamento." ".$total.'")';
-        //echo '</script>';
-
-
-        if ($total > $projeto->orcamento) {
+        $total = $this->valor_total + $soma;
+        if ($total > $projeto) {
             $this->addError($attribute, $messagem);
         }
     }
+
 }

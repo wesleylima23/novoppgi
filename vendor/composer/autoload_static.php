@@ -54,6 +54,7 @@ class ComposerStaticInit461fc12a24fabae1aa50301d1b4ff503
             'kartik\\plugins\\depdrop\\' => 23,
             'kartik\\plugins\\dateformatter\\' => 29,
             'kartik\\mpdf\\' => 12,
+            'kartik\\money\\' => 13,
             'kartik\\growl\\' => 13,
             'kartik\\form\\' => 12,
             'kartik\\file\\' => 12,
@@ -192,6 +193,10 @@ class ComposerStaticInit461fc12a24fabae1aa50301d1b4ff503
         'kartik\\mpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-mpdf',
+        ),
+        'kartik\\money\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-money',
         ),
         'kartik\\growl\\' => 
         array (

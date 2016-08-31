@@ -1,4 +1,4 @@
-# Bootbox - Twitter Bootstrap powered alert, confirm and flexible dialog boxes
+# Bootbox - Bootstrap powered alert, confirm and flexible dialog boxes
 
 Please see http://bootboxjs.com for full usage instructions, or head over to http://paynedigital.com/bootbox for
 the original writeup about the project.
@@ -11,7 +11,7 @@ The easiest thing is to [find me on twitter @makeusabrew](http://twitter.com/mak
 
 Please see the [CONTRIBUTING](https://github.com/makeusabrew/bootbox/blob/master/CONTRIBUTING.md) file for guidelines.
 
-## Running Tests [![Build Status](https://api.travis-ci.org/makeusabrew/bootbox.png)](http://travis-ci.org/makeusabrew/bootbox)
+## Running Tests [![Build Status](https://api.travis-ci.org/makeusabrew/bootbox.svg)](http://travis-ci.org/makeusabrew/bootbox)
 
 Tests are run using [Karma](http://karma-runner.github.io/0.8/index.html) using the Mocha test adapter.
 To run the tests yourself, simply run ```npm install``` within the project followed by ```npm test```.
@@ -43,20 +43,26 @@ Much more dependency information can be found [on the Bootbox website](http://bo
 The latest major release of Bootbox - 4.0.0 - involved a total rewrite of the
 internal code and introduced an entirely new public API. It has not re-implemented
 some functionality from the 3.x series as of yet; this will be addressed in the
-coming weeks in the form of new minor releases.
+the form of new minor releases. Please feel free to add feedback and requests.
 
 There is no new major (e.g. 5.x) release on the roadmap at present.
 
-## Latest Release: 4.0.0
+### Latest Release: 4.4.0
 
-* Bootstrap 3.0.0 compatibility
-* Complete rewrite (and new public API)
-* Use strict mode
-* Add close buttons to wrapper methods (GH-92)
-* Allow dialog titles to be specified (GH-51, GH-112)
-* Allow optional extra class on dialog wrapper (GH-116)
-* Fix ```backdrop: true``` not firing close handler (GH-77)
-* Replace various configuration methods with one ```setDefaults```
+* Allow `backdrop` options of `true` and `false` to dismiss modals
+* Pass dialog as `this` value in callbacks
+* Bootstrap 3.3.2 compatibility
+* jQuery 1.11.2 compatibility
+* Add support for `maxlength` prompt input attribute
+* Gracefully detect lack of Bootstrap library rather than crashing
+* Expose `addLocale` and `removeLocale` for custom locale settings
+* Expose `setLocale` helper to select a locale rather than using `setDefaults("locale", ...)`
+* Add Hungarian locale
+* Add Croatian locale
+* Add Bulgarian locale
+* Add Thai locale
+* Add Persian locale
+* Add Albanian locale
 
 For a full list of releases and changes please see [the changelog](https://github.com/makeusabrew/bootbox/blob/master/CHANGELOG.md).
 
@@ -64,7 +70,7 @@ For a full list of releases and changes please see [the changelog](https://githu
 
 (The MIT License)
 
-Copyright (C) 2011-2013 by Nick Payne <nick@kurai.co.uk> 
+Copyright (C) 2011-2015 by Nick Payne <nick@kurai.co.uk>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

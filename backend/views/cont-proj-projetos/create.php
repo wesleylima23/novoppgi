@@ -13,6 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="cont-proj-projetos-create">
 
     <!--<h1><?= Html::encode($this->title) ?></h1>-->
+    <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+        ['index'], ['class' => 'btn btn-warning']) ?>
+
 
     <?= $this->render('_form', [
         'model' => $model,

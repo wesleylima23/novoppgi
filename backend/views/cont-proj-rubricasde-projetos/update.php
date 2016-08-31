@@ -10,19 +10,14 @@ $coordenador = \app\models\User::find()->select("*")->where("id=$modelProjeto->c
 
 $this->title = mb_strimwidth("Rubricas do projeto - ".$modelProjeto->nomeprojeto,0,60,"...");
 $this->params['breadcrumbs'][] = ['label' => "$modelProjeto->nomeprojeto", 'url' => ['index', 'idProjeto'=>$idProjeto]];
-$this->params['breadcrumbs'][] = ['label' => $model->nomerubrica, 'url' => ['view', 'id' => $model->id,'idProjeto'=>$idProjeto]];
 $this->params['breadcrumbs'][] = 'Atualizar Dados';
 ?>
 <div class="cont-proj-rubricasde-projetos-update">
 
     <!--<h1><?= Html::encode($this->title) ?></h1>-->
-
-    <?= $this->render('_form', [
-        'model' => $model,
-        'rubricas'=>$rubricas,
-        'update' => true,
-    ]) ?>
-
+    <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+        ['index', 'idProjeto'=>$idProjeto], ['class' => 'btn btn-warning']) ?>
+    </br></br>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -54,5 +49,12 @@ $this->params['breadcrumbs'][] = 'Atualizar Dados';
             ]) ?>
         </div>
     </div>
+
+    <?= $this->render('_form', [
+        'model' => $model,
+        'rubricas'=>$rubricas,
+        'update' => true,
+    ]) ?>
+
 
 </div>

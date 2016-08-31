@@ -5,6 +5,9 @@ namespace backend\controllers;
 use app\models\User;
 use backend\models\ContProjAgencias;
 use backend\models\ContProjBancos;
+use backend\models\ContProjRubricasdeProjetos;
+use backend\models\ContProjRubricasdeProjetosSearch;
+use backend\models\ContProjTransferenciasSaldoRubricasSearch;
 use Yii;
 use backend\models\ContProjProjetos;
 use backend\models\ContProjProjetosSearch;
@@ -63,6 +66,30 @@ class ContProjProjetosController extends Controller
         ]);
     }
 
+    public function actionRelatorio(){
+        $searchModel = new ContProjRubricasdeProjetosSearch();
+        $dataProviderCapital = $searchModel->searchCapital(Yii::$app->request->queryParams);
+        $dataProviderCusteio = $searchModel->searchCusteio(Yii::$app->request->queryParams);
+        $searchModelTransferencias = new ContProjTransferenciasSaldoRubricasSearch();
+        $dataProviderTransferencias = $searchModelTransferencias->search(Yii::$app->request->queryParams);
+        return $this->render('relatorio', [
+            'searchModel' => $searchModel,
+            'dataProviderCapital' => $dataProviderCapital,
+            'dataProviderCusteio' => $dataProviderCusteio,
+            'searchModelTransferencias' => $searchModelTransferencias,
+            'dataProviderTransferencias' =>$dataProviderTransferencias,
+        ]);
+    }
+
+    public function actionCancelar(){
+        $this->mensagens('error', 'Cadastro de Projeto',  'O cadastro do projeto foi cancelado!');
+        return $this->redirect(['index']);
+    }
+
+    public function actionCancelarr($id){
+        //$this->mensagens('error', ' de Projeto',  'O cadastro do projeto foi cancelado!');
+        return $this->redirect(['view','id' => $id]);
+    }
     /**
      * Creates a new ContProjProjetos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -86,11 +113,13 @@ class ContProjProjetosController extends Controller
         }
         $model->saldo = 0;
         $model->status = "Cadastrado";
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->data_inicio = date('Y-m-d', strtotime($model->data_inicio));
             $model->data_fim = date('Y-m-d', strtotime($model->data_fim));
+            $model->data_fim_alterada =  $model->data_fim;
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            $this->mensagens('success', 'Cadastro de Projeto',  'Projeto cadastrado com sucesso!');
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -124,14 +153,33 @@ class ContProjProjetosController extends Controller
             $model->proposta = "uploads/".date('dmYhms')."_".$model->propostaArquivo->name;
             $model->propostaArquivo->saveAs($model->proposta);
         }
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->data_inicio = date('Y-m-d', strtotime($model->data_inicio));
+            $model->data_fim = date('Y-m-d', strtotime($model->data_fim));
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $model->data_inicio = date("d-m-Y",strtotime($model->data_inicio));
+            $model->data_fim = date("d-m-Y",strtotime($model->data_fim));
             return $this->render('update', [
                 'model' => $model,
                 'coordenadores' => $coordenadores,
                 'agencias' => $agencias,
                 'bancos' => $bancos,
+            ]);
+        }
+    }
+
+    public function actionProrrogar($id){
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->validate(false)) {
+            $model->data_fim_alterada = date('Y-m-d', strtotime($model->data_fim_alterada));
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $model->data_fim_alterada = null;
+            return $this->render('prorrogar', [
+                'model' => $model,
             ]);
         }
     }
@@ -149,11 +197,22 @@ class ContProjProjetosController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id,$detalhe=false)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        try{
+            $model->delete();
+            $this->mensagens('success', 'Excluir Projeto',  'Projeto excluido com sucesso!');
+        }catch (\yii\base\Exception $e){
+            $this->mensagens('error', 'Excluir Projeto', 'Projeto não pode ser excluido pois existem rubricas associadas ao projeto!');
+            if($detalhe){
+                return $this->redirect(['view','id' => $model->id]);
+            }else{
+                return $this->redirect(['index']);
+            }
+        }
         return $this->redirect(['index']);
+        //return $this->redirect(['index']);
     }
 
     /**
@@ -171,4 +230,18 @@ class ContProjProjetosController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    protected function mensagens($tipo, $titulo, $mensagem){
+        Yii::$app->session->setFlash($tipo, [
+            'type' => $tipo,
+            'icon' => 'home',
+            'duration' => 5000,
+            'message' => $mensagem,
+            'title' => $titulo,
+            'positonY' => 'top',
+            'positonX' => 'center',
+            'showProgressbar' => true,
+        ]);
+    }
+
 }

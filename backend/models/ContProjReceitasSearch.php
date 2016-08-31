@@ -105,7 +105,8 @@ class ContProjReceitasSearch extends ContProjReceitas
             ->andFilterWhere(['like', 'j17_contproj_rubricas.tipo', $this->tipo])
             ->andFilterWhere(['like', 'j17_contproj_rubricas.nome', $this->nomeRubrica])
             ->andFilterWhere(['like', 'j17_contproj_rubricas.codigo', $this->codigo])
-            ->andFilterWhere(['like', 'j17_contproj_receitas.data', $this->data]);
+            ->andFilterWhere(['like', 'j17_contproj_receitas.data', $this->data])
+            ->andFilterWhere(['<=', 'j17_contproj_receitas.valor_receita', $this->valor_receita]);
         return $dataProvider;
     }
 }

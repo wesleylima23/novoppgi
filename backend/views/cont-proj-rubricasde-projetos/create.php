@@ -20,14 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!--<h1><?= Html::encode($this->title) ?></h1>-->
 
+    <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
+        ['index', 'idProjeto'=>$idProjeto], ['class' => 'btn btn-warning']) ?>
 
-
-    <?= $this->render('_form', [
-        'idProjeto'=>$idProjeto,
-        'model' => $model,
-        'rubricas' => $rubricas,
-    ]) ?>
-
+    </br></br>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title"><b>Dados do Projeto</b></h3>
@@ -58,5 +54,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
     </div>
+
+    <?= $this->render('_form', [
+        'idProjeto'=>$idProjeto,
+        'model' => $model,
+        'rubricas' => $rubricas,
+    ]) ?>
+
+
 
 </div>
