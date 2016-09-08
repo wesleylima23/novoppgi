@@ -73,7 +73,7 @@ class AlunoSearch extends Aluno
             'asc' => ['siglaLinhaPesquisa' => SORT_ASC],
             'desc' => ['siglaLinhaPesquisa' => SORT_DESC],
         ];
-    $dataProvider->sort->attributes['nomeOrientador'] = [
+		$dataProvider->sort->attributes['nomeOrientador'] = [
             'asc' => ['nomeOrientador' => SORT_ASC],
             'desc' => ['nomeOrientador' => SORT_DESC],
         ];

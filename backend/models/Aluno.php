@@ -64,6 +64,7 @@ class Aluno extends \yii\db\ActiveRecord
             'email' => 'Email',
             'senha' => 'Senha',
             'matricula' => 'Matrícula',
+			'name' => 'Nome do Aluno',
             'area' => 'Linha de Pesquisa',
             'curso' => 'Curso',
             'endereco' => 'Endereço',
