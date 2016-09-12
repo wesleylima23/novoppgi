@@ -3,24 +3,6 @@
 $vendorDir = dirname(__DIR__);
 
 return array (
-  'kartik-v/yii2-mpdf' => 
-  array (
-    'name' => 'kartik-v/yii2-mpdf',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@kartik/mpdf' => $vendorDir . '/kartik-v/yii2-mpdf',
-    ),
-  ),
-  'yiisoft/yii2-swiftmailer' => 
-  array (
-    'name' => 'yiisoft/yii2-swiftmailer',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
-    ),
-  ),
   'cebe/yii2-gravatar' => 
   array (
     'name' => 'cebe/yii2-gravatar',
@@ -156,15 +138,6 @@ return array (
       '@yiibr/brvalidator' => $vendorDir . '/yiibr/yii2-br-validator',
     ),
   ),
-  'moonlandsoft/yii2-phpexcel' => 
-  array (
-    'name' => 'moonlandsoft/yii2-phpexcel',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@moonland/phpexcel' => $vendorDir . '/moonlandsoft/yii2-phpexcel',
-    ),
-  ),
   'yiisoft/yii2-codeception' => 
   array (
     'name' => 'yiisoft/yii2-codeception',
@@ -192,15 +165,6 @@ return array (
       '@kartik/datecontrol' => $vendorDir . '/kartik-v/yii2-datecontrol',
     ),
   ),
-  'rmrevin/yii2-fontawesome' => 
-  array (
-    'name' => 'rmrevin/yii2-fontawesome',
-    'version' => '2.15.2.0',
-    'alias' => 
-    array (
-      '@rmrevin/yii/fontawesome' => $vendorDir . '/rmrevin/yii2-fontawesome',
-    ),
-  ),
   'dmstr/yii2-adminlte-asset' => 
   array (
     'name' => 'dmstr/yii2-adminlte-asset',
@@ -217,6 +181,51 @@ return array (
     'alias' => 
     array (
       '@kartik/money' => $vendorDir . '/kartik-v/yii2-money',
+    ),
+  ),
+  'kartik-v/yii2-widget-fileinput' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-fileinput',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kartik/file' => $vendorDir . '/kartik-v/yii2-widget-fileinput',
+    ),
+  ),
+  'philippfrenzel/yii2fullcalendar' => 
+  array (
+    'name' => 'philippfrenzel/yii2fullcalendar',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii2fullcalendar' => $vendorDir . '/philippfrenzel/yii2fullcalendar',
+    ),
+  ),
+  'kartik-v/yii2-widget-rating' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-rating',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kartik/rating' => $vendorDir . '/kartik-v/yii2-widget-rating',
+    ),
+  ),
+  'rmrevin/yii2-fontawesome' => 
+  array (
+    'name' => 'rmrevin/yii2-fontawesome',
+    'version' => '2.16.1.0',
+    'alias' => 
+    array (
+      '@rmrevin/yii/fontawesome' => $vendorDir . '/rmrevin/yii2-fontawesome',
+    ),
+  ),
+  'yiisoft/yii2-swiftmailer' => 
+  array (
+    'name' => 'yiisoft/yii2-swiftmailer',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
     ),
   ),
   'yiisoft/yii2-bootstrap' => 
@@ -237,6 +246,15 @@ return array (
       '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base',
     ),
   ),
+  'moonlandsoft/yii2-phpexcel' => 
+  array (
+    'name' => 'moonlandsoft/yii2-phpexcel',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@moonland/phpexcel' => $vendorDir . '/moonlandsoft/yii2-phpexcel',
+    ),
+  ),
   'kartik-v/yii2-widget-select2' => 
   array (
     'name' => 'kartik-v/yii2-widget-select2',
@@ -244,15 +262,6 @@ return array (
     'alias' => 
     array (
       '@kartik/select2' => $vendorDir . '/kartik-v/yii2-widget-select2',
-    ),
-  ),
-  'kartik-v/yii2-widget-fileinput' => 
-  array (
-    'name' => 'kartik-v/yii2-widget-fileinput',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@kartik/file' => $vendorDir . '/kartik-v/yii2-widget-fileinput',
     ),
   ),
   'kartik-v/yii2-widget-datetimepicker' => 
@@ -291,24 +300,6 @@ return array (
       '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
     ),
   ),
-  'philippfrenzel/yii2fullcalendar' => 
-  array (
-    'name' => 'philippfrenzel/yii2fullcalendar',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@yii2fullcalendar' => $vendorDir . '/philippfrenzel/yii2fullcalendar',
-    ),
-  ),
-  'kartik-v/yii2-widget-rating' => 
-  array (
-    'name' => 'kartik-v/yii2-widget-rating',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@kartik/rating' => $vendorDir . '/kartik-v/yii2-widget-rating',
-    ),
-  ),
   'kartik-v/yii2-widget-activeform' => 
   array (
     'name' => 'kartik-v/yii2-widget-activeform',
@@ -325,6 +316,15 @@ return array (
     'alias' => 
     array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii',
+    ),
+  ),
+  'kartik-v/yii2-mpdf' => 
+  array (
+    'name' => 'kartik-v/yii2-mpdf',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kartik/mpdf' => $vendorDir . '/kartik-v/yii2-mpdf',
     ),
   ),
 );

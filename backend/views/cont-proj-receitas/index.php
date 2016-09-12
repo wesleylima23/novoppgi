@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 ]),*/
             ],
-
+            'ordem_bancaria',
             //'tipo',
             [
                 'attribute' => 'tipo',

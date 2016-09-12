@@ -21,6 +21,7 @@ return array(
     'MYANMAR' => $vendorDir . '/mpdf/mpdf/classes/myanmar.php',
     'OTLdump' => $vendorDir . '/mpdf/mpdf/classes/otl_dump.php',
     'PDFBarcode' => $vendorDir . '/mpdf/mpdf/classes/barcode.php',
+    'PclZip' => $vendorDir . '/pclzip/pclzip/pclzip.lib.php',
     'SEA' => $vendorDir . '/mpdf/mpdf/classes/sea.php',
     'SVG' => $vendorDir . '/mpdf/mpdf/classes/svg.php',
     'TTFontFile' => $vendorDir . '/mpdf/mpdf/classes/ttfontsuni.php',

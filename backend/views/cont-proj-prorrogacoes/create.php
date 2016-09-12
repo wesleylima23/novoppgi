@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 $idProjeto = Yii::$app->request->get('idProjeto');
 
-$this->title = 'Create Cont Proj Prorrogacoes';
+$this->title = 'Prorrogar data final do projeto';
 $this->params['breadcrumbs'][] = ['label' => 'Prorrogacoes', 'url' => ['index','idProjeto'=>$idProjeto]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

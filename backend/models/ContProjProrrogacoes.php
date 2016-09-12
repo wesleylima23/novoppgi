@@ -66,7 +66,7 @@ class ContProjProrrogacoes extends \yii\db\ActiveRecord
 
         $projeto = ContProjProjetos::find()->select("*")->where("id=$this->projeto_id")->one();
         $data_final = date('Y-m-d', strtotime($this->data_fim_alterada));
-        if ($data_final <= $projeto->data_fim_alterada) {
+        if ($data_final < $projeto->data_fim_alterada) {
             $this->addError($attribute, 'Nova data final precisa ser maior que a data final registrada atualmente');
         }
     }

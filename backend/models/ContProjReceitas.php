@@ -12,6 +12,7 @@ use Yii;
  * @property string $descricao
  * @property double $valor_receita
  * @property string $data
+ * @property string $ordem_bancaria
  */
 class ContProjReceitas extends \yii\db\ActiveRecord
 {
@@ -19,6 +20,8 @@ class ContProjReceitas extends \yii\db\ActiveRecord
     public $nomeRubrica;
     public $codigo;
     public $tipo;
+    public $ordem;
+    public $total;
     /**
      * @inheritdoc
      */
@@ -33,10 +36,10 @@ class ContProjReceitas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rubricasdeprojetos_id', 'descricao', 'valor_receita', 'data'], 'required'],
+            [['rubricasdeprojetos_id', 'descricao', 'valor_receita', 'data','ordem_bancaria'], 'required'],
             [['rubricasdeprojetos_id'], 'integer'],
             [['valor_receita'], 'number'],
-            ['valor_receita','validar_receita'],
+            [['valor_receita'], 'validar_receita'],
             [['data','tipo'], 'safe'],
             [['descricao'], 'string', 'max' => 150],
         ];
@@ -55,19 +58,21 @@ class ContProjReceitas extends \yii\db\ActiveRecord
             'valor_receita' => 'Valor Receita',
             'data' => 'Data',
             'nomeRubrica' => 'Item de Despêndio',
+            'ordem_bancaria' => 'Ordem Bancária',
         ];
     }
 
     public function validar_receita($attribute,$params){
-        $saldoRubrica = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.valor_total"])
-           ->where("j17_contproj_rubricasdeprojetos.id=$this->rubricasdeprojetos_id")->sum("valor_total");
-        $receitas = ContProjReceitas::find()->select(["valor_receita"])
+
+        /*$rubrica = ContProjRubricasdeProjetos::find()->select(["*"])
+           ->where("j17_contproj_rubricasdeprojetos.id=$this->rubricasdeprojetos_id")->one();
+        $receitas = ContProjReceitas::find()->select(["*"])
             ->where("rubricasdeprojetos_id=$this->rubricasdeprojetos_id")->sum("valor_receita");
-        $permitido = $saldoRubrica - $receitas;
-        if($this->valor_receita > $permitido ){
+        $this->addError($attribute, "$receitas");
+        if($this->valor_receita > $rubrica->valor_previsto){
             $permitido = number_format ( $permitido , 2 );
             $messagem = "limite atingido maximo ainda permitido é $permitido";
             $this->addError($attribute, $messagem);
-        }
+        }*/
     }
 }

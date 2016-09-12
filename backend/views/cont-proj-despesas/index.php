@@ -25,52 +25,121 @@ $this->params['breadcrumbs'][] = $this->title;
         'idProjeto' => $idProjeto,
     ]) ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'ident_nf',
-            'favorecido',
-            'nomeRubrica',
-            //'rubricasdeprojetos_id',
-            'data_emissao',
-            'descricao',
-            'valor_despesa:currency',
-            //'tipo_pessoa',
-            'ident_cheque',
-            // 'data_emissao',
-            // 'nf',
-            // 'ident_cheque',
-            // 'data_emissao_cheque',
-            // 'valor_cheque',
-            // 'favorecido',
-            // 'cnpj_cpf',
-            // 'comprovante',
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><b>Itens de Capital</b></h3>
+        </div>
+        <div class="panel-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProviderCapital,
+                //'filterModel' =>  $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    'ident_nf',
+                    'favorecido',
+                    'nomeRubrica',
+                    //'rubricasdeprojetos_id',
+                    [
+                        'attribute'=>'data_emissao',
+                        'format' => ['date', 'php:d/m/Y'],
+                    ],
+                    'descricao',
+                    'valor_despesa:currency',
+                    //'tipo_pessoa',
+                    'ident_cheque',
+                    // 'data_emissao',
+                    // 'nf',
+                    // 'ident_cheque',
+                    // 'data_emissao_cheque',
+                    // 'valor_cheque',
+                    // 'favorecido',
+                    // 'cnpj_cpf',
+                    // 'comprovante',
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'buttons' => [
-                    'view' => function ($url, $model) use ($idProjeto) {
-                        $url .= '&idProjeto=' . $idProjeto;
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
-                    },
-                    'update' => function ($url, $model) {
-                        return false;
-                    },
-                    'delete' => function ($url, $model) use ($idProjeto) {
-                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id, 'idProjeto' => $idProjeto], [
-                            'data' => [
-                                'confirm' => 'Deseja realmente remover esta receita?',
-                                'method' => 'post',
-                            ],
-                            'title' => Yii::t('yii', 'Remover Receita'),
-                        ]);
-                    }
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'buttons' => [
+                            'view' => function ($url, $model) use ($idProjeto) {
+                                $url .= '&idProjeto=' . $idProjeto;
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
+                            },
+                            'update' => function ($url, $model) {
+                                return false;
+                            },
+                            'delete' => function ($url, $model) use ($idProjeto) {
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id, 'idProjeto' => $idProjeto], [
+                                    'data' => [
+                                        'confirm' => 'Deseja realmente remover esta receita?',
+                                        'method' => 'post',
+                                    ],
+                                    'title' => Yii::t('yii', 'Remover Receita'),
+                                ]);
+                            }
+                        ],
+                    ],
+                    //['class' => 'yii\grid\ActionColumn'],
                 ],
-            ],
-            //['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+            ]); ?>
+        </div>
+    </div>
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><b>Itens de Custeio</b></h3>
+        </div>
+        <div class="panel-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProviderCusteio,
+                //8'filterModel' => $searchModelCusteio,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    'ident_nf',
+                    'favorecido',
+                    'nomeRubrica',
+                    //'rubricasdeprojetos_id',
+                    [
+                        'attribute'=>'data_emissao',
+                        'format' => ['date', 'php:d/m/Y'],
+                    ],
+                    'descricao',
+                    'valor_despesa:currency',
+                    //'tipo_pessoa',
+                    'ident_cheque',
+                    // 'data_emissao',
+                    // 'nf',
+                    // 'ident_cheque',
+                    // 'data_emissao_cheque',
+                    // 'valor_cheque',
+                    // 'favorecido',
+                    // 'cnpj_cpf',
+                    // 'comprovante',
+
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'buttons' => [
+                            'view' => function ($url, $model) use ($idProjeto) {
+                                $url .= '&idProjeto=' . $idProjeto;
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
+                            },
+                            'update' => function ($url, $model) {
+                                return false;
+                            },
+                            'delete' => function ($url, $model) use ($idProjeto) {
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id, 'idProjeto' => $idProjeto], [
+                                    'data' => [
+                                        'confirm' => 'Deseja realmente remover esta receita?',
+                                        'method' => 'post',
+                                    ],
+                                    'title' => Yii::t('yii', 'Remover Receita'),
+                                ]);
+                            }
+                        ],
+                    ],
+                    //['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+
+
+        </div>
+    </div>
 </div>

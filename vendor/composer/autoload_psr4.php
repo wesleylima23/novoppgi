@@ -48,5 +48,10 @@ return array(
     'kartik\\affix\\' => array($vendorDir . '/kartik-v/yii2-widget-affix'),
     'dmstr\\' => array($vendorDir . '/dmstr/yii2-adminlte-asset'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
+    'Zend\\Validator\\' => array($vendorDir . '/zendframework/zend-validator/src'),
+    'Zend\\Stdlib\\' => array($vendorDir . '/zendframework/zend-stdlib/src'),
+    'Zend\\Escaper\\' => array($vendorDir . '/zendframework/zend-escaper/src'),
+    'PhpOffice\\PhpWord\\' => array($vendorDir . '/phpoffice/phpword/src/PhpWord'),
+    'PhpOffice\\Common\\' => array($vendorDir . '/phpoffice/common/src/Common'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

@@ -9,7 +9,6 @@ use yii\helpers\Html;
 
 $idProjeto = Yii::$app->request->get('idProjeto');
 $modelProjeto = \backend\models\ContProjProjetos::find()->where("id=$idProjeto")->one();
-$coordenador = \app\models\User::find()->select("*")->where("id=$modelProjeto->coordenador_id")->one();
 
 $this->title = $modelProjeto->nomeprojeto;
 
@@ -24,36 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ['index', 'idProjeto'=>$idProjeto], ['class' => 'btn btn-warning']) ?>
 
     </br></br>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><b>Dados do Projeto</b></h3>
-        </div>
-        <div class="panel-body">
-            <?= \yii\widgets\DetailView::widget([
-                'model' => $modelProjeto,
-                'attributes' => [
-                    //'coordenador',
-                    'nomeprojeto',
-                    [
-                        'attribute' => 'coordenador_id',
-                        'value' => $coordenador->nome,
-                    ],
-                    'orcamento:currency',
-                    'saldo:currency',
-                    [
-                        'attribute' => 'data_inicio',
-                        'value' => date("d/m/Y", strtotime($modelProjeto->data_inicio)),
-
-                    ],
-                    [
-                        'attribute' => 'data_fim',
-                        'value' => date("d/m/Y", strtotime($modelProjeto->data_fim)),
-
-                    ],
-                ],
-            ]) ?>
-        </div>
-    </div>
+    <?= $this->render('..\cont-proj-projetos\dados', [
+        'idProjeto' => $idProjeto,
+    ]) ?>
 
     <?= $this->render('_form', [
         'idProjeto'=>$idProjeto,

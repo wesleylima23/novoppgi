@@ -34,8 +34,12 @@ $tiposNF = ['Cupom Fiscal' => 'Cupom Fiscal',
 
             <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'valor_despesa')->widget(\kartik\money\MaskMoney::classname(), [
+            <?= $form->field($model, 'quantidade')->textInput(['type' => 'number', 'value'=>1]) ?>
+
+            <?= $form->field($model, 'valor_unitario')->widget(\kartik\money\MaskMoney::classname(), [
+                'value'=>0.00,
                 'pluginOptions' => [
+                    'value'=>0.00,
                     'prefix' => 'R$ ',
                     'suffix' => '',
                     'allowNegative' => false
@@ -95,9 +99,8 @@ $tiposNF = ['Cupom Fiscal' => 'Cupom Fiscal',
             // 'mask' => '999.999.999-99',
             //]) ?>-->
 
-            <!--<?= $form->field($model, 'comprovante')->textInput(['maxlength' => true]) ?>-->
             <div class="row">
-                <?= $form->field($model, 'comprovante', ['options' => ['class' => 'col-md-6']])
+                <?= $form->field($model, 'comprovanteArquivo', ['options' => ['class' => 'col-md-6']])
                     ->fileInput(['accept' => '.pdf']) ?>
             </div>
             </br>

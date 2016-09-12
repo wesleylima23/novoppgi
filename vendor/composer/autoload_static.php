@@ -75,6 +75,17 @@ class ComposerStaticInit461fc12a24fabae1aa50301d1b4ff503
         array (
             'cebe\\markdown\\' => 14,
         ),
+        'Z' => 
+        array (
+            'Zend\\Validator\\' => 15,
+            'Zend\\Stdlib\\' => 12,
+            'Zend\\Escaper\\' => 13,
+        ),
+        'P' => 
+        array (
+            'PhpOffice\\PhpWord\\' => 18,
+            'PhpOffice\\Common\\' => 17,
+        ),
         'F' => 
         array (
             'Faker\\' => 6,
@@ -250,6 +261,26 @@ class ComposerStaticInit461fc12a24fabae1aa50301d1b4ff503
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
         ),
+        'Zend\\Validator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-validator/src',
+        ),
+        'Zend\\Stdlib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-stdlib/src',
+        ),
+        'Zend\\Escaper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
+        ),
+        'PhpOffice\\PhpWord\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/phpword/src/PhpWord',
+        ),
+        'PhpOffice\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/common/src/Common',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
@@ -303,6 +334,7 @@ class ComposerStaticInit461fc12a24fabae1aa50301d1b4ff503
         'MYANMAR' => __DIR__ . '/..' . '/mpdf/mpdf/classes/myanmar.php',
         'OTLdump' => __DIR__ . '/..' . '/mpdf/mpdf/classes/otl_dump.php',
         'PDFBarcode' => __DIR__ . '/..' . '/mpdf/mpdf/classes/barcode.php',
+        'PclZip' => __DIR__ . '/..' . '/pclzip/pclzip/pclzip.lib.php',
         'SEA' => __DIR__ . '/..' . '/mpdf/mpdf/classes/sea.php',
         'SVG' => __DIR__ . '/..' . '/mpdf/mpdf/classes/svg.php',
         'TTFontFile' => __DIR__ . '/..' . '/mpdf/mpdf/classes/ttfontsuni.php',

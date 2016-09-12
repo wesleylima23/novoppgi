@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use app\models\UploadLattesForm;
 use backend\models\ContProjProjetos;
 use backend\models\ContProjReceitas;
 use backend\models\ContProjRubricas;
 use Yii;
 use backend\models\ContProjRubricasdeProjetos;
 use backend\models\ContProjRubricasdeProjetosSearch;
+use yii\base\Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -51,13 +53,25 @@ class ContProjRubricasdeProjetosController extends Controller
     }
 
 
-    public function actionConsultar(){
-        $searchModel = new ContProjRubricasdeProjetosSearch();
-        $dataProvider = $searchModel->searchByRubrica(Yii::$app->request->queryParams);
-        return $this->render('consultarSaldo', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+    public function actionConsultar()
+    {
+        $rubricas = ArrayHelper::map(ContProjRubricas::find()->all(), 'id', 'nome');
+        $model = new ContProjRubricasdeProjetos();
+        if ($model->load(Yii::$app->request->post())) {
+            $searchModel = new ContProjRubricasdeProjetosSearch();
+            $dataProvider = $searchModel->searchByRubrica(Yii::$app->request->queryParams, $model);
+            return $this->render('ConsultarView', [
+                'model' => $model,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'rubricas' => $rubricas,
             ]);
+        } else {
+            return $this->render('consultarSaldo', [
+                'model' => $model,
+                'rubricas' => $rubricas,
+            ]);
+        }
     }
 
     public function actionCancelar($idProjeto)
@@ -82,7 +96,7 @@ class ContProjRubricasdeProjetosController extends Controller
         ]);
     }
 
-    public function cadastrarReceita($model)
+    public function cadastrarReceita(ContProjRubricasdeProjetos $model)
     {
 
         if ($model->valor_disponivel > 0) {
@@ -95,6 +109,7 @@ class ContProjRubricasdeProjetosController extends Controller
                 $projeto->save(false);
                 $receita = new ContProjReceitas();
                 $receita->rubricasdeprojetos_id = $model->id;
+                $receita->ordem_bancaria = $model->ordem_bancaria;
                 $receita->descricao = $model->descricao;
                 $receita->valor_receita = $model->valor_disponivel;
                 $receita->data = date("Y:m:d");
@@ -112,15 +127,6 @@ class ContProjRubricasdeProjetosController extends Controller
         return $model->save();
     }
 
-    public function atualizarReceita($model)
-    {
-        $receita = ContProjReceitas::find()->where("rubricasdeprojetos_id=$model->id")->one();
-        //$receita->rubricasdeprojetos_id = $model->id;
-        $receita->descricao = $model->descricao;
-        $receita->valor_receita = $model->valor_disponivel;
-        //$receita->data = date("Y:m:d");
-        return $receita->save(false);
-    }
 
     /**
      * Creates a new ContProjRubricasdeProjetos model.
@@ -129,6 +135,7 @@ class ContProjRubricasdeProjetosController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new ContProjRubricasdeProjetos();
         $idProjeto = Yii::$app->request->get('idProjeto');
         $rubricas = ArrayHelper::map(ContProjRubricas::find()->all(), 'id', 'nome');
@@ -155,6 +162,24 @@ class ContProjRubricasdeProjetosController extends Controller
         }
     }
 
+
+    public function atualizarReceita(ContProjRubricasdeProjetos $model, ContProjReceitas $receita)
+    {
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $receita->descricao = $model->descricao;
+            $receita->ordem_bancaria = $model->ordem_bancaria;
+            $receita->save(false);
+            $transaction->commit();
+            return true;
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
+            $transaction->rollBack();
+            return false;
+        }
+
+    }
+
     /**
      * Updates an existing ContProjRubricasdeProjetos model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -164,10 +189,13 @@ class ContProjRubricasdeProjetosController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $receita = ContProjReceitas::find()->where("rubricasdeprojetos_id=$model->id")->one();
+        $model->ordem_bancaria =  $receita->ordem_bancaria;
         $idProjeto = Yii::$app->request->get("idProjeto");
         $rubricas = ArrayHelper::map(ContProjRubricas::find()->orderBy('')->all(), 'id', 'nome');
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $this->mensagens('success', 'Atualizar Informações da Rubrica', 'Dados da Rubrica atualizados com sucesso!');
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $this->atualizarReceita($model,$receita);
+            $this->mensagens('success', 'Atualizar Informações da Rubrica', 'Dados da Rubrica foram atualizados com sucesso!');
             return $this->redirect(['index', 'id' => $model->id, 'idProjeto' => $idProjeto,]);
         } else {
             return $this->render('update', [

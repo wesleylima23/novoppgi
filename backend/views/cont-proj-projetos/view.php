@@ -39,6 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ['cont-proj-transferencias-saldo-rubricas/index', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Relatorio Simples',
             ['cont-proj-projetos/relatorio', 'idProjeto' => $model->id], ['class' => 'btn btn-primary']) ?>
+
+    </p>
+    <p>
+        <?= Html::a('Form1',
+            ['cont-proj-projetos/form1', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Form2',
+            ['cont-proj-projetos/form2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Form3',
+            ['cont-proj-projetos/form3', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Form8',
+            ['cont-proj-projetos/form8', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
     </p>
     <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
@@ -103,7 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'proposta',
                 //'value' => "<a href=localhost/novoppgi/backend/web/".$model->edital."' target = '_blank'> Baixar </a>",
                 'format'=>'raw',
-                'value' => "<a href='".$model->edital."' target = '_blank'> Baixar </a>"
+                'value' => "<a href='".$model->proposta."' target = '_blank'> Baixar </a>"
             ],
 
             'status',

@@ -27,6 +27,9 @@ $idProjeto = Yii::$app->request->get('idProjeto');
             } ?>
             <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
+
+            <?= $form->field($model, 'ordem_bancaria')->textInput(['maxlength' => true]) ?>
+
             <!--<?= $form->field($model, 'valor_total')->textInput() ?>-->
 
             <?= $form->field($model, 'valor_total')->widget(\kartik\money\MaskMoney::classname(), [
@@ -49,6 +52,7 @@ $idProjeto = Yii::$app->request->get('idProjeto');
                     ]
                 ]);
             } ?>
+
 
 
             <div class="form-group">

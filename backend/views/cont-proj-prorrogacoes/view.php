@@ -6,19 +6,18 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ContProjProrrogacoes */
 $idProjeto = Yii::$app->request->get('idProjeto');
-$this->title = "Data Final: ".$model->data_fim_alterada;
-$this->params['breadcrumbs'][] = ['label' => 'Prorrogacoes', 'url' => ['index','idProjeto'=>$idProjeto]];
+$this->title = "Data Final: " . date("d/m/Y", strtotime($model->data_fim_alterada));
+$this->params['breadcrumbs'][] = ['label' => 'Prorrogacoes', 'url' => ['index', 'idProjeto' => $idProjeto]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cont-proj-prorrogacoes-view">
 
     <!--<h1><?= Html::encode($this->title) ?></h1>-->
+
+
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
             ['index', 'idProjeto' => $idProjeto], ['class' => 'btn btn-warning']) ?>
-    </p>
-
-    <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id, 'idProjeto' => $idProjeto], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Deletar', ['delete', 'id' => $model->id, 'idProjeto' => $idProjeto], [
             'class' => 'btn btn-danger',
@@ -41,7 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'data_fim_alterada',
+                    [
+                        'attribute' => 'data_fim_alterada',
+                        'format' => ['date', 'php:d/m/Y'],
+                    ],
                     'descricao:ntext',
                 ],
             ]) ?>

@@ -66,6 +66,8 @@ class ContProjTransferenciasSaldoRubricas extends \yii\db\ActiveRecord
             'valor' => 'Valor',
             'data' => 'Data',
             'autorizacao' => 'Autorizacao',
+            'nomeRubricaOrigem'=>'Rubrica de Origem',
+            'nomeRubricaDestino'=>'Rubrica de Destino',
         ];
     }
 

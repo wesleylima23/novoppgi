@@ -56,6 +56,7 @@ $rubricas = \yii\helpers\ArrayHelper::map($rub, 'id', 'descricao');
                 'attribute'=>'data',
                 'format' => ['date', 'php:d/m/Y'],
             ],
+            'ordem_bancaria',
         ],
     ]) ?>
         </div>

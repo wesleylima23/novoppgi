@@ -27,7 +27,8 @@
         "moonlandsoft/yii2-phpexcel": "*",
         "philippfrenzel/yii2fullcalendar": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
-		"kartik-v/yii2-money": "*"
+		"kartik-v/yii2-money": "*",
+		"phpoffice/phpword": "v0.13.*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

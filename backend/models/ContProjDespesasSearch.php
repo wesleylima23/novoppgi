@@ -41,14 +41,14 @@ class ContProjDespesasSearch extends ContProjDespesas
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$tipo)
     {
         $projeto_id = Yii::$app->request->get('idProjeto');
         $query = ContProjDespesas::find()->select("j17_contproj_despesas.*, j17_contproj_rubricas.codigo as codigo, 
         j17_contproj_rubricas.nome as nomeRubrica, j17_contproj_rubricas.tipo as tipo ")
         ->leftJoin("j17_contproj_rubricasdeprojetos","j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
         ->leftJoin("j17_contproj_rubricas","j17_contproj_rubricasdeprojetos.rubrica_id = j17_contproj_rubricas.id")
-        ->where("j17_contproj_rubricasdeprojetos.projeto_id = $projeto_id")->orderBy("tipo");;
+        ->where("j17_contproj_rubricasdeprojetos.projeto_id = $projeto_id AND j17_contproj_rubricas.tipo = '$tipo'")->orderBy("tipo");;
 
         // add conditions that should always apply here
 

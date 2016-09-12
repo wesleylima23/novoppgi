@@ -8,9 +8,11 @@ use Yii;
  * This is the model class for table "j17_contproj_despesas".
  *
  * @property integer $id
+ * @property integer $quantidade
  * @property integer $rubricasdeprojetos_id
  * @property string $descricao
  * @property double $valor_despesa
+ * @property double $valor_unitario
  * @property string $tipo_pessoa
  * @property string $data_emissao
  * @property string $ident_nf
@@ -27,6 +29,7 @@ class ContProjDespesas extends \yii\db\ActiveRecord
     public $nomeRubrica;
     public $codigo;
     public $tipo;
+    public $comprovanteArquivo;
     /**
      * @inheritdoc
      */
@@ -41,10 +44,13 @@ class ContProjDespesas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rubricasdeprojetos_id', 'descricao', 'valor_despesa', 'tipo_pessoa', 'data_emissao', 'ident_nf', 'valor_cheque'], 'required'],
-            [['rubricasdeprojetos_id'], 'integer'],
-            [['valor_despesa', 'valor_cheque'], 'number'],
+            [['rubricasdeprojetos_id', 'descricao', 'valor_unitario', 'quantidade','tipo_pessoa', 'data_emissao', 'ident_nf', 'valor_cheque'], 'required'],
+            [['rubricasdeprojetos_id','quantidade'], 'integer'],
+            [['quantidade'], 'integer', 'min'=>1],
+            [['valor_despesa', 'valor_cheque','valor_unitario'], 'number'],
             [['valor_despesa'],'validar_despesa'],
+            [['valor_unitario'],'validar_valor'],
+            [['valor_cheque'],'validar_cheque'],
             [['data_emissao', 'data_emissao_cheque'], 'safe'],
             [['descricao', 'favorecido'], 'string', 'max' => 150],
             [['tipo_pessoa'], 'string', 'max' => 11],
@@ -52,6 +58,8 @@ class ContProjDespesas extends \yii\db\ActiveRecord
             [['ident_cheque'], 'string', 'max' => 70],
             [['cnpj_cpf'], 'string', 'max' => 20],
             [['comprovante'], 'string', 'max' => 200],
+            [['comprovanteArquivo'],'safe'],
+            [['comprovanteArquivo'],'file','extensions'=>'pdf'],
         ];
     }
 
@@ -75,22 +83,39 @@ class ContProjDespesas extends \yii\db\ActiveRecord
             'favorecido' => 'Favorecido',
             'cnpj_cpf' => 'CNPJ/CPF',
             'comprovante' => 'Comprovante',
-            'nomeRubrica' => 'Item de Despêndio'
+            'nomeRubrica' => 'Item de Despêndio',
+            'valor_unitario'=> 'Valor Unitário',
+            'quantidade' => 'Quantidade'
         ];
     }
 
     public function validar_despesa($attribute,$params){
-        $saldoRubrica = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.valor_total"])
-            ->where("j17_contproj_rubricasdeprojetos.id=$this->rubricasdeprojetos_id")->sum("valor_total");
-        $despesas = ContProjDespesas::find()->select(["valor_despesa"])
-            ->where("rubricasdeprojetos_id=$this->rubricasdeprojetos_id")->sum("valor_despesa");
-        $permitido = $saldoRubrica - $despesas;
-        if($this->valor_despesa > $permitido ){
-            $permitido = number_format ( $permitido , 2 );
-            $messagem = "limite atingido maximo ainda permitido é $permitido";
+        $rubrica = ContProjRubricasdeProjetos::find()->select(["*"])
+            ->where("j17_contproj_rubricasdeprojetos.id=$this->rubricasdeprojetos_id")->one();
+        $projeto = ContProjProjetos::find()->select(["*"])
+            ->where("id=$rubrica->projeto_id")->one();
+        if($this->valor_despesa > $projeto->saldo ){
+            $messagem = "Despesa não pode exceder o saldo disponivel para o projeto";
             $this->addError($attribute, $messagem);
         }
     }
 
+    public function validar_valor($attribute,$params)
+    {
+        $valor = (float)$attribute;
+        if($this->valor_unitario <= 0.0 ){
+            $messagem = "O valor precisa ser maior que zero";
+            $this->addError($attribute, $messagem);
+        }
+    }
+
+    public function validar_cheque($attribute,$params)
+    {
+        $valor = (float)$attribute;
+        if($this->valor_cheque <= 0.0 ){
+            $messagem = "O valor precisa ser maior que zero";
+            $this->addError($attribute, $messagem);
+        }
+    }
 
 }

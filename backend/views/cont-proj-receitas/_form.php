@@ -35,17 +35,8 @@ use kartik\widgets\DatePicker;
 
             <!--<?= $form->field($model, 'data')->textInput() ?>-->
 
-            <!--<div class="row">
-        <?= $form->field($model, 'data', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
-                'language' => 'pt-BR',
-                'options' => ['placeholder' => 'Escolha uma data ...',],
-                'pluginOptions' => [
-                    'format' => 'dd-mm-yyyy',
-                    'todayHighlight' => true
-                ]
-            ])->label("<font color='#FF0000'>*</font> <b>Data:</b>")
-            ?>
-    </div>-->
+            <?= $form->field($model, 'ordem_bancaria')->textInput(['maxlength' => true]) ?>
+
             <div class="row">
                 <?= $form->field($model, 'data', ['options' => ['class' => 'col-md-4']])->widget(DatePicker::classname(), [
                     'language' => 'pt-BR',

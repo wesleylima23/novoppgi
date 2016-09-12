@@ -19,7 +19,7 @@ class ContProjReceitasSearch extends ContProjReceitas
     {
         return [
             [['id', 'rubricasdeprojetos_id'], 'integer'],
-            [['descricao', 'data','tipo','nomeRubrica','codigo'], 'safe'],
+            [['descricao', 'data','tipo','nomeRubrica','codigo','ordem_bancaria'], 'safe'],
             [['valor_receita'], 'number'],
         ];
     }
@@ -86,6 +86,11 @@ class ContProjReceitasSearch extends ContProjReceitas
         $dataProvider->sort->attributes['nomeRubrica'] = [
             'asc' => ['j17_contproj_rubricas.nome' => SORT_ASC],
             'desc' => ['j17_contproj_rubricas.nome' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['ordem_bancaria'] = [
+            'asc' => ['ordem_bancaria' => SORT_ASC],
+            'desc' => ['ordem_bancaria' => SORT_DESC],
         ];
 
         $dataProvider->sort->attributes['codigo'] = [

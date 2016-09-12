@@ -42,11 +42,15 @@ class ContProjDespesasController extends Controller
     public function actionIndex()
     {
         $searchModel = new ContProjDespesasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModelCusteio = new ContProjDespesasSearch();
+        $dataProviderCapital = $searchModel->search(Yii::$app->request->queryParams,"Capital");
+        $dataProviderCusteio = $searchModel->search(Yii::$app->request->queryParams,"Custeio");
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModelCusteio' => $searchModelCusteio,
+            'dataProviderCapital' => $dataProviderCapital,
+            'dataProviderCusteio' => $dataProviderCusteio,
         ]);
     }
 
@@ -65,6 +69,7 @@ class ContProjDespesasController extends Controller
 
     public function cadastrarDespesa(ContProjDespesas $model){
 
+        $model->valor_despesa = $model->quantidade * $model->valor_unitario;
         $model->data_emissao = date('Y-m-d', strtotime($model->data_emissao));
         $model->data_emissao_cheque = date('Y-m-d', strtotime($model->data_emissao_cheque));
 
@@ -98,10 +103,10 @@ class ContProjDespesasController extends Controller
     {
         $idProjeto= Yii::$app->request->get('idProjeto');
         $model = new ContProjDespesas();
-        $model->comprovante = UploadedFile::getInstance($model, 'comprovante');
-        if($model->comprovante) {
-            $model->comprovante = "uploads/".date('dmYhms')."_".$model->comprovante->name;
-            $model->comprovante->saveAs($model->comprovante);
+        $model->comprovanteArquivo = UploadedFile::getInstance($model, 'comprovanteArquivo');
+        if($model->comprovanteArquivo) {
+            $model->comprovante = "uploads/".date('dmYhms')."_".$model->comprovanteArquivo->name;
+            $model->comprovanteArquivo->saveAs($model->comprovante);
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $this->cadastrarDespesa($model);

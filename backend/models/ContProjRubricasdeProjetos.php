@@ -21,6 +21,10 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
     public $nomeprojeto;
     public $nomerubrica;
     public $coordenador;
+    public $data_fim;
+    public $agencia;
+    public $projeto;
+    public $ordem_bancaria;
     /**
      * @inheritdoc
      */
@@ -38,11 +42,10 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
             [['projeto_id', 'rubrica_id', 'descricao', 'valor_total', 'valor_gasto'], 'required'],
             [['projeto_id', 'rubrica_id'], 'integer'],
             [['valor_total', 'valor_gasto', 'valor_disponivel'], 'number'],
-            [['descricao'], 'string', 'max' => 200],
+            [['descricao','ordem_bancaria'], 'string', 'max' => 200],
+            [['valor_disponivel'],'validar_ordem'],
             ['valor_disponivel','validar_valor'],
-            //['valor_total','checarOrcamento'],
             ['valor_total','checarOrcamento'],
-           // ['valor_total','checarOrcamentoUpdate','on'=>'update'],
         ];
     }
 
@@ -61,6 +64,7 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
             'valor_total' => 'Valor Previsto',
             'valor_gasto' => 'Valor Gasto',
             'valor_disponivel' => 'Saldo',
+            'ordem_bancaria' => 'Ordem Bancária',
         ];
     }
 
@@ -70,8 +74,12 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
         }
     }
 
-
-
+    public function validar_ordem($attribute){
+        //$this->addError($attribute, "OB: $this->ordem_bancaria");
+        if($this->valor_disponivel>0 && $this->ordem_bancaria==null){
+            $this->addError($attribute, "'Ordem Bancária' é um campo obrigatório quando o Saldo é maior que zero");
+        }
+    }
 
     public function checarOrcamento($attribute,$params){
         $soma = 0.00;

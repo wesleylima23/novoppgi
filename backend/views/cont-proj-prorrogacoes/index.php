@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'data_fim_alterada',
                 'format' => ['date', 'php:d/m/Y'],
+                //'contentOptions'=>['style'=>'width: 20%;'],
             ],
             'descricao:ntext',
             [

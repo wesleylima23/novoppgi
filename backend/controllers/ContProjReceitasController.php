@@ -83,9 +83,10 @@ class ContProjReceitasController extends Controller
         return $this->descricao;
     }
 
-    public function cadastrarReceita($model){
+    public function cadastrarReceita(ContProjReceitas $model){
 
         $model->data = date('Y-m-d', strtotime($model->data));
+
         $rubrica = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
         $rubrica->valor_disponivel =  $rubrica->valor_disponivel + $model->valor_receita;
 
@@ -169,8 +170,6 @@ class ContProjReceitasController extends Controller
             return false;
         }
     }
-
-
 
     /**
      * Deletes an existing ContProjReceitas model.

@@ -19,7 +19,7 @@ class ContProjRubricasdeProjetosSearch extends ContProjRubricasdeProjetos
     {
         return [
             [['id', 'projeto_id', 'rubrica_id'], 'integer'],
-            [['descricao','nomeprojeto','nomerubrica','coordenador'], 'safe'],
+            [['descricao','nomeprojeto','nomerubrica','coordenador','data_fim'], 'safe'],
             [['valor_total', 'valor_gasto', 'valor_disponivel'], 'number'],
         ];
     }
@@ -88,14 +88,31 @@ class ContProjRubricasdeProjetosSearch extends ContProjRubricasdeProjetos
         return $dataProvider;
     }
 
-    public function searchByRubrica($params)
+    public function searchByRubrica($params,$model)
     {
         $projeto_id = Yii::$app->request->get('idProjeto');
-        $query = ContProjRubricasdeProjetos::find()->select("j17_contproj_projetos.nomeprojeto AS nomeprojeto,
-        j17_contproj_projetos.coordenador_id AS coordenador,
-        j17_contproj_rubricas.nome AS nomerubrica,j17_contproj_rubricasdeprojetos.*")
-            ->leftJoin("j17_contproj_projetos","j17_contproj_projetos.id=j17_contproj_rubricasdeprojetos.projeto_id")
-            ->leftJoin("j17_contproj_rubricas","j17_contproj_rubricas.id=j17_contproj_rubricasdeprojetos.rubrica_id");
+        $saldo = 5000;
+        if($model->valor_disponivel==null){
+            $query = ContProjRubricasdeProjetos::find()->select("j17_contproj_projetos.nomeprojeto AS nomeprojeto,
+            j17_contproj_projetos.id as projeto, j17_contproj_projetos.coordenador_id AS coordenador,
+            j17_contproj_projetos.data_fim AS data_fim,j17_contproj_projetos.agencia_id AS agencia,
+            j17_contproj_rubricas.nome AS nomerubrica,j17_contproj_rubricasdeprojetos.*")
+                ->leftJoin("j17_contproj_projetos", "j17_contproj_projetos.id=j17_contproj_rubricasdeprojetos.projeto_id")
+                ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id=j17_contproj_rubricasdeprojetos.rubrica_id")
+                ->where("j17_contproj_rubricasdeprojetos.valor_disponivel > 0 AND j17_contproj_rubricas.id = 1")
+                ->orderBy("data_fim desc");;
+
+        }else {
+            $query = ContProjRubricasdeProjetos::find()->select("j17_contproj_projetos.nomeprojeto AS nomeprojeto,
+            j17_contproj_projetos.id as projeto, j17_contproj_projetos.coordenador_id AS coordenador,
+            j17_contproj_projetos.data_fim AS data_fim,j17_contproj_projetos.agencia_id AS agencia,
+            j17_contproj_rubricas.nome AS nomerubrica,j17_contproj_rubricasdeprojetos.*")
+                ->leftJoin("j17_contproj_projetos", "j17_contproj_projetos.id=j17_contproj_rubricasdeprojetos.projeto_id")
+                ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id=j17_contproj_rubricasdeprojetos.rubrica_id")
+                ->where("j17_contproj_rubricasdeprojetos.valor_disponivel > 0 
+            AND j17_contproj_rubricasdeprojetos.valor_disponivel <= $model->valor_disponivel AND j17_contproj_rubricas.id = 1")
+                ->orderBy("data_fim desc");
+        }
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -114,10 +131,27 @@ class ContProjRubricasdeProjetosSearch extends ContProjRubricasdeProjetos
             'asc' => ['nomeprojeto' => SORT_ASC],
             'desc' => ['nomeprojeto' => SORT_DESC],
         ];
+
+        $dataProvider->sort->attributes['data_fim'] = [
+            'asc' => ['data_fim' => SORT_ASC],
+            'desc' => ['data_fim' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['agencia'] = [
+            'asc' => ['agencia' => SORT_ASC],
+            'desc' => ['agencia' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['projeto'] = [
+            'asc' => ['projeto' => SORT_ASC],
+            'desc' => ['projeto' => SORT_DESC],
+        ];
+
         $dataProvider->sort->attributes['coordenador'] = [
             'asc' => ['coordenador' => SORT_ASC],
             'desc' => ['coordenador' => SORT_DESC],
         ];
+
         $dataProvider->sort->attributes['nomerubrica'] = [
             'asc' => ['nomerubrica' => SORT_ASC],
             'desc' => ['nomerubrica' => SORT_DESC],
