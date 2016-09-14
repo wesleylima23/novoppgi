@@ -39,9 +39,16 @@ return [
 
 
     'components' => [
-        'user' => [
+        'session' => [
+            'name' => 'PHPBACKENDSESSID',
+            'savePath' => sys_get_temp_dir(),
+        ],
+		'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+			'identityCookie' => [
+                'name' => '_backendUser', // unique for backend
+            ]
         ],
 
 

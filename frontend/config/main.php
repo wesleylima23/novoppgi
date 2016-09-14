@@ -15,9 +15,16 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-        'user' => [
+        'session' => [
+            'name' => 'PHPFRONTENDSESSID',
+            'savePath' => sys_get_temp_dir(),
+        ],
+		'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+			'identityCookie' => [
+                'name' => '_frontendUser', // unique for backend
+            ]
         ],
 
         'view' => [
