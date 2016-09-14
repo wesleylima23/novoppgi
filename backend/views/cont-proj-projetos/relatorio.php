@@ -9,7 +9,7 @@ use yii\grid\GridView;
 $idProjeto = Yii::$app->request->get('idProjeto');
 
 
-$this->title = "Rubricas do projeto";
+$this->title = "Relatorio Simplificado";
 //'Cont Proj Rubricasde Projetos';
 $this->params['breadcrumbs'][] = $this->title;
 //$this->params['breadcrumbs'][] = ['label' => "$nomeProjeto", 'url' => ['index','idProjeto'=>$idProjeto,'nomeProjeto'=>$nomeProjeto]];
@@ -23,7 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span> Voltar  ',
             ['cont-proj-projetos/view', 'id' => $idProjeto], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('Cadastrar nova rubrica para o projeto', ['create', 'idProjeto' => $idProjeto], ['class' => 'btn btn-success']) ?>
     </p>
     <?= $this->render('..\cont-proj-projetos\dados', [
         'idProjeto' => $idProjeto,

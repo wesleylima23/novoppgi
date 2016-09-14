@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use app\models\Candidato;
 use backend\models\ContProjProjetos;
 use backend\models\Projetos;
 use Yii;
@@ -32,6 +33,56 @@ class ContProjRegistraDatasController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function actionListadatas()
+    {
+
+        $ultima_visualizacao = Yii::$app->user->identity->visualizacao_candidatos;
+        $projetos = ContProjProjetos::find()->select("*")->where("coordenador_id=" . Yii::$app->user->identity->id)->all();
+        for ($i = 0; $i < count($projetos); $i++) {
+            $id[] = $projetos[$i]->id;
+        }
+        $ids=join("','",$id);
+        $candidato = ContProjRegistraDatas::find()->where("data = '" . date('Y-m-d') . "' AND projeto_id IN ('$ids')")
+            ->orderBy("data")->all();
+
+        //$candidato = ContProjRegistraDatas::find()->all();
+        //->where("inicio > '".$ultima_visualizacao."'")
+        for ($i = 0; $i < count($candidato); $i++) {
+            $a = date("d/m/Y", strtotime($candidato[$i]->data));
+            echo "<li><a href='#'>";
+            echo "<div class='pull-left'>
+                <img src='../web/img/candidato.png' class='img-circle'
+                alt='user image'/>
+                </div>";
+            echo ("<p>" . "Evento: " .mb_strimwidth($candidato[$i]->observacao,0,15,"...")) . "<br>";
+            echo ("<p>" . "Evento: " .$candidato[$i]->evento) . "<br>";
+            echo ("Data: " . $a) . "</p></a></li>";
+        }
+
+    }
+
+    public function actionQuantidadedatas()
+    {
+        $ultima_visualizacao = Yii::$app->user->identity->visualizacao_candidatos;
+        $projetos = ContProjProjetos::find()->select("*")->where("coordenador_id=" . Yii::$app->user->identity->id)->all();
+        for ($i = 0; $i < count($projetos); $i++) {
+            $id[] = $projetos[$i]->id;
+        }
+        $ids=join("','",$id);
+        $candidato = ContProjRegistraDatas::find()->where("data = '" . date('Y-m-d') . "' AND projeto_id IN ('$ids')")
+            ->orderBy("data")->all();
+        echo count($candidato);
+
+    }
+
+    public function actionZerarnotificacaodatas()
+    {
+        $usuario = new User();
+        $usuario = $usuario->findIdentity(Yii::$app->user->identity->id);
+        $usuario->visualizacao_candidatos = date("Y-m-d H:i:s");
+        $usuario->save();
     }
 
     /**
@@ -70,14 +121,18 @@ class ContProjRegistraDatasController extends Controller
      */
     public function actionCreate()
     {
+        $idProjeto = Yii::$app->request->get('idProjeto');
         $model = new ContProjRegistraDatas();
         $projetos = ArrayHelper::map(ContProjProjetos::find()->orderBy('nomeprojeto')->all(), 'id', 'nomeprojeto');
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->data = date('Y-m-d', strtotime($model->data));
+            $model->save();
+            return $this->redirect(['index', 'id' => $model->id,'idProjeto' => $idProjeto]);
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'projetos' => $projetos,
+                'idProjeto' => $idProjeto,
             ]);
         }
     }
@@ -92,8 +147,9 @@ class ContProjRegistraDatasController extends Controller
     {
         $model = $this->findModel($id);
         $projetos = ArrayHelper::map(ContProjProjetos::find()->orderBy('nomeprojeto')->all(), 'id', 'nomeprojeto');
+        $model->data = date('Y-m-d', strtotime($model->data));
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -108,11 +164,24 @@ class ContProjRegistraDatasController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $detalhe = false)
     {
-        $this->findModel($id)->delete();
+        $idProjeto = Yii::$app->request->get("idProjeto");
 
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        try {
+            $model->delete();
+            $this->mensagens('success', 'Excluir lembrete', 'Excluido com sucesso!');
+        } catch (\yii\base\Exception $e) {
+            $this->mensagens('error', 'Excluir lembrete', 'Não pode ser excluido!');
+            if ($detalhe) {
+                return $this->redirect(['view', 'id' => $model->id, 'idProjeto' => $idProjeto]);
+            } else {
+                return $this->redirect(['index', 'idProjeto' => $idProjeto]);
+            }
+        }
+        return $this->redirect(['index', 'idProjeto' => $idProjeto]);
+
     }
 
     /**
@@ -130,4 +199,19 @@ class ContProjRegistraDatasController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    protected function mensagens($tipo, $titulo, $mensagem)
+    {
+        Yii::$app->session->setFlash($tipo, [
+            'type' => $tipo,
+            'icon' => 'home',
+            'duration' => 5000,
+            'message' => $mensagem,
+            'title' => $titulo,
+            'positonY' => 'top',
+            'positonX' => 'center',
+            'showProgressbar' => true,
+        ]);
+    }
+
 }

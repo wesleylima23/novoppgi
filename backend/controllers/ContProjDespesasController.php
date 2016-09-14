@@ -110,6 +110,7 @@ class ContProjDespesasController extends Controller
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $this->cadastrarDespesa($model);
+            $this->mensagens('success', 'Despesa', 'Despesa cadastrada com sucesso!');
             return $this->redirect(['index', 'idProjeto' => $idProjeto]);
         } else {
             $rubricasdeProj = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.id",

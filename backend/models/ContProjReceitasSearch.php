@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\ContProjReceitas;
+use yii\helpers\ArrayHelper;
 
 /**
  * ContProjReceitasSearch represents the model behind the search form about `backend\models\ContProjReceitas`.
@@ -114,4 +115,57 @@ class ContProjReceitasSearch extends ContProjReceitas
             ->andFilterWhere(['<=', 'j17_contproj_receitas.valor_receita', $this->valor_receita]);
         return $dataProvider;
     }
+
+    public function searchByRubrica($params, $rubrica)
+    {
+        $projeto_id = Yii::$app->request->get('idProjeto');
+        $query = ContProjReceitas::find()->select("j17_contproj_receitas.data as data, j17_contproj_receitas.descricao as descricao, 
+            j17_contproj_receitas.valor_receita as total")
+            ->leftJoin("j17_contproj_rubricasdeprojetos","j17_contproj_receitas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
+            ->where("j17_contproj_rubricasdeprojetos.id =$rubrica")->orderBy("data");
+
+        /*$query2 = ContProjDespesas::find()->select("j17_contproj_despesas.data_emissao AS data, j17_contproj_despesas.descricao AS descricao,
+            j17_contproj_despesas.valor_despesa AS total")
+            ->leftJoin("j17_contproj_rubricasdeprojetos","j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
+            ->where("j17_contproj_rubricasdeprojetos.projeto_id = $projeto_id")->orderBy("data");
+
+        $data = ArrayHelper::merge($query1, $query2);*/
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $dataProvider->sort->attributes['total'] = [
+            'asc' => ['j17_contproj_receitas.valor_receita' => SORT_ASC],
+            'desc' => ['j17_contproj_receitas.valor_receita' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['nomeRubrica'] = [
+            'asc' => ['j17_contproj_rubricas.nome' => SORT_ASC],
+            'desc' => ['j17_contproj_rubricas.nome' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['ordem_bancaria'] = [
+            'asc' => ['ordem_bancaria' => SORT_ASC],
+            'desc' => ['ordem_bancaria' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['codigo'] = [
+            'asc' => ['j17_contproj_rubricas.codigo' => SORT_ASC],
+            'desc' => ['j17_contproj_rubricas.codigo' => SORT_DESC],
+        ];
+
+        return $dataProvider;
+    }
+
+
+
 }

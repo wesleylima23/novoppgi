@@ -1280,7 +1280,7 @@ class EditalController extends Controller
     {       
 
             $ultima_visualizacao = Yii::$app->user->identity->visualizacao_candidatos;
-            $candidato = Candidato::find()->where("inicio > '".$ultima_visualizacao."'")->orderBy("inicio DESC")->all(); 
+            $candidato = Candidato::find()->where("inicio > '".$ultima_visualizacao."'")->orderBy("inicio DESC")->all();
 
             for ($i=0; $i<count($candidato); $i++){
                 echo "<li><a href='#'>";
@@ -1298,7 +1298,7 @@ class EditalController extends Controller
     {       
 
             $ultima_visualizacao = Yii::$app->user->identity->visualizacao_candidatos;
-            $candidato = Candidato::find()->where("inicio > '".$ultima_visualizacao."'")->all(); 
+            $candidato = Candidato::find()->where("inicio > '".$ultima_visualizacao."'")->all();
 
             echo count($candidato);
 
@@ -1321,7 +1321,7 @@ class EditalController extends Controller
     {       
 
             $ultima_visualizacao = Yii::$app->user->identity->visualizacao_candidatos_finalizados;
-            $candidato = Candidato::find()->where("fim > '".$ultima_visualizacao."'")->orderBy("fim DESC")->all(); 
+            $candidato = Candidato::find()->where("fim > '".$ultima_visualizacao."'")->orderBy("fim DESC")->all();
 
             for ($i=0; $i<count($candidato); $i++){
                 echo "<li><a href='#'>";

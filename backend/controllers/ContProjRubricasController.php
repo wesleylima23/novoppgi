@@ -113,9 +113,9 @@ class ContProjRubricasController extends Controller
         $model = $this->findModel($id);
         try{
             $model->delete();
-            $this->mensagens('success', 'Exclusão do  Banco',  'Banco excluido com sucesso!');
+            $this->mensagens('success', 'Exclusão da Rubrica',  'Rubrica excluida com sucesso!');
         }catch (\yii\base\Exception $e){
-            $this->mensagens('error', 'Exclusão do  Banco', 'Banco não pode ser excluido pois existem projetos associadas ao mesmo!');
+            $this->mensagens('error', 'Exclusão da Rubrica', 'Rubrica não pode ser excluido!');
             if($detalhe){
                 return $this->redirect(['view','id' => $model->id]);
             }else{

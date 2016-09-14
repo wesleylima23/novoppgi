@@ -101,4 +101,37 @@ class ContProjDespesasSearch extends ContProjDespesas
 
         return $dataProvider;
     }
+
+    public function searchByRubrica($params, $rubrica)
+    {
+        $projeto_id = Yii::$app->request->get('idProjeto');
+        $query = ContProjDespesas::find()->select("j17_contproj_despesas.data_emissao AS data, j17_contproj_despesas.descricao AS descricao, 
+            j17_contproj_despesas.valor_despesa AS total")
+            ->leftJoin("j17_contproj_rubricasdeprojetos","j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
+            ->where("j17_contproj_rubricasdeprojetos.id =$rubrica")->orderBy("data");
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $dataProvider->sort->attributes['total'] = [
+            'asc' => ['j17_contproj_despesas.valor_despesa' => SORT_ASC],
+            'desc' => ['j17_contproj_despesas.valor_despesa' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['data'] = [
+            'asc' => ['j17_contproj_despesas.data_emissao' => SORT_ASC],
+            'desc' => ['j17_contproj_despesas.data_emissao' => SORT_DESC],
+        ];
+        return $dataProvider;
+    }
+
+
 }

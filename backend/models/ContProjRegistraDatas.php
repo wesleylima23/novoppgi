@@ -48,7 +48,7 @@ class ContProjRegistraDatas extends \yii\db\ActiveRecord
             'id' => 'ID',
             'evento' => 'Evento',
             'data' => 'Data',
-            'projeto_id' => 'Projeto ID',
+            'projeto_id' => 'Projeto',
             'observacao' => 'Observacao',
             'tipo' => 'Tipo',
         ];

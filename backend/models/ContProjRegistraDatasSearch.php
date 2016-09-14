@@ -41,7 +41,7 @@ class ContProjRegistraDatasSearch extends ContProjRegistraDatas
      */
     public function search($params)
     {
-        $query = ContProjRegistraDatas::find();
+        $query = ContProjRegistraDatas::find()->orderBy("data ASC");
 
         // add conditions that should always apply here
 

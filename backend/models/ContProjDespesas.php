@@ -30,6 +30,8 @@ class ContProjDespesas extends \yii\db\ActiveRecord
     public $codigo;
     public $tipo;
     public $comprovanteArquivo;
+    public $data;
+    public $total;
     /**
      * @inheritdoc
      */

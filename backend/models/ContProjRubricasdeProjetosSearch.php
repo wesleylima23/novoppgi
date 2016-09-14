@@ -225,6 +225,7 @@ class ContProjRubricasdeProjetosSearch extends ContProjRubricasdeProjetos
         return $dataProvider;
     }
 
+
     public function searchCusteio($params)
     {
         $projeto_id = Yii::$app->request->get('idProjeto');
@@ -270,6 +271,32 @@ class ContProjRubricasdeProjetosSearch extends ContProjRubricasdeProjetos
         $query->andFilterWhere(['like', 'descricao', $this->descricao])
             ->andFilterWhere(['like', 'j17_contproj_projetos.nomeprojeto', $this->nomeprojeto])
             ->andFilterWhere(['like', 'j17_contproj_rubricas.nome', $this->nomerubrica]);
+        return $dataProvider;
+    }
+
+
+    public function searchDetalhado($params)
+    {
+        $projeto_id = Yii::$app->request->get('idProjeto');
+        $query = ContProjRubricasdeProjetos::find()->select("j17_contproj_receitas.descricao AS nomeprojeto,
+        j17_contproj_despesas.descricao AS nomerubrica")
+            ->leftJoin("j17_contproj_receitas","j17_contproj_rubricasdeprojetos.id = j17_contproj_receitas.rubricasdeprojetos_id")
+            ->leftJoin("j17_contproj_despesas","j17_contproj_rubricasdeprojetos.id = j17_contproj_despesas.rubricasdeprojetos_id")
+            ->where("j17_contproj_rubricasdeprojetos.projeto_id=$projeto_id AND j17_contproj_rubricasdeprojetos.id");
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
         return $dataProvider;
     }
 

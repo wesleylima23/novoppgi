@@ -114,7 +114,7 @@ class ContProjReceitasController extends Controller
         $idProjeto= Yii::$app->request->get('idProjeto');
 
         if ($model->load(Yii::$app->request->post()) && $this->cadastrarReceita($model) ) {
-
+            $this->mensagens('success', 'Receita', 'Receita cadastrada com sucesso!');
             return $this->redirect(['index', 'id' => $model->id,'idProjeto' => $idProjeto]);
         } else {
             $rubricasdeProj = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.id",

@@ -6,7 +6,9 @@ use app\models\User;
 use backend\models\ContProjAgencias;
 use backend\models\ContProjBancos;
 use backend\models\ContProjDespesas;
+use backend\models\ContProjDespesasSearch;
 use backend\models\ContProjReceitas;
+use backend\models\ContProjReceitasSearch;
 use backend\models\ContProjRubricas;
 use backend\models\ContProjRubricasdeProjetos;
 use backend\models\ContProjRubricasdeProjetosSearch;
@@ -67,6 +69,28 @@ class ContProjProjetosController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+
+    public function actionDetalhado($idProjeto)
+    {
+        $searchModel = new ContProjReceitasSearch();
+        $searchModel2 = new ContProjDespesasSearch();
+        $rubricas = ContProjRubricasdeProjetos::find()->select("*")->where("projeto_id=$idProjeto")->all();
+        $data=[];
+        $data2=[];
+        for($i=0;$i<count($rubricas);$i++) {
+
+            $dataProvider = $searchModel->searchByRubrica(Yii::$app->request->queryParams,$rubricas[$i]->id);
+            $dataProvider2= $searchModel2->searchByRubrica(Yii::$app->request->queryParams,$rubricas[$i]->id);
+            $data[]=$dataProvider;
+            $data2[]=$dataProvider2;
+        }
+        return $this->render('detalhado', [
+            'rubricas'=>$rubricas,
+            'data' => $data,
+            'data2' => $data2,
         ]);
     }
 
@@ -165,6 +189,7 @@ class ContProjProjetosController extends Controller
             $model->data_inicio = date('Y-m-d', strtotime($model->data_inicio));
             $model->data_fim = date('Y-m-d', strtotime($model->data_fim));
             $model->save();
+            $this->mensagens('success', 'Projeto', 'Dados atualizados com sucesso!');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             $model->data_inicio = date("d-m-Y", strtotime($model->data_inicio));
@@ -177,6 +202,7 @@ class ContProjProjetosController extends Controller
             ]);
         }
     }
+
 
     public function actionProrrogar($id)
     {
@@ -199,87 +225,89 @@ class ContProjProjetosController extends Controller
         $coordenador = \app\models\User::find()->select("*")->where("id=$projeto->coordenador_id")->one();
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('uploads/Form2.docx');
         $templateProcessor->setValue('outorgado', $coordenador->nome);
-        $templateProcessor->setValue('saldo', number_format ($projeto->saldo,2)." R$");
+        $templateProcessor->setValue('saldo', number_format($projeto->saldo, 2) . " R$");
         $templateProcessor->setValue('reais', 'R$');
         $receitas = ContProjReceitas::find()->select(["*,j17_contproj_receitas.ordem_bancaria AS ordem, 
             SUM(j17_contproj_receitas.valor_receita) AS total"])
-            ->leftJoin("j17_contproj_rubricasdeprojetos","j17_contproj_receitas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
+            ->leftJoin("j17_contproj_rubricasdeprojetos", "j17_contproj_receitas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
             ->where("j17_contproj_rubricasdeprojetos.projeto_id = $id")
             ->groupBy("j17_contproj_receitas.ordem_bancaria")
             ->orderBy("data")->all();
 
         $total = 0;
         $tamanho = count($receitas);
-        $templateProcessor->cloneRow('datReceita',$tamanho);
-        for ($i = 0; $i<$tamanho ; $i++) {
-            $templateProcessor->setValue('datReceita#'.($i+1), date("d/m/Y", strtotime($receitas[$i]->data)));
-            $templateProcessor->setValue('ordem#'.($i+1), $receitas[$i]->ordem_bancaria);
-            $templateProcessor->setValue('valorReceita#'.($i+1), number_format ( $receitas[$i]->total,2)." R$");
+        $templateProcessor->cloneRow('datReceita', $tamanho);
+        for ($i = 0; $i < $tamanho; $i++) {
+            $templateProcessor->setValue('datReceita#' . ($i + 1), date("d/m/Y", strtotime($receitas[$i]->data)));
+            $templateProcessor->setValue('ordem#' . ($i + 1), $receitas[$i]->ordem_bancaria);
+            $templateProcessor->setValue('valorReceita#' . ($i + 1), number_format($receitas[$i]->total, 2) . " R$");
             $total = $total + $receitas[$i]->total;
         }
-        $templateProcessor->setValue('valorTotal',number_format ( $total,2)." R$");
+        $templateProcessor->setValue('valorTotal', number_format($total, 2) . " R$");
         $despesas = ContProjDespesas::find()->select(["*"])
-            ->leftJoin("j17_contproj_rubricasdeprojetos","j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
+            ->leftJoin("j17_contproj_rubricasdeprojetos", "j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
             ->where("j17_contproj_rubricasdeprojetos.projeto_id = $id")->all();
         $tamanho = count($despesas);
-        $templateProcessor->cloneRow('num',$tamanho);
-        for ($i = 0; $i<$tamanho ; $i++) {
-            $templateProcessor->setValue('num#'.($i+1),$despesas[$i]->ident_cheque);
-            $templateProcessor->setValue('dat#'.($i+1), date("d/m/Y", strtotime($despesas[$i]->data_emissao)));
-            $templateProcessor->setValue('numero#'.($i+1),$despesas[$i]->nf);
-            $templateProcessor->setValue('favorecido#'.($i+1),$despesas[$i]->favorecido);
-            $templateProcessor->setValue('valorDespesa#'.($i+1),number_format ($despesas[$i]->valor_despesa,2)." R$");
+        $templateProcessor->cloneRow('num', $tamanho);
+        for ($i = 0; $i < $tamanho; $i++) {
+            $templateProcessor->setValue('num#' . ($i + 1), $despesas[$i]->ident_cheque);
+            $templateProcessor->setValue('dat#' . ($i + 1), date("d/m/Y", strtotime($despesas[$i]->data_emissao)));
+            $templateProcessor->setValue('numero#' . ($i + 1), $despesas[$i]->nf);
+            $templateProcessor->setValue('favorecido#' . ($i + 1), $despesas[$i]->favorecido);
+            $templateProcessor->setValue('valorDespesa#' . ($i + 1), number_format($despesas[$i]->valor_despesa, 2) . " R$");
         }
 
         header('Content-Disposition: attachment; filename="Form2.docx"');
         $templateProcessor->saveAs('php://output');
     }
 
-    public function actionForm8($id){
+    public function actionForm8($id)
+    {
         $projeto = ContProjProjetos::find()->select("*")->where("id=$id")->one();
         $coordenador = \app\models\User::find()->select("*")->where("id=$projeto->coordenador_id")->one();
         $rubricas = ContProjRubricasdeProjetos::find()->select("j17_contproj_rubricas.nome as nomerubrica,valor_total,valor_gasto")
-            ->leftJoin("j17_contproj_rubricas","rubrica_id=j17_contproj_rubricas.id")
+            ->leftJoin("j17_contproj_rubricas", "rubrica_id=j17_contproj_rubricas.id")
             ->where("projeto_id=$id")->all();
         $tamanho = count($rubricas);
         $totalSolicitado = 0;
-        $totalGasto=0;
+        $totalGasto = 0;
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('uploads/Form8.docx');
-        $templateProcessor->cloneRow('rubrica',$tamanho);
+        $templateProcessor->cloneRow('rubrica', $tamanho);
         $templateProcessor->setValue('outorgado', $coordenador->nome);
-        for ($i = 0; $i<$tamanho ; $i++) {
-            $templateProcessor->setValue('rubrica#'.($i+1), $rubricas[$i]->nomerubrica);
-            $templateProcessor->setValue('valorSolicitado#'.($i+1), "R$ ".number_format ($rubricas[$i]->valor_total,2));
-            $templateProcessor->setValue('valorGasto#'.($i+1), "R$ ".number_format ($rubricas[$i]->valor_gasto,2));
+        for ($i = 0; $i < $tamanho; $i++) {
+            $templateProcessor->setValue('rubrica#' . ($i + 1), $rubricas[$i]->nomerubrica);
+            $templateProcessor->setValue('valorSolicitado#' . ($i + 1), "R$ " . number_format($rubricas[$i]->valor_total, 2));
+            $templateProcessor->setValue('valorGasto#' . ($i + 1), "R$ " . number_format($rubricas[$i]->valor_gasto, 2));
             $totalSolicitado = $totalSolicitado + $rubricas[$i]->valor_total;
             $totalGasto = $totalGasto + $rubricas[$i]->valor_gasto;
         }
-        $templateProcessor->setValue('totalSolicitado', "R$ ".number_format ($totalSolicitado,2));
-        $templateProcessor->setValue('totalGasto', "R$ ".number_format ($totalGasto,2));
+        $templateProcessor->setValue('totalSolicitado', "R$ " . number_format($totalSolicitado, 2));
+        $templateProcessor->setValue('totalGasto', "R$ " . number_format($totalGasto, 2));
         header('Content-Disposition: attachment; filename="Form8-Tabela-de-custo-8.docx"');
         $templateProcessor->saveAs('php://output');
     }
 
-    public function actionForm3($id){
+    public function actionForm3($id)
+    {
         $projeto = ContProjProjetos::find()->select("*")->where("id=$id")->one();
         $coordenador = \app\models\User::find()->select("*")->where("id=$projeto->coordenador_id")->one();
         $despesas = ContProjDespesas::find()->select("*,j17_contproj_despesas.descricao as descricao")
-            ->leftJoin("j17_contproj_rubricasdeprojetos","j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
-            ->leftJoin("j17_contproj_rubricas","j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+            ->leftJoin("j17_contproj_rubricasdeprojetos", "j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
+            ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
             ->where("j17_contproj_rubricasdeprojetos.projeto_id = $id AND j17_contproj_rubricas.tipo = 'Capital'")->all();
         $tamanho = count($despesas);
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('uploads/Form3.docx');
         $templateProcessor->setValue('reais', 'R$');
-        $templateProcessor->cloneRow('qte',$tamanho);
+        $templateProcessor->cloneRow('qte', $tamanho);
         $templateProcessor->setValue('outorgado', $coordenador->nome);
-        for ($i = 0; $i<$tamanho ; $i++) {
-            $templateProcessor->setValue('qte#'.($i+1), $despesas[$i]->quantidade);
-            $templateProcessor->setValue('numero#'.($i+1), $despesas[$i]->nf);
-            $templateProcessor->setValue('dat#'.($i+1), date("d/m/Y", strtotime($despesas[$i]->data_emissao)));
-            $templateProcessor->setValue('numero#'.($i+1), $despesas[$i]->nf);
-            $templateProcessor->setValue('descricao#'.($i+1), $despesas[$i]->descricao);
-            $templateProcessor->setValue('unidade#'.($i+1), $despesas[$i]->quantidade);
-            $templateProcessor->setValue('total#'.($i+1), number_format ($despesas[$i]->valor_despesa,2)." R$");
+        for ($i = 0; $i < $tamanho; $i++) {
+            $templateProcessor->setValue('qte#' . ($i + 1), $despesas[$i]->quantidade);
+            $templateProcessor->setValue('numero#' . ($i + 1), $despesas[$i]->nf);
+            $templateProcessor->setValue('dat#' . ($i + 1), date("d/m/Y", strtotime($despesas[$i]->data_emissao)));
+            $templateProcessor->setValue('numero#' . ($i + 1), $despesas[$i]->nf);
+            $templateProcessor->setValue('descricao#' . ($i + 1), $despesas[$i]->descricao);
+            $templateProcessor->setValue('unidade#' . ($i + 1), $despesas[$i]->quantidade);
+            $templateProcessor->setValue('total#' . ($i + 1), number_format($despesas[$i]->valor_despesa, 2) . " R$");
             //${unidade#1}	${total#1} ${unidade#1}	${total#1}
 
         }
@@ -288,17 +316,20 @@ class ContProjProjetosController extends Controller
     }
 
 
-    public function actionForm1($id){
+    public function actionForm1($id)
+    {
         $projeto = ContProjProjetos::find()->select("*")->where("id=$id")->one();
         $coordenador = \app\models\User::find()->select("*")->where("id=$projeto->coordenador_id")->one();
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('uploads/Form1.docx');
-        $templateProcessor->setValue('orcamento', 'R$ '.number_format ($projeto->orcamento,2));
+        $templateProcessor->setValue('orcamento', 'R$ ' . number_format($projeto->orcamento, 2));
         $templateProcessor->setValue('outorgado', $coordenador->nome);
-        $f = new \NumberFormatter("pt-br", \NumberFormatter::SPELLOUT);
-        //echo $f->format(1432);
-        $templateProcessor->setValue('extenso', ucfirst(strtolower($f->format($projeto->orcamento))). " reais");
         header('Content-Disposition: attachment; filename="Form1.docx"');
         $templateProcessor->saveAs('php://output');
+    }
+
+    public function actionExcel()
+    {
+
     }
 
     public static function view($id)

@@ -28,7 +28,9 @@ use kartik\widgets\DatePicker;
         ?>
     </div>
 
-    <?= $form->field($model, 'projeto_id')->dropDownList($projetos, ['prompt' => 'Selecione um Projeto']) ?>
+    <!--<?= $form->field($model, 'projeto_id')->dropDownList($projetos, ['prompt' => 'Selecione um Projeto']) ?>-->
+
+    <?= $form->field($model, 'projeto_id')->hiddenInput(['value' => $idProjeto])->label(false) ?>
 
     <?= $form->field($model, 'observacao')->textInput(['maxlength' => true]) ?>
 
@@ -36,6 +38,7 @@ use kartik\widgets\DatePicker;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Registrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Cancelar',['index','idProjeto'=>$idProjeto], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
