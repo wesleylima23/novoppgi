@@ -22,7 +22,8 @@ class ContProjRubricas extends \yii\db\ActiveRecord
         return 'j17_contproj_rubricas';
     }
 
-    /**
+	
+	/**
      * @inheritdoc
      */
     public function rules()

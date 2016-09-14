@@ -77,7 +77,8 @@ class ContProjProjetosController extends Controller
     {
         $searchModel = new ContProjReceitasSearch();
         $searchModel2 = new ContProjDespesasSearch();
-        $rubricas = ContProjRubricasdeProjetos::find()->select("*")->where("projeto_id=$idProjeto")->all();
+        $rubricas = ContProjRubricasdeProjetos::find()->select("*, j17_contproj_rubricas.nome as nomerubrica")->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = rubrica_id")->where("projeto_id = $idProjeto")->all();
+		
         $data=[];
         $data2=[];
         for($i=0;$i<count($rubricas);$i++) {
