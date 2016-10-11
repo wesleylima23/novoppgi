@@ -41,7 +41,8 @@ class ContProjRegistraDatasSearch extends ContProjRegistraDatas
      */
     public function search($params)
     {
-        $query = ContProjRegistraDatas::find()->orderBy("data ASC");
+        $projeto_id = Yii::$app->request->get('idProjeto');
+        $query = ContProjRegistraDatas::find()->where("projeto_id=$projeto_id")->orderBy("data ASC");
 
         // add conditions that should always apply here
 

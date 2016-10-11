@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7e406d7-97f4-4eb6-9ebb-fcc547372791" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/moment" afterPath="$PROJECT_DIR$/vendor/bower/moment" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/cebe/markdown" afterPath="$PROJECT_DIR$/vendor/cebe/markdown" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/fzaninotto/faker" afterPath="$PROJECT_DIR$/vendor/fzaninotto/faker" />
@@ -11,6 +10,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-select2" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-select2" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-widgets" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-widgets" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/yiisoft/yii2" afterPath="$PROJECT_DIR$/vendor/yiisoft/yii2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php" afterPath="$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" afterPath="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" />
     </list>
     <ignored path="novoppgi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,11 +41,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ContProjProjetosController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ContProjProjetosController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-639">
               <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContProjRegistraDatasSearch.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContProjReceitasSearch.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/models/ContProjReceitasSearch.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-23">
+              <caret line="45" column="59" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -95,7 +117,6 @@
         <option value="$PROJECT_DIR$/backend/models/ContProjDespesasSearch.php" />
         <option value="$PROJECT_DIR$/backend/models/ContProjReceitasSearch.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/detalhado.php" />
-        <option value="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-despesas/index.php" />
         <option value="$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-registra-datas/index.php" />
@@ -106,8 +127,9 @@
         <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php" />
         <option value="$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-despesas/view.php" />
-        <option value="$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php" />
         <option value="$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php" />
+        <option value="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" />
+        <option value="$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php" />
       </list>
     </option>
   </component>
@@ -308,7 +330,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -416,15 +438,15 @@
       <workItem from="1475121331881" duration="133000" />
       <workItem from="1475121490501" duration="1382000" />
       <workItem from="1475124134022" duration="30222000" />
-      <workItem from="1476120088247" duration="10804000" />
+      <workItem from="1476120088247" duration="11379000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="410776000" />
+    <option name="totallyTimeSpent" value="411351000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23792094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -466,20 +488,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-rubricas/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="25" column="75" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-registra-datas/create.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -547,14 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/ContProjReceitasSearch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1467">
-          <caret line="134" column="11" selection-start-line="134" selection-start-column="11" selection-end-line="134" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -632,14 +632,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="305" column="20" selection-start-line="305" selection-start-column="20" selection-end-line="305" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -772,7 +764,7 @@
         <state relative-caret-position="102">
           <caret line="6" column="75" selection-start-line="6" selection-start-column="75" selection-end-line="6" selection-end-column="75" />
           <folding>
-            <element signature="e#7#44#0#PHP" expanded="true" />
+            <element signature="e#7#44#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -827,14 +819,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3117">
@@ -855,6 +839,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-639">
           <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/ContProjProrrogacoesSearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/ContProjTransferenciasSaldoRubricas.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-816">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/ContProjReceitasSearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-23">
+          <caret line="45" column="59" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
           <folding />
         </state>
       </provider>

@@ -69,19 +69,12 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
             'ordem_bancaria' => 'Ordem Bancária',
         ];
     }
-	
-	//RELACIONAMENTO com a tabela Curso
+
     public function getRubrica()
     {
         return $this->hasOne(Rubrica::className(), ['id' => 'rubrica_id']);
     }
 
-    //RELACIONAMENTO com a tabela Curso
-    public function getRubrica()
-    {
-        return $this->hasOne(Rubrica::className(), ['id' => 'rubrica_id']);
-    }
-	
 	public function validar_valor($attribute,$params){
         if($this->$attribute > $this->valor_total ){
             $this->addError($attribute, 'O Saldo inicial não pode ser maior que o valor previsto para a rubrica');
