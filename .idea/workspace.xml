@@ -6,17 +6,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/cebe/markdown" afterPath="$PROJECT_DIR$/vendor/cebe/markdown" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/fzaninotto/faker" afterPath="$PROJECT_DIR$/vendor/fzaninotto/faker" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/bootstrap-fileinput" afterPath="$PROJECT_DIR$/vendor/kartik-v/bootstrap-fileinput" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/bootstrap-star-rating" afterPath="$PROJECT_DIR$/vendor/kartik-v/bootstrap-star-rating" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/php-date-formatter" afterPath="$PROJECT_DIR$/vendor/kartik-v/php-date-formatter" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-datetimepicker" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-datetimepicker" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-fileinput" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-fileinput" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-select2" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-select2" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-widgets" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-widgets" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/xj/yii2-bootbox-widget" afterPath="$PROJECT_DIR$/vendor/xj/yii2-bootbox-widget" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/yiisoft/yii2" afterPath="$PROJECT_DIR$/vendor/yiisoft/yii2" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/yiisoft/extensions.php" afterPath="$PROJECT_DIR$/vendor/yiisoft/extensions.php" />
     </list>
     <ignored path="novoppgi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContProjRegistraDatasController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ContProjRegistraDatasController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="257">
@@ -74,6 +68,16 @@
                 <marker date="1476215000157" expanded="true" signature="1722:1851" ph="..." />
                 <marker date="1476215000157" expanded="true" signature="1794:1828" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dados.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/dados.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="6" column="76" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="76" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -138,7 +142,6 @@
         <option value="$PROJECT_DIR$/backend/views/cont-proj-despesas/update.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-despesas/_form.php" />
-        <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/dados.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/view.php" />
         <option value="$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-despesas/view.php" />
@@ -147,6 +150,7 @@
         <option value="$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php" />
         <option value="$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php" />
         <option value="$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/header.php" />
+        <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/dados.php" />
       </list>
     </option>
   </component>
@@ -224,6 +228,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="novoppgi" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cont-proj-projetos" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -331,15 +375,15 @@
       <workItem from="1475121331881" duration="133000" />
       <workItem from="1475121490501" duration="1382000" />
       <workItem from="1475124134022" duration="30222000" />
-      <workItem from="1476120088247" duration="12266000" />
+      <workItem from="1476120088247" duration="12788000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="412238000" />
+    <option name="totallyTimeSpent" value="412760000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23792094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -728,14 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/dados.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="75" selection-start-line="6" selection-start-column="75" selection-end-line="6" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-639">
@@ -776,6 +812,14 @@
             <marker date="1476215000157" expanded="true" signature="1722:1851" ph="..." />
             <marker date="1476215000157" expanded="true" signature="1794:1828" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/dados.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="76" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="76" />
+          <folding />
         </state>
       </provider>
     </entry>
