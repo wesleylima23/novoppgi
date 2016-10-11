@@ -145,11 +145,17 @@ class ContProjRegistraDatasController extends Controller
      */
     public function actionUpdate($id)
     {
+        $idProjeto= Yii::$app->request->get('idProjeto');
         $model = $this->findModel($id);
         $projetos = ArrayHelper::map(ContProjProjetos::find()->orderBy('nomeprojeto')->all(), 'id', 'nomeprojeto');
-        $model->data = date('Y-m-d', strtotime($model->data));
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
+        $model->data = date('d-m-Y', strtotime($model->data));
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->data = date('Y-m-d', strtotime($model->data));
+            $model->save();
+            return $this->redirect(['index',
+                'id' => $model->id,
+                'idProjeto'=>$idProjeto,
+                ]);
         } else {
             return $this->render('update', [
                 'model' => $model,

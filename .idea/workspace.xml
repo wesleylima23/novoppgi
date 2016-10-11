@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7e406d7-97f4-4eb6-9ebb-fcc547372791" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/bin/markdown" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/moment" afterPath="$PROJECT_DIR$/vendor/bower/moment" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/cebe/markdown" afterPath="$PROJECT_DIR$/vendor/cebe/markdown" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/fzaninotto/faker" afterPath="$PROJECT_DIR$/vendor/fzaninotto/faker" />
@@ -11,8 +12,16 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-widgets" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-widgets" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/yiisoft/yii2" afterPath="$PROJECT_DIR$/vendor/yiisoft/yii2" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php" afterPath="$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" afterPath="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php" afterPath="$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/header.php" afterPath="$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/fullcalendar/CHANGELOG.md" afterPath="$PROJECT_DIR$/vendor/bower/fullcalendar/CHANGELOG.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.css" afterPath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.js" afterPath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.min.css" afterPath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.min.js" afterPath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.print.css" afterPath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/fullcalendar.print.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/gcal.js" afterPath="$PROJECT_DIR$/vendor/bower/fullcalendar/dist/gcal.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
     </list>
     <ignored path="novoppgi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,12 +60,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContProjRegistraDatasSearch.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php">
+      <file leaf-file-name="ContProjDespesasController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
+            <state relative-caret-position="306">
+              <caret line="155" column="40" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="40" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContProjRegistraDatasController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="152" column="38" selection-start-line="152" selection-start-column="38" selection-end-line="152" selection-end-column="38" />
+              <folding>
+                <marker date="1476215000157" expanded="true" signature="1722:1851" ph="..." />
+                <marker date="1476215000157" expanded="true" signature="1794:1828" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,7 +126,6 @@
         <option value="$PROJECT_DIR$/backend/controllers/ContProjProrrogacoesController.php" />
         <option value="$PROJECT_DIR$/backend/controllers/EditalController.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/update.php" />
-        <option value="$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/header.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-registra-datas/_form.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-registra-datas/create.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-registra-datas/update.php" />
@@ -118,7 +139,6 @@
         <option value="$PROJECT_DIR$/backend/models/ContProjReceitasSearch.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-projetos/detalhado.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-despesas/index.php" />
-        <option value="$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-registra-datas/index.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-despesas/update.php" />
         <option value="$PROJECT_DIR$/backend/views/cont-proj-rubricasde-projetos/_form.php" />
@@ -130,6 +150,8 @@
         <option value="$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php" />
         <option value="$PROJECT_DIR$/backend/models/ContProjRubricasdeProjetos.php" />
         <option value="$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php" />
+        <option value="$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php" />
+        <option value="$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/header.php" />
       </list>
     </option>
   </component>
@@ -207,130 +229,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cont-proj-rubricasde-projetos" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cont-proj-registra-datas" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cont-proj-projetos" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cont-proj-despesas" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="novoppgi" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -438,15 +336,15 @@
       <workItem from="1475121331881" duration="133000" />
       <workItem from="1475121490501" duration="1382000" />
       <workItem from="1475124134022" duration="30222000" />
-      <workItem from="1476120088247" duration="11379000" />
+      <workItem from="1476120088247" duration="12067000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="411351000" />
+    <option name="totallyTimeSpent" value="412039000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23792094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -681,25 +579,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-registra-datas/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
           <caret line="62" column="26" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="872">
-          <caret line="220" column="19" selection-start-line="220" selection-start-column="19" selection-end-line="220" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -759,16 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/dados.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="75" selection-start-line="6" selection-start-column="75" selection-end-line="6" selection-end-column="75" />
-          <folding>
-            <element signature="e#7#44#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-despesas/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -819,26 +693,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3117">
-          <caret line="63" column="57" selection-start-line="63" selection-start-column="57" selection-end-line="63" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-despesas/update.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-639">
-          <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -875,11 +733,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/cont-proj-projetos/dados.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="75" selection-start-line="6" selection-start-column="75" selection-end-line="6" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjProjetosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-639">
+          <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/models/ContProjRegistraDatasSearch.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="306">
           <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjDespesasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="155" column="40" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/views/adminLTE/yiisoft/yii2-app/layouts/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="226" column="48" selection-start-line="226" selection-start-column="48" selection-end-line="226" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/controllers/ContProjRegistraDatasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="152" column="38" selection-start-line="152" selection-start-column="38" selection-end-line="152" selection-end-column="38" />
+          <folding>
+            <marker date="1476215000157" expanded="true" signature="1722:1851" ph="..." />
+            <marker date="1476215000157" expanded="true" signature="1794:1828" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

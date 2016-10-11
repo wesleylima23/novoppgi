@@ -224,7 +224,7 @@ if(!Yii::$app->user->isGuest){
                             <span class="label label-success"> <div class="registrarDatas"> </div> </span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header"> Número de Novas Inscrições: <div style="display: inline" class="registrarDatas"> </div> </b></li>
+                            <li class="header"> Novos Lembretes: <div style="display: inline" class="registrarDatas"> </div> </b></li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul id="listaDatas" class="menu">

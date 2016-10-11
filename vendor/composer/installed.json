@@ -2235,7 +2235,7 @@
         "require": {
             "bower-asset/bootbox": "~4.4.0",
             "yiisoft/yii2": "*",
-            "yiisoft/yii2-bootstrap": "~2.0.0"
+            "yiisoft/yii2-bootstrap": "~2.0.0 || ~2.1.0"
         },
         "time": "2016-06-03 11:21:47",
         "type": "library",
@@ -3371,53 +3371,6 @@
         ]
     },
     {
-        "name": "bower-asset/fullcalendar",
-        "version": "v3.0.0",
-        "version_normalized": "3.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fullcalendar/fullcalendar.git",
-            "reference": "d7969b65adf36def0b4e3f759d1db83485142def"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/d7969b65adf36def0b4e3f759d1db83485142def",
-            "reference": "d7969b65adf36def0b4e3f759d1db83485142def",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=2.0.0",
-            "bower-asset/moment": ">=2.9.0"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "dist/fullcalendar.js",
-                "dist/fullcalendar.css"
-            ],
-            "bower-asset-ignore": [
-                "*",
-                "**/.*",
-                "!/dist/**",
-                "!/README.*",
-                "!/LICENSE.*",
-                "!/CHANGELOG.*",
-                "!/CONTRIBUTING.*"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ],
-        "description": "Full-sized drag & drop event calendar",
-        "keywords": [
-            "calendar",
-            "event",
-            "full-sized",
-            "jquery-plugin"
-        ]
-    },
-    {
         "name": "philippfrenzel/yii2fullcalendar",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -3466,6 +3419,53 @@
         "keywords": [
             "fullcalendar",
             "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/fullcalendar",
+        "version": "v3.0.1",
+        "version_normalized": "3.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fullcalendar/fullcalendar.git",
+            "reference": "8aa93919d8227140f98bba543cd97ee9975426f7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/8aa93919d8227140f98bba543cd97ee9975426f7",
+            "reference": "8aa93919d8227140f98bba543cd97ee9975426f7",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=2.0.0",
+            "bower-asset/moment": ">=2.9.0"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "dist/fullcalendar.js",
+                "dist/fullcalendar.css"
+            ],
+            "bower-asset-ignore": [
+                "*",
+                "**/.*",
+                "!/dist/**",
+                "!/README.*",
+                "!/LICENSE.*",
+                "!/CHANGELOG.*",
+                "!/CONTRIBUTING.*"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "Full-sized drag & drop event calendar",
+        "keywords": [
+            "calendar",
+            "event",
+            "full-sized",
+            "jquery-plugin"
         ]
     }
 ]
