@@ -129,30 +129,21 @@
         },
         {
             "name": "bower-asset/fullcalendar",
-            "version": "v2.9.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fullcalendar/fullcalendar.git",
-                "reference": "07a680b2349cfa7c7f2b05c979295447f04ef426"
+                "reference": "d7969b65adf36def0b4e3f759d1db83485142def"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/07a680b2349cfa7c7f2b05c979295447f04ef426",
-                "reference": "07a680b2349cfa7c7f2b05c979295447f04ef426",
+                "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/d7969b65adf36def0b4e3f759d1db83485142def",
+                "reference": "d7969b65adf36def0b4e3f759d1db83485142def",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": ">=1.7.1",
-                "bower-asset/moment": ">=2.5.0"
-            },
-            "require-dev": {
-                "bower-asset/bootstrap": "~3.2.0",
-                "bower-asset/jasmine-fixture": "~2.0.0",
-                "bower-asset/jasmine-jquery": "~2.1.1",
-                "bower-asset/jquery-mockjax": "~2.2.0",
-                "bower-asset/jquery-simulate": "~1.0.1",
-                "bower-asset/jquery-ui": ">=1.11.1",
-                "bower-asset/moment-timezone": "~0.2.1"
+                "bower-asset/jquery": ">=2.0.0",
+                "bower-asset/moment": ">=2.9.0"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -389,12 +380,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "04bfcaa26356cf86c6c4a2420eb95857a86e03ab"
+                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/04bfcaa26356cf86c6c4a2420eb95857a86e03ab",
-                "reference": "04bfcaa26356cf86c6c4a2420eb95857a86e03ab",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
                 "shasum": ""
             },
             "require": {
@@ -441,7 +432,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-06-20 21:09:53"
+            "time": "2016-09-14 20:40:20"
         },
         {
             "name": "cebe/yii2-gravatar",
@@ -2092,16 +2083,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/philippfrenzel/yii2fullcalendar.git",
-                "reference": "e979a9f6cf6f063435e025015251306e80ebc68b"
+                "reference": "5a5320d8f35ee838ee257a1c4aefa9a5c649f1fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/philippfrenzel/yii2fullcalendar/zipball/e979a9f6cf6f063435e025015251306e80ebc68b",
-                "reference": "e979a9f6cf6f063435e025015251306e80ebc68b",
+                "url": "https://api.github.com/repos/philippfrenzel/yii2fullcalendar/zipball/5a5320d8f35ee838ee257a1c4aefa9a5c649f1fa",
+                "reference": "5a5320d8f35ee838ee257a1c4aefa9a5c649f1fa",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/fullcalendar": "2.*",
+                "bower-asset/fullcalendar": "3.*",
                 "php": ">=5.4.0",
                 "yiisoft/yii2": "*",
                 "yiisoft/yii2-jui": "*"
@@ -2133,7 +2124,7 @@
                 "fullcalendar",
                 "yii2"
             ],
-            "time": "2016-06-14 19:06:39"
+            "time": "2016-09-14 19:04:36"
         },
         {
             "name": "phpoffice/common",
@@ -2593,12 +2584,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "17f7fc4d4faa907c3f5eb0fda5b7fa672fef0fd3"
+                "reference": "6a1c220cdf037784da5f0151e4a0e4877af74df6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/17f7fc4d4faa907c3f5eb0fda5b7fa672fef0fd3",
-                "reference": "17f7fc4d4faa907c3f5eb0fda5b7fa672fef0fd3",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/6a1c220cdf037784da5f0151e4a0e4877af74df6",
+                "reference": "6a1c220cdf037784da5f0151e4a0e4877af74df6",
                 "shasum": ""
             },
             "require": {
@@ -2679,7 +2670,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-09-12 15:23:29"
+            "time": "2016-09-13 19:11:52"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -3078,12 +3069,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "ccec426bfe420235bc5ceeefc7641e53204e1693"
+                "reference": "4e81236d14da84c86f3e96561d689845bcf559ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/ccec426bfe420235bc5ceeefc7641e53204e1693",
-                "reference": "ccec426bfe420235bc5ceeefc7641e53204e1693",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/4e81236d14da84c86f3e96561d689845bcf559ef",
+                "reference": "4e81236d14da84c86f3e96561d689845bcf559ef",
                 "shasum": ""
             },
             "require": {
@@ -3120,7 +3111,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-09-12 07:51:30"
+            "time": "2016-09-13 12:22:34"
         },
         {
             "name": "phpspec/php-diff",

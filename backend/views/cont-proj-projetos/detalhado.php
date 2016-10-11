@@ -20,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
 for ($i = 0; $i < count($data); $i++) {
 
     echo
-    '<div class="panel panel-default">
+        '<div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><b>Receitas e Depesas da Rubrica</b></h3>
+            <h3 class="panel-title"><b>'.$rubricas[$i]->nomerubrica.'</b></h3>
         </div>
         <div class="panel-body"><h4><b>Receita</b></h4>
         <b>Valor Previsto: R$ '.number_format($rubricas[$i]->valor_total,2).'</b>&nbsp|&nbsp&nbsp'.

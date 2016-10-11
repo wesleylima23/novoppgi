@@ -25,8 +25,8 @@ $idProjeto = Yii::$app->request->get('idProjeto');
             <?php if (!isset($update)) {
                 echo $form->field($model, 'rubrica_id')->dropDownList($rubricas, ['prompt' => 'Selecione uma rubrica']);
             } ?>
-            <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'ordem_bancaria')->textInput(['maxlength' => true]) ?>
 

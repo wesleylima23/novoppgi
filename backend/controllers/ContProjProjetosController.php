@@ -77,7 +77,8 @@ class ContProjProjetosController extends Controller
     {
         $searchModel = new ContProjReceitasSearch();
         $searchModel2 = new ContProjDespesasSearch();
-        $rubricas = ContProjRubricasdeProjetos::find()->select("*")->where("projeto_id=$idProjeto")->all();
+        $rubricas = ContProjRubricasdeProjetos::find()->select("j17_contproj_rubricasdeprojetos.*, j17_contproj_rubricas.nome as nomerubrica")->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = rubrica_id")->where("projeto_id = $idProjeto")->all();
+
         $data=[];
         $data2=[];
         for($i=0;$i<count($rubricas);$i++) {
@@ -225,7 +226,7 @@ class ContProjProjetosController extends Controller
         $coordenador = \app\models\User::find()->select("*")->where("id=$projeto->coordenador_id")->one();
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('uploads/Form2.docx');
         $templateProcessor->setValue('outorgado', $coordenador->nome);
-        $templateProcessor->setValue('saldo', number_format($projeto->saldo, 2) . " R$");
+        $templateProcessor->setValue('saldo', "R$ ".number_format($projeto->saldo, 2) );
         $templateProcessor->setValue('reais', 'R$');
         $receitas = ContProjReceitas::find()->select(["*,j17_contproj_receitas.ordem_bancaria AS ordem, 
             SUM(j17_contproj_receitas.valor_receita) AS total"])
@@ -240,10 +241,10 @@ class ContProjProjetosController extends Controller
         for ($i = 0; $i < $tamanho; $i++) {
             $templateProcessor->setValue('datReceita#' . ($i + 1), date("d/m/Y", strtotime($receitas[$i]->data)));
             $templateProcessor->setValue('ordem#' . ($i + 1), $receitas[$i]->ordem_bancaria);
-            $templateProcessor->setValue('valorReceita#' . ($i + 1), number_format($receitas[$i]->total, 2) . " R$");
+            $templateProcessor->setValue('valorReceita#' . ($i + 1), "R$ ".number_format($receitas[$i]->total, 2));
             $total = $total + $receitas[$i]->total;
         }
-        $templateProcessor->setValue('valorTotal', number_format($total, 2) . " R$");
+        $templateProcessor->setValue('valorTotal', "R$ ".number_format($total, 2) );
         $despesas = ContProjDespesas::find()->select(["*"])
             ->leftJoin("j17_contproj_rubricasdeprojetos", "j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
             ->where("j17_contproj_rubricasdeprojetos.projeto_id = $id")->all();
@@ -254,7 +255,7 @@ class ContProjProjetosController extends Controller
             $templateProcessor->setValue('dat#' . ($i + 1), date("d/m/Y", strtotime($despesas[$i]->data_emissao)));
             $templateProcessor->setValue('numero#' . ($i + 1), $despesas[$i]->nf);
             $templateProcessor->setValue('favorecido#' . ($i + 1), $despesas[$i]->favorecido);
-            $templateProcessor->setValue('valorDespesa#' . ($i + 1), number_format($despesas[$i]->valor_despesa, 2) . " R$");
+            $templateProcessor->setValue('valorDespesa#' . ($i + 1), "R$ ".number_format($despesas[$i]->valor_despesa, 2) );
         }
 
         header('Content-Disposition: attachment; filename="Form2.docx"');
@@ -307,7 +308,7 @@ class ContProjProjetosController extends Controller
             $templateProcessor->setValue('numero#' . ($i + 1), $despesas[$i]->nf);
             $templateProcessor->setValue('descricao#' . ($i + 1), $despesas[$i]->descricao);
             $templateProcessor->setValue('unidade#' . ($i + 1), $despesas[$i]->quantidade);
-            $templateProcessor->setValue('total#' . ($i + 1), number_format($despesas[$i]->valor_despesa, 2) . " R$");
+            $templateProcessor->setValue('total#' . ($i + 1), "R$ ".number_format($despesas[$i]->valor_despesa, 2) );
             //${unidade#1}	${total#1} ${unidade#1}	${total#1}
 
         }
@@ -327,9 +328,304 @@ class ContProjProjetosController extends Controller
         $templateProcessor->saveAs('php://output');
     }
 
-    public function actionExcel()
+    public function actionExcel($id)
     {
 
+        $rubricas = ContProjRubricasdeProjetos::find()->select("j17_contproj_rubricasdeprojetos.*,
+                    j17_contproj_rubricas.nome as nomerubrica,
+                    j17_contproj_rubricas.codigo as codigo,
+                    j17_contproj_rubricas.tipo as tipo")
+                    ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+                    ->where("projeto_id=$id")->all();
+
+        $despesas = ContProjDespesas::find()->select("j17_contproj_despesas.*,j17_contproj_rubricas.codigo as codigo")
+                    ->leftJoin("j17_contproj_rubricasdeprojetos", "j17_contproj_despesas.rubricasdeprojetos_id = j17_contproj_rubricasdeprojetos.id")
+                    ->leftJoin("j17_contproj_rubricas","j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+                    ->where("j17_contproj_rubricasdeprojetos.projeto_id=$id")->all();
+        // Create new PHPExcel object
+        $objPHPExcel = new \PHPExcel();
+        $objPHPExcel->createSheet(1);
+
+        $default_border = array(
+            'style' => \PHPExcel_Style_Border::BORDER_THIN,
+            'color' => array('argb'=>\PHPExcel_Style_Color::COLOR_BLACK)
+        );
+
+        $grey = array(
+            'fill' => array(
+                'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('argb'=>'FFd3d3d3'),
+            )
+        );
+
+        $styleArray = array(
+            'font'  => array(
+                'bold'  => false,
+                'color' => array('argb' => \PHPExcel_Style_Color::COLOR_WHITE),
+                'size'  => 11,
+                'name'  => 'Calibri'
+            ),
+            'fill' => array(
+                'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('argb'=>\PHPExcel_Style_Color::COLOR_BLACK),
+            ),
+        );
+
+        $style =array(
+            'fill' => array(
+                'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('argb'=>'26fc8b85'),
+            ));
+
+        $styleRecebido =array(
+            'fill' => array(
+                'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('argb'=>'2695c9dd'),
+            ),
+        );
+
+        $styleGasto =array(
+            'fill' => array(
+                'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('argb'=>'0Dfc8b85'),
+        ));
+
+        $styleDisponivel =array(
+            'fill' => array(
+                'type' => \PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('argb'=>'4D95eb59'),
+            ));
+
+        $border = array(
+            'borders' => array(
+                'bottom' => $default_border,
+                'left' => $default_border,
+                'top' => $default_border,
+                'right' => $default_border,
+            ),
+        );
+
+        $style = array(
+            'alignment' => array(
+                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER_CONTINUOUS,
+            )
+        );
+
+        $objPHPExcel->setActiveSheetIndex(1);
+
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(100);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+
+
+        $objPHPExcel->setActiveSheetIndex(1)
+            ->setCellValue('A2', 'Data')
+            ->setCellValue('B2', 'Item')
+            ->setCellValue('C2', 'Rubrica')
+            ->setCellValue('D2', 'Quantidade')
+            ->setCellValue('E2', 'Valor Unitário')
+            ->setCellValue('F2', 'Valor Total');
+        $objPHPExcel->getActiveSheet()->getStyle('A2:F2')->applyFromArray($styleArray);
+
+        $objPHPExcel->getActiveSheet()
+            ->getStyle('E3:F'.(count($despesas)+3))
+            ->getNumberFormat()
+            ->setFormatCode(
+                '"RS "_-#,##0.00'
+            );
+
+        $objPHPExcel->getActiveSheet()->getStyle('C3:F'.(count($despesas)+3))->applyFromArray($style);
+        for($i=0;$i<count($despesas);$i++){
+            $data = date('d/m/Y', strtotime($despesas[$i]->data_emissao));
+            $objPHPExcel->setActiveSheetIndex(1)->setCellValue('A'.($i+3).'', $data);
+            $objPHPExcel->setActiveSheetIndex(1)->setCellValue('B'.($i+3).'', $despesas[$i]->descricao);
+            $objPHPExcel->setActiveSheetIndex(1)->setCellValue('C'.($i+3).'', $despesas[$i]->codigo);
+            $objPHPExcel->setActiveSheetIndex(1)->setCellValue('D'.($i+3).'', $despesas[$i]->quantidade);
+            $objPHPExcel->setActiveSheetIndex(1)->setCellValue('E'.($i+3).'', $despesas[$i]->valor_unitario);
+            $objPHPExcel->setActiveSheetIndex(1)->setCellValue('F'.($i+3).'', '=(D'.($i+3).')*(E'.($i+3).')');
+            if(($i+3)%2 ==1 ){
+                $objPHPExcel->getActiveSheet()->getStyle('A'.($i+3).':F'.($i+3).'')->applyFromArray($grey);
+            }
+        }
+        if(($i+3)%2 ==1 ){
+            $objPHPExcel->getActiveSheet()->getStyle('A'.($i+3).':E'.($i+3).'')->applyFromArray($grey);
+        }
+
+        $objPHPExcel->setActiveSheetIndex(1)
+            ->setCellValue('A'.($i+3), 'Total')
+            ->setCellValue('B'.($i+3), '')
+            ->setCellValue('C'.($i+3), '')
+            ->setCellValue('D'.($i+3), '')
+            ->setCellValue('E'.($i+3), '=SUM(E3:E'.($i+2).')')
+            ->setCellValue('F'.($i+3).'', '=SUM(F3:F'.($i+2).')');
+
+        $objPHPExcel->getActiveSheet()->getStyle('A'.($i+3).':F'.($i+3))->getFont()->setBold(true);
+
+        $objPHPExcel->getActiveSheet()->setTitle('Gastos');
+
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(50);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getStyle('A3:E3')->applyFromArray($styleArray);
+
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A3', 'Código')
+            ->setCellValue('B3', 'Rubrica')
+            ->setCellValue('C3', 'Valor Recebido')
+            ->setCellValue('D3', 'Valor Gasto')
+            ->setCellValue('E3', 'Valor Disponível');
+
+        $objPHPExcel->getActiveSheet()
+            ->getStyle('C4:E'.(count($rubricas)+6))
+            ->getNumberFormat()
+            ->setFormatCode(
+                '"RS "_-#,##0.00'
+            );
+        for($i=0;$i<count($rubricas);$i++){
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.($i+4).'', $rubricas[$i]->codigo);
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.($i+4).'', $rubricas[$i]->nomerubrica);
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.($i+4).'', $rubricas[$i]->valor_total);
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.($i+4).'', $rubricas[$i]->valor_gasto);
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.($i+4).'', '=(C'.($i+4).'- D'.($i+4).')');
+            $objPHPExcel->getActiveSheet()->getStyle('A'.($i+4).':E'.($i+4).'')->applyFromArray($border);
+            if(($i+4)%2 ==0 ){
+                $objPHPExcel->getActiveSheet()->getStyle('A'.($i+4).':E'.($i+4).'')->applyFromArray($grey);
+            }
+        }
+        if(($i+4)%2 ==0 ){
+            $objPHPExcel->getActiveSheet()->getStyle('A'.($i+4).':E'.($i+4).'')->applyFromArray($grey);
+        }
+        if(($i+5)%2 ==0 ){
+            $objPHPExcel->getActiveSheet()->getStyle('A'.($i+4).':E'.($i+4).'')->applyFromArray($grey);
+        }
+
+        $objPHPExcel->getActiveSheet()->getStyle('A'.($i+4).':E'.($i+4).'')->applyFromArray($border);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.($i+5).':E'.($i+5).'')->applyFromArray($border);
+        //$objPHPExcel->getActiveSheet()->getStyle('C4:C'.($i+5).'')->applyFromArray($styleRecebido);
+        $objPHPExcel->getActiveSheet()->getStyle('C4:C'.($i+5).'')->applyFromArray($styleRecebido);
+        $objPHPExcel->getActiveSheet()->getStyle('D4:D'.($i+5).'')->applyFromArray($styleGasto);
+        $objPHPExcel->getActiveSheet()->getStyle('E4:E'.($i+5).'')->applyFromArray($styleDisponivel);
+
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.($i+4), 'TAR_BAN')
+            ->setCellValue('B'.($i+4), 'Tarifa Bancária')
+            ->setCellValue('C'.($i+4), '0')
+            ->setCellValue('D'.($i+4), '0')
+            ->setCellValue('E'.($i+4).'', '0');
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.($i+5), 'Total')
+            ->setCellValue('B'.($i+5), '')
+            ->setCellValue('C'.($i+5), '=SUM(C4:C'.($i+4).')')
+            ->setCellValue('D'.($i+5), '=SUM(D4:D'.($i+4).')')
+            ->setCellValue('E'.($i+5).'', '=SUM(E4:E'.($i+4).')');
+
+
+        $objPHPExcel->getActiveSheet()->getStyle('A'.($i+5).':E'.($i+5))->getFont()->setBold(true);
+
+        $objPHPExcel->getActiveSheet()->getStyle('A3:E'.($i+5).'')->applyFromArray($border);
+
+
+        $j = $i + 8;
+
+        $objPHPExcel->getActiveSheet()
+            ->getStyle('C'.($j+1).':E'.($j+4))
+            ->getNumberFormat()
+            ->setFormatCode(
+                '"RS "_-#,##0.00'
+            );
+
+        $objPHPExcel->getActiveSheet()->getStyle('A'.$j.':E'.$j)->applyFromArray($styleArray);
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.$j, 'Código')
+            ->setCellValue('B'.$j, 'Rubrica')
+            ->setCellValue('C'.$j, 'Valor Recebido')
+            ->setCellValue('D'.$j, 'Valor Gasto')
+            ->setCellValue('E'.$j, 'Valor Disponível');
+
+
+        $capitalRecebido = ContProjRubricasdeProjetos::find()->select(["*"])
+            ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+            ->where("projeto_id=$id AND j17_contproj_rubricas.tipo = 'Capital' ")->sum("j17_contproj_rubricasdeprojetos.valor_total");
+        $capitalGasto = ContProjRubricasdeProjetos::find()->select(["*"])
+            ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+            ->where("projeto_id=$id AND j17_contproj_rubricas.tipo = 'Capital' ")->sum("j17_contproj_rubricasdeprojetos.valor_gasto");
+        $capitalDisponivel = ContProjRubricasdeProjetos::find()->select(["*"])
+            ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+            ->where("projeto_id=$id AND j17_contproj_rubricas.tipo = 'Capital' ")->sum("j17_contproj_rubricasdeprojetos.valor_disponivel");
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.($j+1), 'CAP')
+            ->setCellValue('B'.($j+1), 'CAPITAL')
+            ->setCellValue('C'.($j+1), $capitalRecebido)
+            ->setCellValue('D'.($j+1), $capitalGasto)
+            ->setCellValue('E'.($j+1).'', $capitalDisponivel);
+
+
+        $custeioRecebido = ContProjRubricasdeProjetos::find()->select(["*"])
+            ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+            ->where("projeto_id=$id AND j17_contproj_rubricas.tipo = 'Custeio' ")->sum("j17_contproj_rubricasdeprojetos.valor_total");
+        $custeioGasto = ContProjRubricasdeProjetos::find()->select(["*"])
+            ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+            ->where("projeto_id=$id AND j17_contproj_rubricas.tipo = 'Custeio' ")->sum("j17_contproj_rubricasdeprojetos.valor_gasto");
+        $custeioDisponivel = ContProjRubricasdeProjetos::find()->select(["*"])
+            ->leftJoin("j17_contproj_rubricas", "j17_contproj_rubricas.id = j17_contproj_rubricasdeprojetos.rubrica_id")
+            ->where("projeto_id=$id AND j17_contproj_rubricas.tipo = 'Custeio' ")->sum("j17_contproj_rubricasdeprojetos.valor_disponivel");
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.($j+2), 'CUS')
+            ->setCellValue('B'.($j+2), 'CUSTEIO')
+            ->setCellValue('C'.($j+2), $custeioRecebido)
+            ->setCellValue('D'.($j+2), $custeioGasto)
+            ->setCellValue('E'.($j+2).'', $custeioDisponivel);
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.($j+3), 'TAR')
+            ->setCellValue('B'.($j+3), 'Tarifas Bancárias')
+            ->setCellValue('C'.($j+3), '0')
+            ->setCellValue('D'.($j+3), '0')
+            ->setCellValue('E'.($j+3).'', '0');
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A'.($j+4), 'TOTAL')
+            ->setCellValue('B'.($j+4), '')
+            ->setCellValue('C'.($j+4), '=SUM(C'.($j+1).'- C'.($j+3).')')
+            ->setCellValue('D'.($j+4), '=SUM(D'.($j+1).'- D'.($j+3).')')
+            ->setCellValue('E'.($j+4).'', '=SUM(E'.($j+1).'- E'.($j+3).')');
+
+
+
+        $objPHPExcel->getActiveSheet()->getStyle('C'.($j+1).':C'.($j+4).'')->applyFromArray($styleRecebido);
+        $objPHPExcel->getActiveSheet()->getStyle('D'.($j+1).':D'.($j+4).'')->applyFromArray($styleGasto);
+        $objPHPExcel->getActiveSheet()->getStyle('E'.($j+1).':E'.($j+4).'')->applyFromArray($styleDisponivel);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.($j+4).':E'.($j+4))->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->setTitle('Resumo');
+
+
+        // Redirect output to a client’s web browser (Excel2007)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="Planilha.xlsx"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
     }
 
     public static function view($id)

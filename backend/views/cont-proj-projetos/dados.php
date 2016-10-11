@@ -1,8 +1,11 @@
 <?php
 
+use \backend\models\ContProjProjetos;
+use app\models\User;
+
 $idProjeto = Yii::$app->request->get('idProjeto');
-$modelProjeto = \backend\models\ContProjProjetos::find()->where("id=$idProjeto")->one();
-$coordenador = \app\models\User::find()->select("*")->where("id=$modelProjeto->coordenador_id")->one();
+$modelProjeto = ContProjProjetos::find()->select("*")->where("id=$idProjeto")->one();
+$coordenador = User::find()->select("*")->where("id=$modelProjeto->coordenador_id")->one();
 
 ?>
 

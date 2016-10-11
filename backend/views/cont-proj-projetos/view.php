@@ -54,8 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['cont-proj-projetos/form3', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Form8',
             ['cont-proj-projetos/form8', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <!--<?= Html::a('Excel',
-            ['cont-proj-projetos/excel', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>-->
+        <?= Html::a('Excel',
+            ['cont-proj-projetos/excel', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
     </p>
     <p>

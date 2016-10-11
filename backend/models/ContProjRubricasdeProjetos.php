@@ -25,6 +25,8 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
     public $agencia;
     public $projeto;
     public $ordem_bancaria;
+	public $codigo;
+    public $tipo;
     /**
      * @inheritdoc
      */
@@ -66,6 +68,12 @@ class ContProjRubricasdeProjetos extends \yii\db\ActiveRecord
             'valor_disponivel' => 'Saldo',
             'ordem_bancaria' => 'Ordem Bancária',
         ];
+    }
+	
+	//RELACIONAMENTO com a tabela Curso
+    public function getRubrica()
+    {
+        return $this->hasOne(Rubrica::className(), ['id' => 'rubrica_id']);
     }
 
     public function validar_valor($attribute,$params){

@@ -10,6 +10,8 @@ $idProjeto = Yii::$app->request->get('idProjeto');
 $this->title = $model->descricao;
 $this->params['breadcrumbs'][] = ['label' => 'Despesas', 'url' => ['index','idProjeto'=>$idProjeto]];
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 <div class="cont-proj-despesas-view">
 
@@ -43,15 +45,26 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'rubricasdeprojetos_id',
+                    [
+                        'attribute' => 'rubricasdeprojetos_id',
+                        'label'=> 'Rubrica',
+                        'format'=>'ntext',
+                        'value' => $rubricasDeProjeto[$model->rubricasdeprojetos_id],
+                    ],
                     'descricao',
                     'valor_despesa:currency',
                     'tipo_pessoa',
-                    'data_emissao',
+                    [
+                        'attribute' => 'data_emissao',
+                        'format' => ['date', 'php:d/m/Y'],
+                    ],
                     'ident_nf',
                     'nf',
                     'ident_cheque',
-                    'data_emissao_cheque',
+                    [
+                        'attribute' => 'data_emissao_cheque',
+                        'format' => ['date', 'php:d/m/Y'],
+                    ],
                     'valor_cheque:currency',
                     'favorecido',
                     'cnpj_cpf',

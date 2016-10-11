@@ -28,9 +28,11 @@ $tiposNF = ['Cupom Fiscal' => 'Cupom Fiscal',
                 'options' => ['enctype' => 'multipart/form-data']
             ])); ?>
 
-            <!--<?= $form->field($model, 'rubricasdeprojetos_id')->textInput()->label("Item de despendio ") ?>-->
-
-            <?= $form->field($model, 'rubricasdeprojetos_id')->dropDownList($rubricasDeProjeto, ['prompt' => ' ']) ?>
+            <?php
+                if (!isset($update)) {
+                    $form->field($model, 'rubricasdeprojetos_id')->dropDownList($rubricasDeProjeto, ['prompt' => ' ']);
+                }
+            ?>
 
             <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
@@ -95,15 +97,13 @@ $tiposNF = ['Cupom Fiscal' => 'Cupom Fiscal',
 
             <?= $form->field($model, 'cnpj_cpf')->textInput(['maxlength' => true]) ?>
 
-            <!--<? //echo $form->field($model, 'cnpj_cpf')->textInput(['maxlength' => true])->widget(\yii\widgets\MaskedInput::className(), [
-            // 'mask' => '999.999.999-99',
-            //]) ?>-->
-
             <div class="row">
                 <?= $form->field($model, 'comprovanteArquivo', ['options' => ['class' => 'col-md-6']])
                     ->fileInput(['accept' => '.pdf']) ?>
             </div>
+
             </br>
+
             <div class="form-group">
                 <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                 <?= Html::a('Cancelar', ['index', 'idProjeto' => $idProjeto,], ['class' => 'btn btn-danger']) ?>

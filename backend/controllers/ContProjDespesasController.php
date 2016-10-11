@@ -61,8 +61,16 @@ class ContProjDespesasController extends Controller
      */
     public function actionView($id)
     {
+        $idProjeto= Yii::$app->request->get('idProjeto');
+        $rubricasdeProj = \backend\models\ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.id",
+            "CONCAT_WS(' - ',j17_contproj_rubricas.tipo,j17_contproj_rubricas.nome, j17_contproj_rubricasdeprojetos.descricao ) 
+                AS descricao"])
+            ->leftJoin("j17_contproj_rubricas","j17_contproj_rubricasdeprojetos.rubrica_id = j17_contproj_rubricas.id")
+            ->where("j17_contproj_rubricasdeprojetos.projeto_id = $idProjeto")->all();
+        $rubricasDeProjeto = \yii\helpers\ArrayHelper::map($rubricasdeProj, 'id', 'descricao');
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'rubricasDeProjeto'=> $rubricasDeProjeto,
         ]);
     }
 
@@ -136,17 +144,67 @@ class ContProjDespesasController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $rubricasDeProjeto = ArrayHelper::map(ContProjRubricasdeProjetos::find()->orderBy('nome'), 'id', 'descricao');
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $idProjeto= Yii::$app->request->get('idProjeto');
+        $model  = $this->findModel($id);
+        $model->data_emissao_cheque = date("d-m-Y", strtotime($model->data_emissao_cheque));
+        $model->data_emissao = date("d-m-Y", strtotime($model->data_emissao));
+        $model2 = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $this->atualizarDespesa($model2,$model);
+            return $this->redirect(['index',
+                'id' => $model->id,
+                'idProjeto'=>$idProjeto,
+            ]);
+
         } else {
+            $rubricasdeProj = ContProjRubricasdeProjetos::find()->select(["j17_contproj_rubricasdeprojetos.id",
+                "CONCAT_WS(':',j17_contproj_rubricas.tipo,j17_contproj_rubricas.nome, j17_contproj_rubricasdeprojetos.valor_total) 
+                AS descricao"])
+                ->leftJoin("j17_contproj_rubricas","j17_contproj_rubricasdeprojetos.rubrica_id = j17_contproj_rubricas.id")
+                ->where("j17_contproj_rubricasdeprojetos.projeto_id = $idProjeto")->all();
+            $rubricasDeProjeto = ArrayHelper::map($rubricasdeProj, 'id', 'descricao');
+
             return $this->render('update', [
                 'model' => $model,
                 'rubricasDeProjeto'=>$rubricasDeProjeto,
             ]);
         }
     }
+
+
+    public function atualizarDespesa(ContProjDespesas $model2,ContProjDespesas $model){
+
+        $model->valor_despesa = $model->quantidade * $model->valor_unitario;
+        $model->data_emissao = date('Y-m-d', strtotime($model->data_emissao));
+        $model->data_emissao_cheque = date('Y-m-d', strtotime($model->data_emissao_cheque));
+
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+
+            $rubrica = ContProjRubricasdeProjetos::find()->select("*")->where("id=$model->rubricasdeprojetos_id")->one();
+            $rubrica->valor_disponivel =  $rubrica->valor_disponivel + $model2->valor_despesa;
+            $rubrica->valor_disponivel =  $rubrica->valor_disponivel - $model->valor_despesa;
+
+            $rubrica->valor_gasto =  $rubrica->valor_gasto - $model2->valor_despesa;
+            $rubrica->valor_gasto =  $rubrica->valor_gasto + $model->valor_despesa;
+
+            $projeto = ContProjProjetos::find()->select("*")->where("id=$rubrica->projeto_id")->one();
+            $projeto->saldo =  $projeto->saldo + $model2->valor_despesa;
+            $projeto->saldo =  $projeto->saldo - $model->valor_despesa;
+
+            if ($projeto->save(false) && $model->save(false) && $rubrica->save(false)) {
+                $transaction->commit();
+                return true;
+            }
+
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
+        }
+
+        $transaction->rollBack();
+        return false;
+    }
+
 
 
     public function deletar(ContProjDespesas $model){

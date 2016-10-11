@@ -63,8 +63,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $url .= '&idProjeto=' . $idProjeto;
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
                             },
-                            'update' => function ($url, $model) {
-                                return false;
+                            'update' => function ($url, $model) use ($idProjeto) {
+                                $url .= '&idProjeto=' . $idProjeto;
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url);
+                                //return false;
                             },
                             'delete' => function ($url, $model) use ($idProjeto) {
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id, 'idProjeto' => $idProjeto], [
@@ -121,8 +123,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $url .= '&idProjeto=' . $idProjeto;
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
                             },
-                            'update' => function ($url, $model) {
-                                return false;
+                            'update' => function ($url, $model) use ($idProjeto) {
+                                $url .= '&idProjeto=' . $idProjeto;
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url);
+                                //return false;
                             },
                             'delete' => function ($url, $model) use ($idProjeto) {
                                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id, 'idProjeto' => $idProjeto], [
